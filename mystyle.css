@@ -1,0 +1,60 @@
+
+#schoolNAME{text-transform: capitalize;
+            color:#800080; font-weight:bold; font-family:verdana; font-size:16pt }
+.cont_i{border-style: inset;background-color:#FFFFFF;}
+#cont_b{border-style:outset;width: 160px; background-color: #8FBC8F;
+            border-bottom-width: 5px;}
+
+.no-edit{background-color: #D3D3D3; 
+         text-align:center; font-weight: bold;
+         border-style: solid;
+         border-color:#D3D3D3}
+
+.teamone{background-color: #FFEBCD;color:#0000FF; font-weight:bold}
+.teamtwo{background-color: #E6E6FA;color:#0000FF; font-weight:bold}
+.teamthree{background-color: #E0FFFF;color:#0000FF; font-weight:bold}
+
+.algebra{border-style: inset; border-color:#6A5ACD #B0B0B0;
+         border-top-width:2px; border-bottom-width:2px }
+.geometry{border-style:inset; border-color:#00FFFF #B0B0B0; 
+          border-top-width:2px; border-bottom-width:2px}
+.prec{border-style:inset; border-color:#FF69B4 #B0B0B0;
+      border-top-width:2px; border-bottom-width:2px}
+.mixed_a{border-style:inset; border-color:#6A5ACD #D80000; 
+         border-right-width:4px;border-left-width:4px;
+         border-top-width:2px; border-bottom-width:2px }
+.mixed_g{border-style:inset; border-color:#00FFFF #D80000; 
+         border-right-width:4px;border-left-width:4px; 
+         border-top-width:2px; border-bottom-width:2px}
+.mixed_p{border-style:inset; border-color:#FF69B4 #D80000; 
+         border-right-width:4px;border-left-width:4px; 
+         border-top-width:2px; border-bottom-width:2px}
+.mixed_v{border-style:solid; border-color:#B0B0B0 #D80000; 
+         border-right-width:4px;border-left-width:4px }
+.mixed_text{font-size: 12px; text-align: center; background-color:#00FF00; font-weight:bold}
+
+
+.log_out{border-style:outset;width: 150px; 
+         background-color: #A0A0A0; display: block;
+         border-bottom-width: 5px; border-color:#CCCCCC}
+/*.cancel_change{border-style:outset;width: 150px; background-color: #8FBC8F;
+               border-bottom-width: 5px;}*/
+.cancel_all{border-style:outset;width: 150px; background-color: #20B2AA;
+            border-bottom-width: 5px;}
+.delete_team{border-style:outset;width: 150px; background-color: #8FBC8F;
+            border-bottom-width: 5px;}
+/*.save{border-style:outset;width: 150px; background-color: #CD5C5C;
+      border-bottom-width: 5px;color: #FFFFFF; font-weight: bold}*/
+.save_all{border-style:outset;width: 150px; background-color: #CD5C5C;
+      border-bottom-width: 5px;color: #FFFFFF; font-weight: bold}
+.confirm{border-style:outset;width: 150px; background-color: #ff00ff;
+      border-bottom-width: 5px;color: #FFFFFF; font-weight: bold}
+.change_pass{border-style:outset;width: 150px; background-color: #ffdc00;
+      border-bottom-width: 5px;}
+
+.team_name{background-color: yellow;font-weight:bold; 
+           font-size: 12pt;}
+.summary{background-color: #0000FF;}
+.summ{color:#FF0000;font-weight:bold}
+#summary{color:#FFFFFF;}
+

@@ -1,0 +1,12 @@
+<configuration>
+   
+        
+        <sessionState mode="inproc"
+  cookieless="false"
+  regenerateExpiredSessionId="true"
+  timeout="30"
+  stateNetworkTimeout="30"
+  />
+    
+
+</configuration>
