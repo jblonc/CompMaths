@@ -33,35 +33,35 @@
              myOleDbInsComm.Parameters.Add(new OdbcParameter("@school", OdbcType.VarChar, 20));
              myOleDbInsComm.Parameters["@school"].Value = school.Text;
 
-             myOleDbInsComm.Parameters.Add(new OdbcParameter("@password", OleDbType.VarChar, 20));
+             myOleDbInsComm.Parameters.Add(new OdbcParameter("@password", OdbcType.VarChar, 20));
              myOleDbInsComm.Parameters["@password"].Value = school.Text;
 
-             myOleDbInsComm.Parameters.Add(new OdbcParameter("@school_id", OleDbType.Integer, 3));
+             myOleDbInsComm.Parameters.Add(new OdbcParameter("@school_id", OdbcType.Integer, 3));
              //myOleDbInsComm.Parameters["@school_id"].Value = school_id.Text;
 
-             myOleDbInsComm.Parameters.Add(new OdbcParameter("@school_name", OleDbType.VarChar, 50));
+             myOleDbInsComm.Parameters.Add(new OdbcParameter("@school_name", OdbcType.VarChar, 50));
              myOleDbInsComm.Parameters["@school_name"].Value = school_name.Text;
 
 
-             myOleDbInsComm.Parameters.Add(new OdbcParameter("@contact", OleDbType.VarChar, 50));
+             myOleDbInsComm.Parameters.Add(new OdbcParameter("@contact", OdbcType.VarChar, 50));
              myOleDbInsComm.Parameters["@contact"].Value = contact.Text;
 
 
-             myOleDbInsComm.Parameters.Add(new OdbcParameter("@email", OleDbType.LongVarWChar));
+             myOleDbInsComm.Parameters.Add(new OdbcParameter("@email", OdbcType.LongVarWChar));
              myOleDbInsComm.Parameters["@email"].Value = email.Text;
 
-             myOleDbInsComm.Parameters.Add(new OdbcParameter("@phone", OleDbType.LongVarWChar));
+             myOleDbInsComm.Parameters.Add(new OdbcParameter("@phone", OdbcType.LongVarWChar));
              myOleDbInsComm.Parameters["@phone"].Value = phone.Text;
 
-             myOleDbInsComm.Parameters.Add(new OdbcParameter("@school_addr", OleDbType.VarChar, 100));
+             myOleDbInsComm.Parameters.Add(new OdbcParameter("@school_addr", OdbcType.VarChar, 100));
              myOleDbInsComm.Parameters["@school_addr"].Value = school_addr.Text;
 
              OdbcCommand schoolSelCmd=new OdbcCommand("SELECT school FROM schools WHERE school=@school", dbconn);
-             schoolSelCmd.Parameters.Add(new OdbcParameter("@school", OleDbType.VarChar, 20));
+             schoolSelCmd.Parameters.Add(new OdbcParameter("@school", OdbcType.VarChar, 20));
              schoolSelCmd.Parameters["@school"].Value = school.Text;
 
              OdbcCommand schoolIdSelCmd=new OdbcCommand("SELECT school_id FROM schools WHERE school_id=@school_id", dbconn);
-             schoolIdSelCmd.Parameters.Add(new OdbcParameter("@school_id", OleDbType.Integer, 3));
+             schoolIdSelCmd.Parameters.Add(new OdbcParameter("@school_id", OdbcType.Integer, 3));
              //schoolIdSelCmd.Parameters["@school_id"].Value = school_id.Text;
 
              message.Text="";
