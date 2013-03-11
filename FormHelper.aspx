@@ -208,7 +208,7 @@
          numConsideredCmd.Parameters.Add(new OdbcParameter("@school",OdbcType.VarChar,20));
          numConsideredCmd.Parameters["@school"].Value=uname;       
 
-        OdbcCommand contInfoCmd= new OdbcCommand("SELECT contact, email, phone FROM schools WHERE school=@school",dbconn);
+        OdbcCommand contInfoCmd= new OdbcCommand("SELECT contact, email, phone FROM schools WHERE school=?",dbconn);
          contInfoCmd.Parameters.Add(new OdbcParameter("@school",OdbcType.VarChar,20));
          contInfoCmd.Parameters["@school"].Value=uname; 
          
