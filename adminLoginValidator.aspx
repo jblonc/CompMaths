@@ -6,7 +6,7 @@
 
            // using System;
            // using System.Data;
-           // using System.Data.Odbc;
+           // using System.Data.Odbc;//these 3 lines should be included in web.config file
         
             OdbcConnection dbconn = new OdbcConnection("Driver={SQL Server Native Client 10.0};Server=tcp:ufwryy6r0y.database.windows.net,1433;Database=xyzstart_db;Uid=xyzdb@ufwryy6r0y;Pwd=virAf89Hda;Encrypt=yes;Connection Timeout=30;");
 
@@ -26,7 +26,8 @@
           myOdbcComm.Parameters.AddWithValue("@username", un);
           OdbcDataReader reader = myOdbcComm.ExecuteReader();
           string lookuppass="";
-          while( reader.Read()){lookuppass= reader.GetString(0);};
+          while( reader.Read()){lookuppass= reader.GetString(0);}
+          myOdbcComm.dispose();
           
           if(lookuppass==pw){isValidated=true;}
          }
