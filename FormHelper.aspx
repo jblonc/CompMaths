@@ -18,7 +18,7 @@
 
          OdbcCommand findSchoolInfoCmd= new OdbcCommand("SELECT school_id,[password], school_name FROM schools WHERE school=@school",dbconn);
          
-         findSchoolInfoCmd.Parameters.Add(new OleDbParameter("@school",OleDbType.VarChar,20));
+         findSchoolInfoCmd.Parameters.Add(new OdbcParameter("@school",OdbcType.VarChar,20));
          findSchoolInfoCmd.Parameters["@school"].Value=uname;
 
          dbconn.Open();
@@ -92,21 +92,21 @@
          OdbcCommand delCmd=new OdbcCommand("DELETE FROM participants WHERE student_id=@s_id",dbconn);                                              
          OdbcCommand selComm=new OdbcCommand("SELECT student_id FROM participants WHERE student_id=@ss_id",dbconn);
          OdbcCommand selTeamComm=new OdbcCommand("SELECT team_id FROM teams WHERE team_id=@team_id",dbconn); 
-             insComm.Parameters.Add(new OleDbParameter("@sdt_id", OleDbType.VarChar, 9));
-             insComm.Parameters.Add(new OleDbParameter("@name", OleDbType.VarChar, 20));
-             insComm.Parameters.Add(new OleDbParameter("@cat", OleDbType.VarChar, 8));
-             insComm.Parameters.Add(new OleDbParameter("@group", OleDbType.VarChar, 8));
+             insComm.Parameters.Add(new OdbcParameter("@sdt_id", OdbcType.VarChar, 9));
+             insComm.Parameters.Add(new OdbcParameter("@name", OdbcType.VarChar, 20));
+             insComm.Parameters.Add(new OdbcParameter("@cat", OdbcType.VarChar, 8));
+             insComm.Parameters.Add(new OdbcParameter("@group", OdbcType.VarChar, 8));
 
-             insComm.Parameters.Add(new OleDbParameter("@school", OleDbType.VarChar, 20));
-             insComm.Parameters.Add(new OleDbParameter("@team_id", OleDbType.VarChar, 4));
-             insTeamComm.Parameters.Add(new OleDbParameter("@team_id", OleDbType.VarChar, 4));
-             insTeamComm.Parameters.Add(new OleDbParameter("@team_no", OleDbType.VarChar, 1));
-             insTeamComm.Parameters.Add(new OleDbParameter("@school", OleDbType.VarChar, 20));
-             updComm.Parameters.Add(new OleDbParameter("@s_id", OleDbType.VarChar, 9));
-             updComm.Parameters.Add(new OleDbParameter("@s_name", OleDbType.VarChar, 20));
-             delCmd.Parameters.Add(new OleDbParameter("@s_id", OleDbType.VarChar, 9));
-             selComm.Parameters.Add(new OleDbParameter("@ss_id", OleDbType.VarChar, 9));
-             selTeamComm.Parameters.Add(new OleDbParameter("@team_id", OleDbType.VarChar, 4));
+             insComm.Parameters.Add(new OdbcParameter("@school", OdbcType.VarChar, 20));
+             insComm.Parameters.Add(new OdbcParameter("@team_id", OdbcType.VarChar, 4));
+             insTeamComm.Parameters.Add(new OdbcParameter("@team_id", OdbcType.VarChar, 4));
+             insTeamComm.Parameters.Add(new OdbcParameter("@team_no", OdbcType.VarChar, 1));
+             insTeamComm.Parameters.Add(new OdbcParameter("@school", OdbcType.VarChar, 20));
+             updComm.Parameters.Add(new OdbcParameter("@s_id", OdbcType.VarChar, 9));
+             updComm.Parameters.Add(new OdbcParameter("@s_name", OdbcType.VarChar, 20));
+             delCmd.Parameters.Add(new OdbcParameter("@s_id", OdbcType.VarChar, 9));
+             selComm.Parameters.Add(new OdbcParameter("@ss_id", OdbcType.VarChar, 9));
+             selTeamComm.Parameters.Add(new OdbcParameter("@team_id", OdbcType.VarChar, 4));
 
              insComm.Parameters["@school"].Value = uname;
 
@@ -168,17 +168,17 @@
                }
             //delete team if there is no participant in the team; record/update how many in the team
          OdbcCommand selPFromT=new OdbcCommand("SELECT student_id FROM participants WHERE team_id=@team_id",dbconn); 
-         selPFromT.Parameters.Add(new OleDbParameter("@team_id", OleDbType.VarChar, 4));
+         selPFromT.Parameters.Add(new OdbcParameter("@team_id", OdbcType.VarChar, 4));
          selPFromT.Parameters["@team_id"].Value = SchoolID+teamno[j];
          OdbcCommand deleteT=new OdbcCommand("DELETE FROM teams WHERE team_id=@team_id",dbconn);
-         deleteT.Parameters.Add(new OleDbParameter("@team_id", OleDbType.VarChar, 4));
+         deleteT.Parameters.Add(new OdbcParameter("@team_id", OdbcType.VarChar, 4));
          deleteT.Parameters["@team_id"].Value = SchoolID+teamno[j];
          OdbcCommand udSCount=new OdbcCommand("UPDATE teams SET team_id=@tid,team_status=@tstatus, [ount]=@pcount  WHERE team_id=@tid",dbconn);//count is a reserved word?!
-         udSCount.Parameters.Add(new OleDbParameter("@tid", OleDbType.VarChar, 4));
+         udSCount.Parameters.Add(new OdbcParameter("@tid", OdbcType.VarChar, 4));
          udSCount.Parameters["@tid"].Value = SchoolID+teamno[j]; 
-         udSCount.Parameters.Add(new OleDbParameter("@tstatus", OleDbType.Boolean));
+         udSCount.Parameters.Add(new OdbcParameter("@tstatus", OdbcType.Bit));
          udSCount.Parameters["@tstatus"].Value = false; 
-         udSCount.Parameters.Add(new OleDbParameter("@pcount", OleDbType.Integer, 2));
+         udSCount.Parameters.Add(new OdbcParameter("@pcount", OdbcType.Int, 2));
                
          dbconn.Open();
          OdbcDataReader selPinTReader=selPFromT.ExecuteReader();
@@ -196,20 +196,20 @@
     void populateForm(){//message1.Text="<script language='javascript'"+">"+"alert('what');"+"</scri"+"pt>";
                     OdbcCommand populateFormCmd= new OdbcCommand("SELECT student_id, name FROM participants WHERE school=@school",dbconn);
          
-         populateFormCmd.Parameters.Add(new OleDbParameter("@school",OleDbType.VarChar,20));
+         populateFormCmd.Parameters.Add(new OdbcParameter("@school",OdbcType.VarChar,20));
          populateFormCmd.Parameters["@school"].Value=uname;
 
           // decide how many teams confirmed, and working on how many teams? somewhat!
          OdbcCommand numConfirmedCmd= new OdbcCommand("SELECT * FROM teams WHERE team_status= true AND school=@school",dbconn);
-         numConfirmedCmd.Parameters.Add(new OleDbParameter("@school",OleDbType.VarChar,20));
+         numConfirmedCmd.Parameters.Add(new OdbcParameter("@school",OdbcType.VarChar,20));
          numConfirmedCmd.Parameters["@school"].Value=uname;  
 
          OdbcCommand numConsideredCmd= new OdbcCommand("SELECT [ount] FROM teams WHERE team_status= false AND school=@school",dbconn);
-         numConsideredCmd.Parameters.Add(new OleDbParameter("@school",OleDbType.VarChar,20));
+         numConsideredCmd.Parameters.Add(new OdbcParameter("@school",OdbcType.VarChar,20));
          numConsideredCmd.Parameters["@school"].Value=uname;       
 
         OdbcCommand contInfoCmd= new OdbcCommand("SELECT contact, email, phone FROM schools WHERE school=@school",dbconn);
-         contInfoCmd.Parameters.Add(new OleDbParameter("@school",OleDbType.VarChar,20));
+         contInfoCmd.Parameters.Add(new OdbcParameter("@school",OdbcType.VarChar,20));
          contInfoCmd.Parameters["@school"].Value=uname; 
          
           //these gurrantee those not in database to appear blank; otherwise cancel_changes only cancel changes to those already in database.
@@ -317,12 +317,12 @@
 
     void participate_confirm(int j){
               OdbcCommand countInT=new OdbcCommand("SELECT [ount] FROM teams WHERE team_id=@team_id",dbconn);
-         countInT.Parameters.Add(new OleDbParameter("@team_id", OleDbType.VarChar, 4));
+         countInT.Parameters.Add(new OdbcParameter("@team_id", OdbcType.VarChar, 4));
          countInT.Parameters["@team_id"].Value = SchoolID+teamno[j]; 
          OdbcCommand confirmUpd=new OdbcCommand("UPDATE teams SET team_id=@team_id, team_status=@team_status WHERE team_id=@team_id",dbconn);
-         confirmUpd.Parameters.Add(new OleDbParameter("@team_id", OleDbType.VarChar, 4));
+         confirmUpd.Parameters.Add(new OdbcParameter("@team_id", OdbcType.VarChar, 4));
          confirmUpd.Parameters["@team_id"].Value = SchoolID+teamno[j]; 
-         confirmUpd.Parameters.Add(new OleDbParameter("@team_status", OleDbType.Boolean));//change to boolean
+         confirmUpd.Parameters.Add(new OdbcParameter("@team_status", OdbcType.Bit));//change to Bit
          confirmUpd.Parameters["@team_status"].Value = true; 
                //need change true to? True; no need to consider "False" situation.default is false unless manually changed in db.
          dbconn.Open();
@@ -350,10 +350,10 @@
     void delete_team(int j){
                  
                   OdbcCommand delTComm = new OdbcCommand("DELETE FROM teams WHERE team_id=@team_id", dbconn);
-                  delTComm.Parameters.Add(new OleDbParameter("@team_id", OleDbType.VarChar, 4));
+                  delTComm.Parameters.Add(new OdbcParameter("@team_id", OdbcType.VarChar, 4));
                   delTComm.Parameters["@team_id"].Value=SchoolID+teamno[j];
                   OdbcCommand selTComm = new OdbcCommand("SELECT team_id FROM teams WHERE team_id=@team_id", dbconn);
-                  selTComm.Parameters.Add(new OleDbParameter("@team_id", OleDbType.VarChar, 4));
+                  selTComm.Parameters.Add(new OdbcParameter("@team_id", OdbcType.VarChar, 4));
                   selTComm.Parameters["@team_id"].Value=SchoolID+teamno[j];
                   dbconn.Open();
                   OdbcDataReader tReader=selTComm.ExecuteReader();
@@ -394,13 +394,13 @@
       }
     void save_cont(Object Src, EventArgs E){
          OdbcCommand contUpd=new OdbcCommand("UPDATE schools SET school=@school, contact=@cont, email=@email, phone=@phone WHERE school=@school",dbconn);
-         contUpd.Parameters.Add(new OleDbParameter("@school", OleDbType.VarChar, 20));
+         contUpd.Parameters.Add(new OdbcParameter("@school", OdbcType.VarChar, 20));
          contUpd.Parameters["@school"].Value = uname;
-         contUpd.Parameters.Add(new OleDbParameter("@cont", OleDbType.VarChar, 20));
+         contUpd.Parameters.Add(new OdbcParameter("@cont", OdbcType.VarChar, 20));
          contUpd.Parameters["@cont"].Value = cont.Text; 
-         contUpd.Parameters.Add(new OleDbParameter("@email", OleDbType.VarChar, 50));
+         contUpd.Parameters.Add(new OdbcParameter("@email", OdbcType.VarChar, 50));
          contUpd.Parameters["@email"].Value =cont_email.Text;
-         contUpd.Parameters.Add(new OleDbParameter("@phone", OleDbType.VarChar, 20));
+         contUpd.Parameters.Add(new OdbcParameter("@phone", OdbcType.VarChar, 20));
          contUpd.Parameters["@phone"].Value = cont_phone.Text;
          dbconn.Open();
          contUpd.ExecuteNonQuery();
