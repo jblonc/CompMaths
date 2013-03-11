@@ -90,7 +90,7 @@
          OdbcCommand insTeamComm = new OdbcCommand("INSERT INTO teams ( team_id,team_no,school) Values (@team_id,@team_no, @school)", dbconn);
          OdbcCommand updComm=new OdbcCommand("UPDATE participants SET student_id=@s_id, name=@s_name WHERE student_id=@s_id",dbconn); 
          OdbcCommand delCmd=new OdbcCommand("DELETE FROM participants WHERE student_id=@s_id",dbconn);                                              
-         OdbcCommand selComm=new OdbcCommand("SELECT student_id FROM participants WHERE student_id=@ss_id",dbconn);
+         OdbcCommand selComm=new OdbcCommand("SELECT student_id FROM participants WHERE student_id=?",dbconn);
          OdbcCommand selTeamComm=new OdbcCommand("SELECT team_id FROM teams WHERE team_id=@team_id",dbconn); 
              insComm.Parameters.Add(new OdbcParameter("@sdt_id", OdbcType.VarChar, 9));
              insComm.Parameters.Add(new OdbcParameter("@name", OdbcType.VarChar, 20));
@@ -105,7 +105,7 @@
              updComm.Parameters.Add(new OdbcParameter("@s_id", OdbcType.VarChar, 9));
              updComm.Parameters.Add(new OdbcParameter("@s_name", OdbcType.VarChar, 20));
              delCmd.Parameters.Add(new OdbcParameter("@s_id", OdbcType.VarChar, 9));
-             selComm.Parameters.Add(new OdbcParameter("@ss_id", OdbcType.VarChar, 9));
+             selComm.Parameters.Add(new OdbcParameter("@student_id", OdbcType.VarChar, 9));
              selTeamComm.Parameters.Add(new OdbcParameter("@team_id", OdbcType.VarChar, 4));
 
              insComm.Parameters["@school"].Value = uname;
@@ -352,7 +352,7 @@
                   OdbcCommand delTComm = new OdbcCommand("DELETE FROM teams WHERE team_id=@team_id", dbconn);
                   delTComm.Parameters.Add(new OdbcParameter("@team_id", OdbcType.VarChar, 4));
                   delTComm.Parameters["@team_id"].Value=SchoolID+teamno[j];
-                  OdbcCommand selTComm = new OdbcCommand("SELECT team_id FROM teams WHERE team_id=@team_id", dbconn);
+                  OdbcCommand selTComm = new OdbcCommand("SELECT team_id FROM teams WHERE team_id=?", dbconn);
                   selTComm.Parameters.Add(new OdbcParameter("@team_id", OdbcType.VarChar, 4));
                   selTComm.Parameters["@team_id"].Value=SchoolID+teamno[j];
                   dbconn.Open();

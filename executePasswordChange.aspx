@@ -2,7 +2,7 @@
         private bool pchange (string txt1, string txt2){
             msg.Text="";
             bool isExecuted = false;
-            OleDbConnection dbconn = new OleDbConnection("Provider=SQLNCLI10; Server=tcp:ufwryy6r0y.database.windows.net,1433; Database=[xyzstart_db]; Uid=[xyzdb@ufwryy6r0y]; Pwd=[virAf89Hda];");
+            OdbcConnection dbconn = new OdbcConnection("Driver={SQL Server Native Client 10.0};Server=tcp:ufwryy6r0y.database.windows.net,1433;Database=xyzstart_db;Uid=xyzdb@ufwryy6r0y;Pwd=virAf89Hda;Encrypt=yes;Connection Timeout=30;");
         HttpCookie u2cookie = Request.Cookies["uvalidation"];
           ViewState["Referer"] = Request.Headers["Referer"];
           if(u2cookie!=null){  
@@ -11,10 +11,10 @@
          {
   
           dbconn.Open();
-          OleDbCommand myOleDbComm = new OleDbCommand("UPDATE schools SET school=@sch, [password]=@pss WHERE school=@sch", dbconn);
+          OdbcCommand myOleDbComm = new OdbcCommand("UPDATE schools SET school=@sch, [password]=@pss WHERE school=?", dbconn);
           
-          myOleDbComm.Parameters.Add( "@sch", OleDbType.VarChar, 20 );
-	    myOleDbComm.Parameters["@sch"].Value = (String)u2cookie.Values["username"];
+          myOleDbComm.Parameters.Add( "@school", OleDbType.VarChar, 20 );
+	    myOleDbComm.Parameters["@school"].Value = (String)u2cookie.Values["username"];
           myOleDbComm.Parameters.Add( "@pss", OleDbType.VarChar, 20 );
 	    myOleDbComm.Parameters["@pss"].Value = txt1;
           myOleDbComm.ExecuteNonQuery();
