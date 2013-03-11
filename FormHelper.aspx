@@ -91,7 +91,7 @@
          OdbcCommand updComm=new OdbcCommand("UPDATE participants SET student_id=@s_id, name=@s_name WHERE student_id=@s_id",dbconn); 
          OdbcCommand delCmd=new OdbcCommand("DELETE FROM participants WHERE student_id=@s_id",dbconn);                                              
          OdbcCommand selComm=new OdbcCommand("SELECT student_id FROM participants WHERE student_id=?",dbconn);
-         OdbcCommand selTeamComm=new OdbcCommand("SELECT team_id FROM teams WHERE team_id=@team_id",dbconn); 
+         OdbcCommand selTeamComm=new OdbcCommand("SELECT team_id FROM teams WHERE team_id=?",dbconn); 
              insComm.Parameters.Add(new OdbcParameter("@sdt_id", OdbcType.VarChar, 9));
              insComm.Parameters.Add(new OdbcParameter("@name", OdbcType.VarChar, 20));
              insComm.Parameters.Add(new OdbcParameter("@cat", OdbcType.VarChar, 8));
