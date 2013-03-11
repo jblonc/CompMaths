@@ -88,8 +88,8 @@
         
          OdbcCommand insComm = new OdbcCommand("INSERT INTO participants ( student_id,name, category, [roup], school,team_id) Values (@student_id,@name, @category, @group, @school,@team_id)", dbconn);
          OdbcCommand insTeamComm = new OdbcCommand("INSERT INTO teams (team_id,team_no,school) Values (?,?, ?)", dbconn);
-         OdbcCommand updComm=new OdbcCommand("UPDATE participants SET student_id=@s_id, name=@s_name WHERE student_id=@s_id",dbconn); 
-         OdbcCommand delCmd=new OdbcCommand("DELETE FROM participants WHERE student_id=@s_id",dbconn);                                              
+         OdbcCommand updComm=new OdbcCommand("UPDATE participants SET student_id=@student_id, name=@s_name WHERE student_id=?",dbconn); 
+         OdbcCommand delCmd=new OdbcCommand("DELETE FROM participants WHERE student_id=?",dbconn);                                              
          OdbcCommand selComm=new OdbcCommand("SELECT student_id FROM participants WHERE student_id=?",dbconn);
          OdbcCommand selTeamComm=new OdbcCommand("SELECT team_id FROM teams WHERE team_id=?",dbconn); 
              insComm.Parameters.Add(new OdbcParameter("@student_id", OdbcType.VarChar, 9));
@@ -102,9 +102,9 @@
              insTeamComm.Parameters.Add(new OdbcParameter("@team_id", OdbcType.VarChar, 4));
              insTeamComm.Parameters.Add(new OdbcParameter("@team_no", OdbcType.VarChar, 1));
              insTeamComm.Parameters.Add(new OdbcParameter("@school", OdbcType.VarChar, 20));
-             updComm.Parameters.Add(new OdbcParameter("@s_id", OdbcType.VarChar, 9));
+             updComm.Parameters.Add(new OdbcParameter("@student_id", OdbcType.VarChar, 9));
              updComm.Parameters.Add(new OdbcParameter("@s_name", OdbcType.VarChar, 20));
-             delCmd.Parameters.Add(new OdbcParameter("@s_id", OdbcType.VarChar, 9));
+             delCmd.Parameters.Add(new OdbcParameter("@student_id", OdbcType.VarChar, 9));
              selComm.Parameters.Add(new OdbcParameter("@student_id", OdbcType.VarChar, 9));
              selTeamComm.Parameters.Add(new OdbcParameter("@team_id", OdbcType.VarChar, 4));
 
@@ -140,11 +140,11 @@
  
              dbconn.Open();
 
-             updComm.Parameters["@s_id"].Value = Request.Form["team"+j.ToString()+"_"+i.ToString()+"_id"];
+             updComm.Parameters["@student_id"].Value = Request.Form["team"+j.ToString()+"_"+i.ToString()+"_id"];
 
              updComm.Parameters["@s_name"].Value = Request.Form["team"+j.ToString()+"_"+i.ToString()];
 
-             delCmd.Parameters["@s_id"].Value = Request.Form["team"+j.ToString()+"_"+i.ToString()+"_id"];
+             delCmd.Parameters["@student_id"].Value = Request.Form["team"+j.ToString()+"_"+i.ToString()+"_id"];
 
              selComm.Parameters["@student_id"].Value = Request.Form["team"+j.ToString()+"_"+i.ToString()+"_id"];
 
@@ -173,7 +173,7 @@
          OdbcCommand deleteT=new OdbcCommand("DELETE FROM teams WHERE team_id=?",dbconn);
          deleteT.Parameters.Add(new OdbcParameter("@team_id", OdbcType.VarChar, 4));
          deleteT.Parameters["@team_id"].Value = SchoolID+teamno[j];
-         OdbcCommand udSCount=new OdbcCommand("UPDATE teams SET team_id=@tid,team_status=@tstatus, [ount]=@pcount  WHERE team_id=@tid",dbconn);//count is a reserved word?!
+         OdbcCommand udSCount=new OdbcCommand("UPDATE teams SET team_id=@tid,team_status=@tstatus, [ount]=@pcount  WHERE team_id=?",dbconn);//count is a reserved word?!
          udSCount.Parameters.Add(new OdbcParameter("@tid", OdbcType.VarChar, 4));
          udSCount.Parameters["@tid"].Value = SchoolID+teamno[j]; 
          udSCount.Parameters.Add(new OdbcParameter("@tstatus", OdbcType.Bit));
@@ -319,7 +319,7 @@
               OdbcCommand countInT=new OdbcCommand("SELECT [ount] FROM teams WHERE team_id=?",dbconn);
          countInT.Parameters.Add(new OdbcParameter("@team_id", OdbcType.VarChar, 4));
          countInT.Parameters["@team_id"].Value = SchoolID+teamno[j]; 
-         OdbcCommand confirmUpd=new OdbcCommand("UPDATE teams SET team_id=@team_id, team_status=@team_status WHERE team_id=@team_id",dbconn);
+         OdbcCommand confirmUpd=new OdbcCommand("UPDATE teams SET team_id=@team_id, team_status=@team_status WHERE team_id=?",dbconn);
          confirmUpd.Parameters.Add(new OdbcParameter("@team_id", OdbcType.VarChar, 4));
          confirmUpd.Parameters["@team_id"].Value = SchoolID+teamno[j]; 
          confirmUpd.Parameters.Add(new OdbcParameter("@team_status", OdbcType.Bit));//change to Bit
@@ -393,7 +393,7 @@
          Response.Redirect("uPassChange.aspx", true);
       }
     void save_cont(Object Src, EventArgs E){
-         OdbcCommand contUpd=new OdbcCommand("UPDATE schools SET school=@school, contact=@cont, email=@email, phone=@phone WHERE school=@school",dbconn);
+         OdbcCommand contUpd=new OdbcCommand("UPDATE schools SET school=@school, contact=@cont, email=@email, phone=@phone WHERE school=?",dbconn);
          contUpd.Parameters.Add(new OdbcParameter("@school", OdbcType.VarChar, 20));
          contUpd.Parameters["@school"].Value = uname;
          contUpd.Parameters.Add(new OdbcParameter("@cont", OdbcType.VarChar, 20));
