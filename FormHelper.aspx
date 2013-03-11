@@ -146,7 +146,7 @@
 
              delCmd.Parameters["@s_id"].Value = Request.Form["team"+j.ToString()+"_"+i.ToString()+"_id"];
 
-             selComm.Parameters["@ss_id"].Value = Request.Form["team"+j.ToString()+"_"+i.ToString()+"_id"];
+             selComm.Parameters["@student_id"].Value = Request.Form["team"+j.ToString()+"_"+i.ToString()+"_id"];
 
              
              selread =selComm.ExecuteReader();
