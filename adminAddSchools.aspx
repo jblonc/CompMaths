@@ -36,7 +36,7 @@
              myOleDbInsComm.Parameters.Add(new OdbcParameter("@password", OdbcType.VarChar, 20));
              myOleDbInsComm.Parameters["@password"].Value = school.Text;
 
-             myOleDbInsComm.Parameters.Add(new OdbcParameter("@school_id", OdbcType.Integer, 3));
+             myOleDbInsComm.Parameters.Add(new OdbcParameter("@school_id", OdbcType.int, 3));
              //myOleDbInsComm.Parameters["@school_id"].Value = school_id.Text;
 
              myOleDbInsComm.Parameters.Add(new OdbcParameter("@school_name", OdbcType.VarChar, 50));
