@@ -8,7 +8,7 @@
          {
   
           dbconn.Open();
-          OleDbCommand myOleDbComm = new OleDbCommand("SELECT password FROM admins WHERE username=?", dbconn);
+          OleDbCommand myOleDbComm = new OleDbCommand("SELECT password FROM dbo.admins WHERE username=?", dbconn);
           
           myOleDbComm.Parameters.Add( "@username", OleDbType.VarChar, 25 );
 	    myOleDbComm.Parameters["@username"].Value = un;
