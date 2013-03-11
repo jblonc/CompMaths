@@ -47,10 +47,10 @@
              myOleDbInsComm.Parameters["@contact"].Value = contact.Text;
 
 
-             myOleDbInsComm.Parameters.Add(new OdbcParameter("@email", OdbcType.LongVarWChar));
+             myOleDbInsComm.Parameters.Add(new OdbcParameter("@email", OdbcType.Text));
              myOleDbInsComm.Parameters["@email"].Value = email.Text;
 
-             myOleDbInsComm.Parameters.Add(new OdbcParameter("@phone", OdbcType.LongVarWChar));
+             myOleDbInsComm.Parameters.Add(new OdbcParameter("@phone", OdbcType.Text));
              myOleDbInsComm.Parameters["@phone"].Value = phone.Text;
 
              myOleDbInsComm.Parameters.Add(new OdbcParameter("@school_addr", OdbcType.VarChar, 100));
@@ -61,7 +61,7 @@
              schoolSelCmd.Parameters["@school"].Value = school.Text;
 
              OdbcCommand schoolIdSelCmd=new OdbcCommand("SELECT school_id FROM schools WHERE school_id=@school_id", dbconn);
-             schoolIdSelCmd.Parameters.Add(new OdbcParameter("@school_id", OdbcType.Integer, 3));
+             schoolIdSelCmd.Parameters.Add(new OdbcParameter("@school_id", OdbcType.Int));
              //schoolIdSelCmd.Parameters["@school_id"].Value = school_id.Text;
 
              message.Text="";
