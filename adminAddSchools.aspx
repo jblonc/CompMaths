@@ -5,14 +5,14 @@
 <html>
    
      <script language="C#" runat="server">
-         OleDbConnection dbconn;
+         OdbcConnection dbconn;
          void Page_Load(Object Src, EventArgs E) {
          HttpCookie cookie = Request.Cookies["validation"];
           ViewState["Referer"] = Request.Headers["Referer"];
         if(cookie!=null){
          if((String)cookie.Values["valid_word"]!="allright"){Response.Redirect("adminLogin.aspx", true);} }
         else{Response.Redirect("adminLogin.aspx", true);}
-         dbconn = new OleDbConnection("Provider=SQLNCLI10; Server=tcp:ufwryy6r0y.database.windows.net,1433; Database=[xyzstart_db]; Uid=[xyzdb@ufwryy6r0y]; Pwd=[virAf89Hda];");
+         dbconn = new OdbcConnection("Driver={SQL Server Native Client 10.0};Server=tcp:ufwryy6r0y.database.windows.net,1433;Database=xyzstart_db;Uid=xyzdb@ufwryy6r0y;Pwd=virAf89Hda;Encrypt=yes;Connection Timeout=30;");
          if(!IsPostBack)
          {
          BindGrid();
@@ -27,9 +27,9 @@
             Page.Validate();
             if(!Page.IsValid){return;}
             
-             OleDbCommand schoolIdSelAll=new OleDbCommand("SELECT school_id FROM schools", dbconn);
+             OdbcCommand schoolIdSelAll=new OdbcCommand("SELECT school_id FROM schools", dbconn);
              
-             OleDbCommand myOleDbInsComm = new OleDbCommand("INSERT INTO schools ( school,[password], school_id, school_name,contact,email,phone, address) Values ( @school,@password, @school_id, @school_name,@contact,@email,@phone,@school_addr)", dbconn);
+             OdbcCommand myOleDbInsComm = new OdbcCommand("INSERT INTO schools ( school,[password], school_id, school_name,contact,email,phone, address) Values ( @school,@password, @school_id, @school_name,@contact,@email,@phone,@school_addr)", dbconn);
              myOleDbInsComm.Parameters.Add(new OleDbParameter("@school", OleDbType.VarChar, 20));
              myOleDbInsComm.Parameters["@school"].Value = school.Text;
 
@@ -56,11 +56,11 @@
              myOleDbInsComm.Parameters.Add(new OleDbParameter("@school_addr", OleDbType.VarChar, 100));
              myOleDbInsComm.Parameters["@school_addr"].Value = school_addr.Text;
 
-             OleDbCommand schoolSelCmd=new OleDbCommand("SELECT school FROM schools WHERE school=@school", dbconn);
+             OdbcCommand schoolSelCmd=new OdbcCommand("SELECT school FROM schools WHERE school=@school", dbconn);
              schoolSelCmd.Parameters.Add(new OleDbParameter("@school", OleDbType.VarChar, 20));
              schoolSelCmd.Parameters["@school"].Value = school.Text;
 
-             OleDbCommand schoolIdSelCmd=new OleDbCommand("SELECT school_id FROM schools WHERE school_id=@school_id", dbconn);
+             OdbcCommand schoolIdSelCmd=new OdbcCommand("SELECT school_id FROM schools WHERE school_id=@school_id", dbconn);
              schoolIdSelCmd.Parameters.Add(new OleDbParameter("@school_id", OleDbType.Integer, 3));
              //schoolIdSelCmd.Parameters["@school_id"].Value = school_id.Text;
 
@@ -71,11 +71,11 @@
   
                dbconn.Open();
                
-               OleDbDataReader schoolRead =schoolSelCmd.ExecuteReader();
+               OdbcDataReader schoolRead =schoolSelCmd.ExecuteReader();
                if(schoolRead.Read()){message.Text="This school already exists in record!";schoolRead.Close();}
                else{schoolRead.Close();
 
-               OleDbDataReader allIdRead=schoolIdSelAll.ExecuteReader();
+               OdbcDataReader allIdRead=schoolIdSelAll.ExecuteReader();
                ArrayList IdArray= new ArrayList();
                while(allIdRead.Read()){IdArray.Add(allIdRead.GetString(0));}
                allIdRead.Close();
@@ -87,7 +87,7 @@
                            } while(cid>0);
              schoolIdSelCmd.Parameters["@school_id"].Value = schoolIdTry;
 
-                OleDbDataReader schoolIdRead =schoolIdSelCmd.ExecuteReader();
+                OdbcDataReader schoolIdRead =schoolIdSelCmd.ExecuteReader();
                 if(schoolIdRead.Read()){message.Text="This school_id already exists; please select again!";
                                         schoolIdRead.Close();}
                 else{schoolIdRead.Close();
@@ -112,7 +112,7 @@
              BindGrid();
           }
      void BindGrid(){
-        OleDbDataAdapter displayComm=new OleDbDataAdapter("SELECT school, school_id,school_name, contact, email, phone , address FROM schools ORDER BY school", dbconn);// 
+        OdbcDataAdapter displayComm=new OdbcDataAdapter("SELECT school, school_id,school_name, contact, email, phone , address FROM schools ORDER BY school", dbconn);// 
         DataSet ds= new DataSet();
         displayComm.Fill(ds, "schools");
         schools.DataSource=ds.Tables["schools"].DefaultView;
