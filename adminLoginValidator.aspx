@@ -27,6 +27,7 @@
           OdbcDataReader reader = myOdbcComm.ExecuteReader();
           string lookuppass="";
          // while( reader.Read()){lookuppass= reader.GetString(0);}
+          reader.Read();
           lookuppass= reader.GetString(0);
           
             reader.Close();
