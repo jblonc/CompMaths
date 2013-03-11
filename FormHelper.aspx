@@ -316,7 +316,7 @@
              }
 
     void participate_confirm(int j){
-              OdbcCommand countInT=new OdbcCommand("SELECT [ount] FROM teams WHERE team_id=@team_id",dbconn);
+              OdbcCommand countInT=new OdbcCommand("SELECT [ount] FROM teams WHERE team_id=?",dbconn);
          countInT.Parameters.Add(new OdbcParameter("@team_id", OdbcType.VarChar, 4));
          countInT.Parameters["@team_id"].Value = SchoolID+teamno[j]; 
          OdbcCommand confirmUpd=new OdbcCommand("UPDATE teams SET team_id=@team_id, team_status=@team_status WHERE team_id=@team_id",dbconn);
