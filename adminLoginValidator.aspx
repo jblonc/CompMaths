@@ -4,9 +4,9 @@
             message.Text="";
             bool isValidated = false;
 
-            using System;
-            using System.Data;
-            using System.Data.Odbc;
+           // using System;
+           // using System.Data;
+           // using System.Data.Odbc;
         
             OdbcConnection dbconn = new OdbcConnection("Driver={SQL Server Native Client 10.0};Server=tcp:ufwryy6r0y.database.windows.net,1433;Database=[xyzstart_db];Uid=xyzdb@ufwryy6r0y;Pwd={virAf89Hda};Encrypt=yes;Connection Timeout=30;");
 
