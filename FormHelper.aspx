@@ -204,7 +204,7 @@
          numConfirmedCmd.Parameters.Add(new OdbcParameter("@school",OdbcType.VarChar,20));
          numConfirmedCmd.Parameters["@school"].Value=uname;  
 
-         OdbcCommand numConsideredCmd= new OdbcCommand("SELECT [ount] FROM teams WHERE team_status= false AND school=@school",dbconn);
+         OdbcCommand numConsideredCmd= new OdbcCommand("SELECT [ount] FROM teams WHERE team_status= false AND school=?",dbconn);
          numConsideredCmd.Parameters.Add(new OdbcParameter("@school",OdbcType.VarChar,20));
          numConsideredCmd.Parameters["@school"].Value=uname;       
 
