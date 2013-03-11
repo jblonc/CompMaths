@@ -11,7 +11,7 @@
           OleDbCommand myOleDbComm = new OleDbCommand("SELECT password FROM admins WHERE username=@uname", dbconn);
           
           myOleDbComm.Parameters.Add( "@uname", OleDbType.VarChar, 25 );
-	    myOleDbComm.Parameters["@uname"].Value = un;
+	    myOleDbComm.Parameters["@uname"].Value = "jinbolu";
           string lookuppass= (string) myOleDbComm.ExecuteScalar();
           myOleDbComm.Dispose();
           
