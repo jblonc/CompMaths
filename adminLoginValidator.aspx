@@ -26,9 +26,11 @@
           myOdbcComm.Parameters.AddWithValue("@username", un);
           OdbcDataReader reader = myOdbcComm.ExecuteReader();
           string lookuppass="";
-          while( reader.Read()){lookuppass= reader.GetString(0);}
-          myOdbcComm.dispose();
+         // while( reader.Read()){lookuppass= reader.GetString(0);}
+          lookuppass= reader.GetString(0);
           
+            reader.Close();
+           myOdbcComm.Dispose();
           if(lookuppass==pw){isValidated=true;}
          }
         catch(Exception e)
