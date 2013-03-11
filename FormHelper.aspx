@@ -170,7 +170,7 @@
          OdbcCommand selPFromT=new OdbcCommand("SELECT student_id FROM participants WHERE team_id=?",dbconn); 
          selPFromT.Parameters.Add(new OdbcParameter("@team_id", OdbcType.VarChar, 4));
          selPFromT.Parameters["@team_id"].Value = SchoolID+teamno[j];
-         OdbcCommand deleteT=new OdbcCommand("DELETE FROM teams WHERE team_id=@team_id",dbconn);
+         OdbcCommand deleteT=new OdbcCommand("DELETE FROM teams WHERE team_id=?",dbconn);
          deleteT.Parameters.Add(new OdbcParameter("@team_id", OdbcType.VarChar, 4));
          deleteT.Parameters["@team_id"].Value = SchoolID+teamno[j];
          OdbcCommand udSCount=new OdbcCommand("UPDATE teams SET team_id=@tid,team_status=@tstatus, [ount]=@pcount  WHERE team_id=@tid",dbconn);//count is a reserved word?!
