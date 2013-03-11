@@ -86,15 +86,15 @@
     void participate_save(int j){
          
         
-         OdbcCommand insComm = new OdbcCommand("INSERT INTO participants ( student_id,name, category, [roup], school,team_id) Values (@sdt_id,@name, @cat, @group, @school,@team_id)", dbconn);
+         OdbcCommand insComm = new OdbcCommand("INSERT INTO participants ( student_id,name, category, [roup], school,team_id) Values (@student_id,@name, @category, @group, @school,@team_id)", dbconn);
          OdbcCommand insTeamComm = new OdbcCommand("INSERT INTO teams (team_id,team_no,school) Values (?,?, ?)", dbconn);
          OdbcCommand updComm=new OdbcCommand("UPDATE participants SET student_id=@s_id, name=@s_name WHERE student_id=@s_id",dbconn); 
          OdbcCommand delCmd=new OdbcCommand("DELETE FROM participants WHERE student_id=@s_id",dbconn);                                              
          OdbcCommand selComm=new OdbcCommand("SELECT student_id FROM participants WHERE student_id=?",dbconn);
          OdbcCommand selTeamComm=new OdbcCommand("SELECT team_id FROM teams WHERE team_id=?",dbconn); 
-             insComm.Parameters.Add(new OdbcParameter("@sdt_id", OdbcType.VarChar, 9));
+             insComm.Parameters.Add(new OdbcParameter("@student_id", OdbcType.VarChar, 9));
              insComm.Parameters.Add(new OdbcParameter("@name", OdbcType.VarChar, 20));
-             insComm.Parameters.Add(new OdbcParameter("@cat", OdbcType.VarChar, 8));
+             insComm.Parameters.Add(new OdbcParameter("@category", OdbcType.VarChar, 8));
              insComm.Parameters.Add(new OdbcParameter("@group", OdbcType.VarChar, 8));
 
              insComm.Parameters.Add(new OdbcParameter("@school", OdbcType.VarChar, 20));
@@ -123,9 +123,9 @@
              OdbcDataReader selread, selTeamRead;
             
              for(int i=1; i<=12; i++){
-             if(i<=4){insComm.Parameters["@cat"].Value = "Algebra";}
-             else if (i<=8){insComm.Parameters["@cat"].Value = "Geometry";}
-             else {insComm.Parameters["@cat"].Value = "PreCal";}
+             if(i<=4){insComm.Parameters["@category"].Value = "Algebra";}
+             else if (i<=8){insComm.Parameters["@category"].Value = "Geometry";}
+             else {insComm.Parameters["@category"].Value = "PreCal";}
              
              if(i%4==0){insComm.Parameters["@group"].Value = "Mixed";}
              else {insComm.Parameters["@group"].Value = "Subject";}
@@ -133,7 +133,7 @@
              /*if(i==4 || i==8 || i==12){insComm.Parameters["@group"].Value = "Mixed";}
              else {insComm.Parameters["@group"].Value = "Subject";}*/
              
-             insComm.Parameters["@sdt_id"].Value = Request.Form["team"+j.ToString()+"_"+i.ToString()+"_id"];//
+             insComm.Parameters["@student_id"].Value = Request.Form["team"+j.ToString()+"_"+i.ToString()+"_id"];//
 
              insComm.Parameters["@name"].Value = Request.Form["team"+j.ToString()+"_"+i.ToString()];//alg1.Text;
 
