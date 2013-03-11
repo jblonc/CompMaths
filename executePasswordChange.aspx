@@ -2,7 +2,7 @@
         private bool pchange (string txt1, string txt2){
             msg.Text="";
             bool isExecuted = false;
-            OleDbConnection dbconn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;data source=" + "E:\\Inetpub\\websites\\msf.uwc.edu\\fpdb\\mathleague\\ml.mdb");
+            OleDbConnection dbconn = new OleDbConnection("Provider=SQLNCLI10; Server=tcp:ufwryy6r0y.database.windows.net,1433; Database=[xyzstart_db]; Uid=[xyzdb@ufwryy6r0y]; Pwd=[virAf89Hda];");
         HttpCookie u2cookie = Request.Cookies["uvalidation"];
           ViewState["Referer"] = Request.Headers["Referer"];
           if(u2cookie!=null){  

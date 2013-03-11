@@ -13,7 +13,7 @@
         if(cookie!=null){
          if((String)cookie.Values["valid_word"]!="allright"){Response.Redirect("adminLogin.aspx", true);} }
         else{Response.Redirect("adminLogin.aspx", true);}
-         dbconn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;data source=" +                                 "E:\\Inetpub\\websites\\msf.uwc.edu\\fpdb\\mathleague\\ml.mdb");
+         dbconn = new OleDbConnection("Provider=SQLNCLI10; Server=tcp:ufwryy6r0y.database.windows.net,1433; Database=[xyzstart_db]; Uid=[xyzdb@ufwryy6r0y]; Pwd=[virAf89Hda];");
          if(!IsPostBack)
          {
          BindGrid();
@@ -28,7 +28,7 @@
         {teams.EditItemIndex = -1; BindGrid(); }
      void teamGrades_Update(Object sender, DataGridCommandEventArgs e)
         {
-         /*String updateCmd="UPDATE teams SET team_id=@tid, team_no=@tno, [count]=@cnt,team_status=@tstat,school=@school, geometry_g=@gg, algebra_g=@ag,precal_g=@pg, mixed_g=@mg WHERE team_id=@tid";*/
+         /*String updateCmd="UPDATE teams SET team_id=@tid, team_no=@tno, [ount]=@cnt,team_status=@tstat,school=@school, geometry_g=@gg, algebra_g=@ag,precal_g=@pg, mixed_g=@mg WHERE team_id=@tid";*/
          String updateCmd="UPDATE teams SET team_id=@tid,geometry_g=@gg, algebra_g=@ag,precal_g=@pg, mixed_g=@mg WHERE team_id=@tid";
 
          OleDbCommand myUpdateCmd= new OleDbCommand(updateCmd, dbconn);
@@ -43,9 +43,9 @@
          myUpdateCmd.Parameters.Add(new OleDbParameter("@mg", OleDbType.Double, 2));
          myUpdateCmd.Parameters["@tid"].Value=teams.DataKeys[(int)e.Item.ItemIndex];
          String[] cols={"@tid","@tno","@cnt","@tstat","@school","@gg","@ag","@pg","@mg"};
-         int numCols=e.Item.Cells.Count;
+         int numCols=e.Item.Cells.ount;
          message.Text="";
-         for (int i=6; i<numCols-1;i++) //numCols=11.
+         for (int i=ount6; i<numCols-1;i++) //numCols=11.
             {
              String colvalue=((System.Web.UI.WebControls.TextBox) e.Item.Cells[i].Controls[0]).Text;
              myUpdateCmd.Parameters[cols[i-1]].Value = Convert.ToDouble(colvalue);
@@ -59,7 +59,7 @@
          // message.Text+="working";
         }
      void BindGrid(){
-        OleDbDataAdapter displayComm=new OleDbDataAdapter("SELECT team_id, team_no, [count], team_status, school, geometry_g, algebra_g, precal_g, mixed_g, team_score FROM teams ORDER BY school, team_id", dbconn);
+        OleDbDataAdapter displayComm=new OleDbDataAdapter("SELECT team_id, team_no, [ount], team_status, school, geometry_g, algebra_g, precal_g, mixed_g, team_score FROM teams ORDER BY school, team_id", dbconn);
         DataSet ds= new DataSet();
         displayComm.Fill(ds, "teams");
         teams.DataSource=ds.Tables["teams"].DefaultView;

@@ -9,7 +9,7 @@
           
           
 
-         dbconn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;data source=" +"E:\\Inetpub\\websites\\msf.uwc.edu\\fpdb\\mathleague\\ml.mdb");               teamno=new String[4]; teamno[0]="";teamno[1]="2";teamno[2]="6";teamno[3]="8";
+         dbconn = new OleDbConnection("Provider=SQLNCLI10; Server=tcp:ufwryy6r0y.database.windows.net,1433; Database=[xyzstart_db]; Uid=[xyzdb@ufwryy6r0y]; Pwd=[virAf89Hda];");               teamno=new String[4]; teamno[0]="";teamno[1]="2";teamno[2]="6";teamno[3]="8";
          if(uFormcookie!=null){
            if((String)uFormcookie.Values["valid_word"]!="collegebound"){Response.Redirect("uLogin.aspx", true);}}
          else{Response.Redirect("uLogin.aspx", true);}
@@ -86,7 +86,7 @@
     void participate_save(int j){
          
         
-         OleDbCommand insComm = new OleDbCommand("INSERT INTO participants ( student_id,name, category, [group], school,team_id) Values (@sdt_id,@name, @cat, @group, @school,@team_id)", dbconn);
+         OleDbCommand insComm = new OleDbCommand("INSERT INTO participants ( student_id,name, category, [roup], school,team_id) Values (@sdt_id,@name, @cat, @group, @school,@team_id)", dbconn);
          OleDbCommand insTeamComm = new OleDbCommand("INSERT INTO teams ( team_id,team_no,school) Values (@team_id,@team_no, @school)", dbconn);
          OleDbCommand updComm=new OleDbCommand("UPDATE participants SET student_id=@s_id, name=@s_name WHERE student_id=@s_id",dbconn); 
          OleDbCommand delCmd=new OleDbCommand("DELETE FROM participants WHERE student_id=@s_id",dbconn);                                              
@@ -173,7 +173,7 @@
          OleDbCommand deleteT=new OleDbCommand("DELETE FROM teams WHERE team_id=@team_id",dbconn);
          deleteT.Parameters.Add(new OleDbParameter("@team_id", OleDbType.VarChar, 4));
          deleteT.Parameters["@team_id"].Value = SchoolID+teamno[j];
-         OleDbCommand udSCount=new OleDbCommand("UPDATE teams SET team_id=@tid,team_status=@tstatus, [count]=@pcount  WHERE team_id=@tid",dbconn);//count is a reserved word?!
+         OleDbCommand udSCount=new OleDbCommand("UPDATE teams SET team_id=@tid,team_status=@tstatus, [ount]=@pcount  WHERE team_id=@tid",dbconn);//count is a reserved word?!
          udSCount.Parameters.Add(new OleDbParameter("@tid", OleDbType.VarChar, 4));
          udSCount.Parameters["@tid"].Value = SchoolID+teamno[j]; 
          udSCount.Parameters.Add(new OleDbParameter("@tstatus", OleDbType.Boolean));
@@ -204,7 +204,7 @@
          numConfirmedCmd.Parameters.Add(new OleDbParameter("@school",OleDbType.VarChar,20));
          numConfirmedCmd.Parameters["@school"].Value=uname;  
 
-         OleDbCommand numConsideredCmd= new OleDbCommand("SELECT [count] FROM teams WHERE team_status= false AND school=@school",dbconn);
+         OleDbCommand numConsideredCmd= new OleDbCommand("SELECT [ount] FROM teams WHERE team_status= false AND school=@school",dbconn);
          numConsideredCmd.Parameters.Add(new OleDbParameter("@school",OleDbType.VarChar,20));
          numConsideredCmd.Parameters["@school"].Value=uname;       
 
@@ -316,7 +316,7 @@
              }
 
     void participate_confirm(int j){
-              OleDbCommand countInT=new OleDbCommand("SELECT [count] FROM teams WHERE team_id=@team_id",dbconn);
+              OleDbCommand countInT=new OleDbCommand("SELECT [ount] FROM teams WHERE team_id=@team_id",dbconn);
          countInT.Parameters.Add(new OleDbParameter("@team_id", OleDbType.VarChar, 4));
          countInT.Parameters["@team_id"].Value = SchoolID+teamno[j]; 
          OleDbCommand confirmUpd=new OleDbCommand("UPDATE teams SET team_id=@team_id, team_status=@team_status WHERE team_id=@team_id",dbconn);

@@ -8,14 +8,13 @@
          OleDbConnection dbconn;
          /*void Page_Load(Object Src, EventArgs E) {
          //if(Session["validation"]!="allright"){Response.Redirect("adminLogin.aspx", true);} 
-         dbconn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;data source=" +                                 "E:\\Inetpub\\websites\\msf.uwc.edu\\fpdb\\mathleague\\ml.mdb");*/
+         dbconn = new OleDbConnection("Provider=SQLNCLI10; Server=tcp:ufwryy6r0y.database.windows.net,1433; Database=[xyzstart_db]; Uid=[xyzdb@ufwryy6r0y]; Pwd=[virAf89Hda];");*/
          void Page_Load(Object Src, EventArgs E) {
          HttpCookie cookie = Request.Cookies["validation"];
           ViewState["Referer"] = Request.Headers["Referer"];
         if(cookie!=null){
          if((String)cookie.Values["valid_word"]!="allright"){Response.Redirect("adminLogin.aspx", true);} }
-        else{Response.Redirect("adminLogin.aspx", true);}
-         dbconn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;data source=" +                                 "E:\\Inetpub\\websites\\msf.uwc.edu\\fpdb\\mathleague\\ml.mdb");
+        else{Response.Redirect("adminL"Provider=SQLNCLI10; Server=tcp:ufwryy6r0y.database.windows.net,1433; Database=[xyzstart_db]; Uid=[xyzdb@ufwryy6r0y]; Pwd=[virAf89Hda];");
          if(!IsPostBack)
          {
          BindGrid();
@@ -145,10 +144,10 @@
         GTCommandString.Add("SELECT teams.team_id, schools.school_name, schools.contact, teams.precal_g FROM teams, schools WHERE teams.school=schools.school AND teams.precal_g>0 ORDER BY teams.precal_g DESC, teams.team_id ASC");
         GTCommandString.Add("SELECT teams.team_id, schools.school_name, schools.contact, teams.mixed_g FROM teams, schools WHERE teams.school=schools.school AND teams.mixed_g>0 ORDER BY teams.mixed_g DESC, teams.team_id ASC");
         GTCommandString.Add("SELECT teams.team_id, schools.school_name, schools.contact, teams.team_score FROM teams, schools WHERE teams.school=schools.school AND teams.team_score>0 ORDER BY teams.team_score DESC, teams.team_id ASC");
-        GTCommandNamesString.Add("SELECT [name]  FROM participants WHERE team_id=@tid AND (category='Algebra' AND [group]='Subject')");
-        GTCommandNamesString.Add("SELECT [name]  FROM participants WHERE team_id=@tid AND (category='Geometry' AND [group]='Subject')");
-        GTCommandNamesString.Add("SELECT [name]  FROM participants WHERE team_id=@tid AND (category='Precal' AND [group]='Subject')");
-        GTCommandNamesString.Add("SELECT [name]  FROM participants WHERE team_id=@tid AND [group]='Mixed'");
+        GTCommandNamesString.Add("SELECT [name]  FROM participants WHERE team_id=@tid AND (category='Algebra' AND [roup]='Subject')");
+        GTCommandNamesString.Add("SELECT [name]  FROM participants WHERE team_id=@tid AND (category='Geometry' AND [roup]='Subject')");
+        GTCommandNamesString.Add("SELECT [name]  FROM participants WHERE team_id=@tid AND (category='Precal' AND [roup]='Subject')");
+        GTCommandNamesString.Add("SELECT [name]  FROM participants WHERE team_id=@tid AND [roup]='Mixed'");
         GTCommandNamesString.Add("SELECT [name]  FROM participants WHERE team_id=@tid");
         ArrayList TypeList=new ArrayList();ArrayList CategoryList=new ArrayList();
         TypeList.Add("Group");TypeList.Add("Group");TypeList.Add("Group");TypeList.Add("Group");TypeList.Add("Team");
