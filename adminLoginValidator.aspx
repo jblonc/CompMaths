@@ -8,10 +8,10 @@
          {
   
           dbconn.Open();
-          OleDbCommand myOleDbComm = new OleDbCommand("SELECT password FROM admins WHERE username=@uname", dbconn);
+          OleDbCommand myOleDbComm = new OleDbCommand("SELECT password FROM admins WHERE username=?", dbconn);
           
-          myOleDbComm.Parameters.Add( "@uname", OleDbType.VarChar, 25 );
-	    myOleDbComm.Parameters["@uname"].Value = "jinbolu";
+          myOleDbComm.Parameters.Add( "@username", OleDbType.VarChar, 25 );
+	    myOleDbComm.Parameters["@username"].Value = un;
           string lookuppass= (string) myOleDbComm.ExecuteScalar();
           myOleDbComm.Dispose();
           
