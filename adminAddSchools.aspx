@@ -27,9 +27,9 @@
             Page.Validate();
             if(!Page.IsValid){return;}
             
-             OdbcCommand schoolIdSelAll=new OdbcCommand("SELECT school_id FROM schools", dbconn);
+             OdbcCommand schoolIdSelAll=new OdbcCommand("SELECT school_id FROM xyzstart_db .dbo.schools", dbconn);
              
-             OdbcCommand myOleDbInsComm = new OdbcCommand("INSERT INTO schools ( school,[password], school_id, school_name,contact,email,phone, address) Values ( @school,@password, @school_id, @school_name,@contact,@email,@phone,@school_addr)", dbconn);
+             OdbcCommand myOleDbInsComm = new OdbcCommand("INSERT INTO xyzstart_db .dbo.schools ( school,[password], school_id, school_name,contact,email,phone, address) Values ( @school,@password, @school_id, @school_name,@contact,@email,@phone,@school_addr)", dbconn);
              myOleDbInsComm.Parameters.Add(new OdbcParameter("@school", OdbcType.VarChar, 20));
              myOleDbInsComm.Parameters["@school"].Value = school.Text;
 
@@ -56,11 +56,11 @@
              myOleDbInsComm.Parameters.Add(new OdbcParameter("@school_addr", OdbcType.VarChar, 100));
              myOleDbInsComm.Parameters["@school_addr"].Value = school_addr.Text;
 
-             OdbcCommand schoolSelCmd=new OdbcCommand("SELECT school FROM schools WHERE school=@school", dbconn);
+             OdbcCommand schoolSelCmd=new OdbcCommand("SELECT school FROM xyzstart_db .dbo.schools WHERE school=@school", dbconn);
              schoolSelCmd.Parameters.Add(new OdbcParameter("@school", OdbcType.VarChar, 20));
              schoolSelCmd.Parameters["@school"].Value = school.Text;
 
-             OdbcCommand schoolIdSelCmd=new OdbcCommand("SELECT school_id FROM schools WHERE school_id=@school_id", dbconn);
+             OdbcCommand schoolIdSelCmd=new OdbcCommand("SELECT school_id FROM xyzstart_db .dbo.schools WHERE school_id=@school_id", dbconn);
              schoolIdSelCmd.Parameters.Add(new OdbcParameter("@school_id", OdbcType.Int));
              //schoolIdSelCmd.Parameters["@school_id"].Value = school_id.Text;
 
@@ -112,7 +112,7 @@
              BindGrid();
           }
      void BindGrid(){
-        OdbcDataAdapter displayComm=new OdbcDataAdapter("SELECT school, school_id,school_name, contact, email, phone , address FROM schools ORDER BY school", dbconn);// 
+        OdbcDataAdapter displayComm=new OdbcDataAdapter("SELECT school, school_id,school_name, contact, email, phone , address FROM xyzstart_db .dbo.schools ORDER BY school", dbconn);// 
         DataSet ds= new DataSet();
         displayComm.Fill(ds, "schools");
         schools.DataSource=ds.Tables["schools"].DefaultView;
