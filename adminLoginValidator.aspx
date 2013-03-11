@@ -2,8 +2,8 @@
         private bool validator (string un, string pw){
             message.Text="";
             bool isValidated = false;
-            OleDbConnection dbconn = new OleDbConnection("Provider=SQLOLEDB; Data Provider = SQLNCLI10; Data Source=ufwryy6r0y.database.windows.net,1433; Initial Catalog =[xyzstart_db]; Uid=[xyzdb@ufwryy6r0y]; Password=[virAf89Hda];");
-            
+            OleDbConnection dbconn = new OleDbConnection("Provider=SQLOLEDB; Data Provider = SQLNCLI10;  Initial Catalog =[xyzstart_db]; User id =xyzdb@ufwryy6r0y; Password=virAf89Hda;");
+   //Data Source=ufwryy6r0y.database.windows.net,1433;         
         try
          {
   
