@@ -112,7 +112,7 @@
              BindGrid();
           }
      void BindGrid(){
-        OdbcDataAdapter displayComm=new OdbcDataAdapterO("SELECT school, school_id,school_name, contact, email, phone , address FROM schools ORDER BY school", dbconn);// 
+        OdbcDataAdapter displayComm=new OdbcDataAdapter("SELECT school, school_id,school_name, contact, email, phone , address FROM schools ORDER BY school", dbconn);// 
         DataSet ds= new DataSet();
         displayComm.Fill(ds, "schools");
         schools.DataSource=ds.Tables["schools"].DefaultView;
