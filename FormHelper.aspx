@@ -1,5 +1,5 @@
      <script language="C#" runat="server">
-         OleDbConnection dbconn;
+         OdbcConnection dbconn;
            
          String SchoolID;String pass;String uname; 
          String[] teamno;//{"","2","6","8"} team1.Text=teamno[1]; etc.
@@ -9,20 +9,20 @@
           
           
 
-         dbconn = new OleDbConnection("Provider=SQLNCLI10; Server=tcp:ufwryy6r0y.database.windows.net,1433; Database=[xyzstart_db]; Uid=[xyzdb@ufwryy6r0y]; Pwd=[virAf89Hda];");               teamno=new String[4]; teamno[0]="";teamno[1]="2";teamno[2]="6";teamno[3]="8";
+         dbconn = new new OdbcConnection("Driver={SQL Server Native Client 10.0};Server=tcp:ufwryy6r0y.database.windows.net,1433;Database=xyzstart_db;Uid=xyzdb@ufwryy6r0y;Pwd=virAf89Hda;Encrypt=yes;Connection Timeout=30;");               teamno=new String[4]; teamno[0]="";teamno[1]="2";teamno[2]="6";teamno[3]="8";
          if(uFormcookie!=null){
            if((String)uFormcookie.Values["valid_word"]!="collegebound"){Response.Redirect("uLogin.aspx", true);}}
          else{Response.Redirect("uLogin.aspx", true);}
 
          uname=(String)uFormcookie.Values["username"];
 
-         OleDbCommand findSchoolInfoCmd= new OleDbCommand("SELECT school_id,[password], school_name FROM schools WHERE school=@school",dbconn);
+         OdbcCommand findSchoolInfoCmd= new OdbcCommand("SELECT school_id,[password], school_name FROM schools WHERE school=@school",dbconn);
          
          findSchoolInfoCmd.Parameters.Add(new OleDbParameter("@school",OleDbType.VarChar,20));
          findSchoolInfoCmd.Parameters["@school"].Value=uname;
 
          dbconn.Open();
-         OleDbDataReader dbread =findSchoolInfoCmd.ExecuteReader();
+         OdbcDataReader dbread =findSchoolInfoCmd.ExecuteReader();
          if(dbread.Read()){SchoolID=dbread.GetString(0);pass=dbread.GetString(1);schoolNAME.Text=dbread.GetString(2);}
          dbread.Close();
          dbconn.Close();
@@ -86,12 +86,12 @@
     void participate_save(int j){
          
         
-         OleDbCommand insComm = new OleDbCommand("INSERT INTO participants ( student_id,name, category, [roup], school,team_id) Values (@sdt_id,@name, @cat, @group, @school,@team_id)", dbconn);
-         OleDbCommand insTeamComm = new OleDbCommand("INSERT INTO teams ( team_id,team_no,school) Values (@team_id,@team_no, @school)", dbconn);
-         OleDbCommand updComm=new OleDbCommand("UPDATE participants SET student_id=@s_id, name=@s_name WHERE student_id=@s_id",dbconn); 
-         OleDbCommand delCmd=new OleDbCommand("DELETE FROM participants WHERE student_id=@s_id",dbconn);                                              
-         OleDbCommand selComm=new OleDbCommand("SELECT student_id FROM participants WHERE student_id=@ss_id",dbconn);
-         OleDbCommand selTeamComm=new OleDbCommand("SELECT team_id FROM teams WHERE team_id=@team_id",dbconn); 
+         OdbcCommand insComm = new OdbcCommand("INSERT INTO participants ( student_id,name, category, [roup], school,team_id) Values (@sdt_id,@name, @cat, @group, @school,@team_id)", dbconn);
+         OdbcCommand insTeamComm = new OdbcCommand("INSERT INTO teams ( team_id,team_no,school) Values (@team_id,@team_no, @school)", dbconn);
+         OdbcCommand updComm=new OdbcCommand("UPDATE participants SET student_id=@s_id, name=@s_name WHERE student_id=@s_id",dbconn); 
+         OdbcCommand delCmd=new OdbcCommand("DELETE FROM participants WHERE student_id=@s_id",dbconn);                                              
+         OdbcCommand selComm=new OdbcCommand("SELECT student_id FROM participants WHERE student_id=@ss_id",dbconn);
+         OdbcCommand selTeamComm=new OdbcCommand("SELECT team_id FROM teams WHERE team_id=@team_id",dbconn); 
              insComm.Parameters.Add(new OleDbParameter("@sdt_id", OleDbType.VarChar, 9));
              insComm.Parameters.Add(new OleDbParameter("@name", OleDbType.VarChar, 20));
              insComm.Parameters.Add(new OleDbParameter("@cat", OleDbType.VarChar, 8));
@@ -120,7 +120,7 @@
              selTeamComm.Parameters["@team_id"].Value = SchoolID+teamno[j];
              
              
-             OleDbDataReader selread, selTeamRead;
+             OdbcDataReader selread, selTeamRead;
             
              for(int i=1; i<=12; i++){
              if(i<=4){insComm.Parameters["@cat"].Value = "Algebra";}
@@ -167,13 +167,13 @@
                    }
                }
             //delete team if there is no participant in the team; record/update how many in the team
-         OleDbCommand selPFromT=new OleDbCommand("SELECT student_id FROM participants WHERE team_id=@team_id",dbconn); 
+         OdbcCommand selPFromT=new OdbcCommand("SELECT student_id FROM participants WHERE team_id=@team_id",dbconn); 
          selPFromT.Parameters.Add(new OleDbParameter("@team_id", OleDbType.VarChar, 4));
          selPFromT.Parameters["@team_id"].Value = SchoolID+teamno[j];
-         OleDbCommand deleteT=new OleDbCommand("DELETE FROM teams WHERE team_id=@team_id",dbconn);
+         OdbcCommand deleteT=new OdbcCommand("DELETE FROM teams WHERE team_id=@team_id",dbconn);
          deleteT.Parameters.Add(new OleDbParameter("@team_id", OleDbType.VarChar, 4));
          deleteT.Parameters["@team_id"].Value = SchoolID+teamno[j];
-         OleDbCommand udSCount=new OleDbCommand("UPDATE teams SET team_id=@tid,team_status=@tstatus, [ount]=@pcount  WHERE team_id=@tid",dbconn);//count is a reserved word?!
+         OdbcCommand udSCount=new OdbcCommand("UPDATE teams SET team_id=@tid,team_status=@tstatus, [ount]=@pcount  WHERE team_id=@tid",dbconn);//count is a reserved word?!
          udSCount.Parameters.Add(new OleDbParameter("@tid", OleDbType.VarChar, 4));
          udSCount.Parameters["@tid"].Value = SchoolID+teamno[j]; 
          udSCount.Parameters.Add(new OleDbParameter("@tstatus", OleDbType.Boolean));
@@ -181,7 +181,7 @@
          udSCount.Parameters.Add(new OleDbParameter("@pcount", OleDbType.Integer, 2));
                
          dbconn.Open();
-         OleDbDataReader selPinTReader=selPFromT.ExecuteReader();
+         OdbcDataReader selPinTReader=selPFromT.ExecuteReader();
          int PinT=0;
          while(selPinTReader.Read()){PinT++;} selPinTReader.Close();
          udSCount.Parameters["@pcount"].Value =PinT;
@@ -194,21 +194,21 @@
          populateForm();
         }
     void populateForm(){//message1.Text="<script language='javascript'"+">"+"alert('what');"+"</scri"+"pt>";
-                    OleDbCommand populateFormCmd= new OleDbCommand("SELECT student_id, name FROM participants WHERE school=@school",dbconn);
+                    OdbcCommand populateFormCmd= new OdbcCommand("SELECT student_id, name FROM participants WHERE school=@school",dbconn);
          
          populateFormCmd.Parameters.Add(new OleDbParameter("@school",OleDbType.VarChar,20));
          populateFormCmd.Parameters["@school"].Value=uname;
 
           // decide how many teams confirmed, and working on how many teams? somewhat!
-         OleDbCommand numConfirmedCmd= new OleDbCommand("SELECT * FROM teams WHERE team_status= true AND school=@school",dbconn);
+         OdbcCommand numConfirmedCmd= new OdbcCommand("SELECT * FROM teams WHERE team_status= true AND school=@school",dbconn);
          numConfirmedCmd.Parameters.Add(new OleDbParameter("@school",OleDbType.VarChar,20));
          numConfirmedCmd.Parameters["@school"].Value=uname;  
 
-         OleDbCommand numConsideredCmd= new OleDbCommand("SELECT [ount] FROM teams WHERE team_status= false AND school=@school",dbconn);
+         OdbcCommand numConsideredCmd= new OdbcCommand("SELECT [ount] FROM teams WHERE team_status= false AND school=@school",dbconn);
          numConsideredCmd.Parameters.Add(new OleDbParameter("@school",OleDbType.VarChar,20));
          numConsideredCmd.Parameters["@school"].Value=uname;       
 
-        OleDbCommand contInfoCmd= new OleDbCommand("SELECT contact, email, phone FROM schools WHERE school=@school",dbconn);
+        OdbcCommand contInfoCmd= new OdbcCommand("SELECT contact, email, phone FROM schools WHERE school=@school",dbconn);
          contInfoCmd.Parameters.Add(new OleDbParameter("@school",OleDbType.VarChar,20));
          contInfoCmd.Parameters["@school"].Value=uname; 
          
@@ -226,7 +226,7 @@
           team3_9.Text="";team3_10.Text="";team3_11.Text="";team3_12.Text=""; */        
 
          dbconn.Open();
-         OleDbDataReader popuread =populateFormCmd.ExecuteReader();         
+         OdbcDataReader popuread =populateFormCmd.ExecuteReader();         
          while(popuread.Read()){
                   String sid=popuread.GetString(0);
                   String sname=popuread.GetString(1);
@@ -273,20 +273,20 @@
          popuread.Close();
 
          //decide how many teams confirmed
-         OleDbDataReader confirmedR =numConfirmedCmd.ExecuteReader();
+         OdbcDataReader confirmedR =numConfirmedCmd.ExecuteReader();
          int nconfirmed =0;
          while(confirmedR.Read()){nconfirmed++;}
          confirmedR.Close();
          summary.Text="You have "+nconfirmed.ToString()+" complete team(s).<br />Incomplete teams:<br />";
          //decide how many teams being worked on
-         OleDbDataReader consideredR =numConsideredCmd.ExecuteReader();
+         OdbcDataReader consideredR =numConsideredCmd.ExecuteReader();
          int nConsidered=0;
          while(consideredR.Read()){int nShort=12-consideredR.GetInt32(0);nConsidered++;
                                    summary.Text+="one team needs "+nShort.ToString()+" student(s) to complete<br />";}
          summary.Text+="Totally "+nConsidered.ToString()+" incomplete team(s)";
          consideredR.Close();
 
-         OleDbDataReader contInfoR =contInfoCmd.ExecuteReader();
+         OdbcDataReader contInfoR =contInfoCmd.ExecuteReader();
          if(contInfoR.Read()){cont.Text=contInfoR.GetString(0);cont_email.Text=contInfoR.GetString(1);
                               cont_phone.Text=contInfoR.GetString(2);}
           contInfoR.Close();
@@ -316,17 +316,17 @@
              }
 
     void participate_confirm(int j){
-              OleDbCommand countInT=new OleDbCommand("SELECT [ount] FROM teams WHERE team_id=@team_id",dbconn);
+              OdbcCommand countInT=new OdbcCommand("SELECT [ount] FROM teams WHERE team_id=@team_id",dbconn);
          countInT.Parameters.Add(new OleDbParameter("@team_id", OleDbType.VarChar, 4));
          countInT.Parameters["@team_id"].Value = SchoolID+teamno[j]; 
-         OleDbCommand confirmUpd=new OleDbCommand("UPDATE teams SET team_id=@team_id, team_status=@team_status WHERE team_id=@team_id",dbconn);
+         OdbcCommand confirmUpd=new OdbcCommand("UPDATE teams SET team_id=@team_id, team_status=@team_status WHERE team_id=@team_id",dbconn);
          confirmUpd.Parameters.Add(new OleDbParameter("@team_id", OleDbType.VarChar, 4));
          confirmUpd.Parameters["@team_id"].Value = SchoolID+teamno[j]; 
          confirmUpd.Parameters.Add(new OleDbParameter("@team_status", OleDbType.Boolean));//change to boolean
          confirmUpd.Parameters["@team_status"].Value = true; 
                //need change true to? True; no need to consider "False" situation.default is false unless manually changed in db.
          dbconn.Open();
-         OleDbDataReader countRead =countInT.ExecuteReader();
+         OdbcDataReader countRead =countInT.ExecuteReader();
          if(countRead.Read()){int shortOfT=12-countRead.GetInt32(0); countRead.Close();// int is treated as int32; GetInt16 doesn't work
                              if(shortOfT!=0){
                             
@@ -349,14 +349,14 @@
 
     void delete_team(int j){
                  
-                  OleDbCommand delTComm = new OleDbCommand("DELETE FROM teams WHERE team_id=@team_id", dbconn);
+                  OdbcCommand delTComm = new OdbcCommand("DELETE FROM teams WHERE team_id=@team_id", dbconn);
                   delTComm.Parameters.Add(new OleDbParameter("@team_id", OleDbType.VarChar, 4));
                   delTComm.Parameters["@team_id"].Value=SchoolID+teamno[j];
-                  OleDbCommand selTComm = new OleDbCommand("SELECT team_id FROM teams WHERE team_id=@team_id", dbconn);
+                  OdbcCommand selTComm = new OdbcCommand("SELECT team_id FROM teams WHERE team_id=@team_id", dbconn);
                   selTComm.Parameters.Add(new OleDbParameter("@team_id", OleDbType.VarChar, 4));
                   selTComm.Parameters["@team_id"].Value=SchoolID+teamno[j];
                   dbconn.Open();
-                  OleDbDataReader tReader=selTComm.ExecuteReader();
+                  OdbcDataReader tReader=selTComm.ExecuteReader();
                   if(tReader.Read()){tReader.Close();delTComm.ExecuteNonQuery();messageHidden.Text="This team deleted!";}
                     else{
                           tReader.Close();
@@ -393,7 +393,7 @@
          Response.Redirect("uPassChange.aspx", true);
       }
     void save_cont(Object Src, EventArgs E){
-         OleDbCommand contUpd=new OleDbCommand("UPDATE schools SET school=@school, contact=@cont, email=@email, phone=@phone WHERE school=@school",dbconn);
+         OdbcCommand contUpd=new OdbcCommand("UPDATE schools SET school=@school, contact=@cont, email=@email, phone=@phone WHERE school=@school",dbconn);
          contUpd.Parameters.Add(new OleDbParameter("@school", OleDbType.VarChar, 20));
          contUpd.Parameters["@school"].Value = uname;
          contUpd.Parameters.Add(new OleDbParameter("@cont", OleDbType.VarChar, 20));

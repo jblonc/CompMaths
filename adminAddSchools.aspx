@@ -27,7 +27,7 @@
             Page.Validate();
             if(!Page.IsValid){return;}
             
-             OdbcCommand schoolIdSelAll=new OdbcCommand("SELECT school_id FROM xyzstart_db .dbo.schools", dbconn);
+             OdbcCommand schoolIdSelAll=new OdbcCommand("SELECT school_id FROM xyzstart_db .dbo.OdbcCommand", dbconn);
              
              OdbcCommand myOleDbInsComm = new OdbcCommand("INSERT INTO xyzstart_db .dbo.schools ( school,[password], school_id, school_name,contact,email,phone, address) Values ( @school,@password, @school_id, @school_name,@contact,@email,@phone,@school_addr)", dbconn);
              myOleDbInsComm.Parameters.Add(new OdbcParameter("@school", OdbcType.VarChar, 20));
@@ -47,10 +47,10 @@
              myOleDbInsComm.Parameters["@contact"].Value = contact.Text;
 
 
-             myOleDbInsComm.Parameters.Add(new OdbcParameter("@email", OdbcType.Text));
+             myOleDbInsComm.Parameters.Add(new OdbcParameter("@email", OdbcType.VarChar, 50));
              myOleDbInsComm.Parameters["@email"].Value = email.Text;
 
-             myOleDbInsComm.Parameters.Add(new OdbcParameter("@phone", OdbcType.Text));
+             myOleDbInsComm.Parameters.Add(new OdbcParameter("@phone", OdbcType.VarChar, 50));
              myOleDbInsComm.Parameters["@phone"].Value = phone.Text;
 
              myOleDbInsComm.Parameters.Add(new OdbcParameter("@school_addr", OdbcType.VarChar, 100));
