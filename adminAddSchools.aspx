@@ -30,7 +30,7 @@
              OdbcCommand schoolIdSelAll=new OdbcCommand("SELECT school_id FROM schools", dbconn);
              
              OdbcCommand myOleDbInsComm = new OdbcCommand("INSERT INTO schools ( school,[password], school_id, school_name,contact,email,phone, address) Values ( @school,@password, @school_id, @school_name,@contact,@email,@phone,@school_addr)", dbconn);
-             myOleDbInsComm.Parameters.Add(new OdbcParameter("@school", OleDbType.VarChar, 20));
+             myOleDbInsComm.Parameters.Add(new OdbcParameter("@school", OdbcType.VarChar, 20));
              myOleDbInsComm.Parameters["@school"].Value = school.Text;
 
              myOleDbInsComm.Parameters.Add(new OdbcParameter("@password", OleDbType.VarChar, 20));
