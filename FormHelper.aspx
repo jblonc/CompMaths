@@ -194,7 +194,7 @@
          populateForm();
         }
     void populateForm(){//message1.Text="<script language='javascript'"+">"+"alert('what');"+"</scri"+"pt>";
-                    OdbcCommand populateFormCmd= new OdbcCommand("SELECT student_id, name FROM participants WHERE school=@school",dbconn);
+                    OdbcCommand populateFormCmd= new OdbcCommand("SELECT student_id, name FROM participants WHERE school=?",dbconn);
          
          populateFormCmd.Parameters.Add(new OdbcParameter("@school",OdbcType.VarChar,20));
          populateFormCmd.Parameters["@school"].Value=uname;
