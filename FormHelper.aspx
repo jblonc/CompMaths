@@ -16,7 +16,7 @@
 
          uname=(String)uFormcookie.Values["username"];
 
-         OdbcCommand findSchoolInfoCmd= new OdbcCommand("SELECT school_id,[password], school_name FROM schools WHERE school=@school",dbconn);
+         OdbcCommand findSchoolInfoCmd= new OdbcCommand("SELECT school_id,[password], school_name FROM schools WHERE school=?",dbconn);
          
          findSchoolInfoCmd.Parameters.Add(new OdbcParameter("@school",OdbcType.VarChar,20));
          findSchoolInfoCmd.Parameters["@school"].Value=uname;
