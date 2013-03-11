@@ -200,7 +200,7 @@
          populateFormCmd.Parameters["@school"].Value=uname;
 
           // decide how many teams confirmed, and working on how many teams? somewhat!
-         OdbcCommand numConfirmedCmd= new OdbcCommand("SELECT * FROM teams WHERE team_status= true AND school=?",dbconn);
+         OdbcCommand numConfirmedCmd= new OdbcCommand("SELECT * FROM teams WHERE team_status= 'true' AND school=?",dbconn);
          numConfirmedCmd.Parameters.Add(new OdbcParameter("@school",OdbcType.VarChar,20));
          numConfirmedCmd.Parameters["@school"].Value=uname;  
 
