@@ -12,9 +12,9 @@
   
           
           OdbcDataAdapter adapter = new OdbcDataAdapter(
-        "select school, passw from schools", dbconn);
+        "select school, password from schools", dbconn);
         
-         adapter.UpdateCommand =  new OdbcCommand("UPDATE schools SET passw=? WHERE school=?",dbconn);// SET school=?, [password]=?
+         adapter.UpdateCommand =  new OdbcCommand("UPDATE schools SET password=? WHERE school=?",dbconn);// SET school=?, [password]=?
         //  OdbcCommand myOleDbComm = new OdbcCommand("UPDATE schools SET school=?, [password]=? WHERE school=?", dbconn);
           
           // adapter.UpdateCommand.Parameters.Add( "@school", OdbcType.VarChar, 20 ).Value = (String)u2cookie.Values["username"];
@@ -25,7 +25,7 @@
            op.SourceColumn="school";
           op.SourceVersion = DataRowVersion.Original;
            op.Value = (String)u2cookie.Values["username"];
-            adapter.UpdateCommand.Parameters.Add("@passw",OdbcType.VarChar,20,"passw");
+            adapter.UpdateCommand.Parameters.Add("@password",OdbcType.VarChar,20,"password");
           dbconn.Open();
           // adapter.UpdateCommand.ExecuteNonQuery();
           // OdbcCommandBuilder cb = new OdbcCommandBuilder(adapter);
@@ -34,7 +34,7 @@
           DataSet ds = new DataSet();
           adapter.Fill(ds, "schools");
           DataRow changeRow = ds.Tables["schools"].Rows[0];
-          changeRow["passw"]=txt1;;
+          changeRow["passordw"]=txt1;;
           DataRow[] modRows = ds.Tables["schools"].Select(null, null, DataViewRowState.ModifiedCurrent);
          // adapter.Update(ds, "schools");
           adapter.Update(modRows);
