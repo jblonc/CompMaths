@@ -51,11 +51,11 @@
           myOleDbComm.ExecuteNonQuery();
        */
           //myOleDbComm.Dispose();
-         OdbcCommand ocmm = new OdbcCommand("update schools set password=? where school=?",dbconn);
+       /****  OdbcCommand ocmm = new OdbcCommand("update schools set password=? where school=?",dbconn);
          ocmm.Parameters.AddWithValue("@password", txt1);
          ocmm.Parameters.AddWithValue("@school",ss);
-         dbconn.executeNonQuery(ocmm);//OdbcCommand does not have executeNonQuery() method
-
+         dbconn.executeNonQuery(ocmm);//OdbcCommand does not have executeNonQuery() method; OdbcConnection doesn't either
+       ***/
           isExecuted=true;
         
     //*     }
