@@ -33,7 +33,9 @@
          String ss= (String)u2cookie.Values["username"];
           DataSet ds = new DataSet();
           adapter.Fill(ds, "schools");
+          msg.Text="outside";
           foreach(DataRow dr in ds.Tables["schools"].Rows){
+              msg.Text +="inside";
            if(dr["school"] == ss){dr["password"]=txt1;}
           }
          // DataRow changeRow = ds.Tables["schools"].Select("school >='@school'")[0];//db.Tables["schools"].Rows[0];
