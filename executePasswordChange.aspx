@@ -10,10 +10,11 @@
        //* try
      //*    {
   
-          dbconn.Open();
+          
           OdbcDataAdapter adapter = new OdbcDataAdapter(
         "select school, [password] from schools", dbconn);
-         adapter.UpdateCommand =  new OdbcCommand("UPDATE schools SET school=?, [password]=? WHERE school=?", dbconn);
+         dbconn.Open();
+         adapter.UpdateCommand =  new OdbcCommand("UPDATE schools SET school=?, [password]=? WHERE school=?");
         //  OdbcCommand myOleDbComm = new OdbcCommand("UPDATE schools SET school=?, [password]=? WHERE school=?", dbconn);
           
            adapter.UpdateCommand.Parameters.Add( "@school", OdbcType.VarChar, 20 );
