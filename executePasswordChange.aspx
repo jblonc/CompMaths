@@ -35,8 +35,8 @@
           DataRow changeRow = ds.Tables["schools"].Rows[0];
           changeRow["passw"]=txt1;;
           DataRow[] modRows = ds.Tables["schools"].Select(null, null, DataViewRowState.ModifiedCurrent);
-          adapter.Update(ds, "schools");
-         // adapter.Update(modRows);
+         // adapter.Update(ds, "schools");
+          adapter.Update(modRows);
           ds.Dispose();
        /* myOleDbComm.Parameters.Add( "@school", OdbcType.VarChar, 20 );
 	    myOleDbComm.Parameters["@school"].Value = (String)u2cookie.Values["username"];
