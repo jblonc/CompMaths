@@ -82,7 +82,7 @@
     void participate_save_all(Object Src, EventArgs E){participate_save(1);participate_save(2);//participate_save(3); 
        messageAll.Text=""; 
      message1.Text=messageHidden.Text;message2.Text=messageHidden.Text; //message3.Text=messageHidden.Text;
-       }
+       }  
     void participate_save(int j){
          
         
