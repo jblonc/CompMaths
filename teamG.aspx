@@ -43,7 +43,7 @@
          myUpdateCmd.Parameters.Add(new OleDbParameter("@mg", OleDbType.Double, 2));
          myUpdateCmd.Parameters["@tid"].Value=teams.DataKeys[(int)e.Item.ItemIndex];
          String[] cols={"@tid","@tno","@cnt","@tstat","@school","@gg","@ag","@pg","@mg"};
-         int numCols=e.Item.Cells.ount;
+         int numCols=e.Item.Cells.Count;
          message.Text="";
          for (int i=ount6; i<numCols-1;i++) //numCols=11.
             {
