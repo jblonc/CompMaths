@@ -95,13 +95,13 @@
         for(int p=0;p<3;p++){
         OdbcCommand ind_genericSelCmd= new OdbcCommand((String)CommandString[p],dbconn);
         OdbcCommand ind_genericInsCmd= new OdbcCommand("INSERT INTO winners ([names],[id],[type],category,school_name,contact,score) VALUES(@names,@id, @type,@category, @school_name,@contact,@score)",dbconn); 
-        ind_genericInsCmd.Parameters.Add(new OdbcParameter("@names", OleDbType.VarChar, 240)); 
-        ind_genericInsCmd.Parameters.Add(new OdbcParameter("@id", OleDbType.VarChar, 9)); 
-        ind_genericInsCmd.Parameters.Add(new OdbcParameter("@type", OleDbType.VarChar, 15)); 
-        ind_genericInsCmd.Parameters.Add(new OdbcParameter("@category", OleDbType.VarChar, 8));
-        ind_genericInsCmd.Parameters.Add(new OdbcParameter("@school_name", OleDbType.VarChar, 50));
-        ind_genericInsCmd.Parameters.Add(new OdbcParameter("@contact", OleDbType.VarChar, 50));         
-        ind_genericInsCmd.Parameters.Add(new OdbcParameter("@score", OleDbType.Double, 2));
+        ind_genericInsCmd.Parameters.Add(new OdbcParameter("@names", OdbcType.VarChar, 240)); 
+        ind_genericInsCmd.Parameters.Add(new OdbcParameter("@id", OdbcType.VarChar, 9)); 
+        ind_genericInsCmd.Parameters.Add(new OdbcParameter("@type", OdbcType.VarChar, 15)); 
+        ind_genericInsCmd.Parameters.Add(new OdbcParameter("@category", OdbcType.VarChar, 8));
+        ind_genericInsCmd.Parameters.Add(new OdbcParameter("@school_name", OdbcType.VarChar, 50));
+        ind_genericInsCmd.Parameters.Add(new OdbcParameter("@contact", OdbcType.VarChar, 50));         
+        ind_genericInsCmd.Parameters.Add(new OdbcParameter("@score", OdbcType.Double, 2));
 
         int ind_generic=0;
         ArrayList ind_generic_NAME=new ArrayList();
@@ -156,24 +156,24 @@
         CategoryList.Add("Mixed");CategoryList.Add("Team");
         //dbconn.Open();
         OdbcCommand grp_genericInsCmd= new OdbcCommand("INSERT INTO winners ([names],[id], [type],[category],school_name,contact,score) VALUES (@names,@id, @type,@category, @school_name,@contact,@score)",dbconn); 
-        grp_genericInsCmd.Parameters.Add(new OdbcParameter("@names", OleDbType.VarChar, 240)); 
-        grp_genericInsCmd.Parameters.Add(new OdbcParameter("@id", OleDbType.VarChar, 9)); 
-        grp_genericInsCmd.Parameters.Add(new OdbcParameter("@type", OleDbType.VarChar, 15)); 
-        grp_genericInsCmd.Parameters.Add(new OdbcParameter("@category", OleDbType.VarChar, 8));
-        grp_genericInsCmd.Parameters.Add(new OdbcParameter("@school_name", OleDbType.VarChar, 50));
-        grp_genericInsCmd.Parameters.Add(new OdbcParameter("@contact", OleDbType.VarChar, 50));         
-        grp_genericInsCmd.Parameters.Add(new OdbcParameter("@score", OleDbType.Double, 2));
+        grp_genericInsCmd.Parameters.Add(new OdbcParameter("@names", OdbcType.VarChar, 240)); 
+        grp_genericInsCmd.Parameters.Add(new OdbcParameter("@id", OdbcType.VarChar, 9)); 
+        grp_genericInsCmd.Parameters.Add(new OdbcParameter("@type", OdbcType.VarChar, 15)); 
+        grp_genericInsCmd.Parameters.Add(new OdbcParameter("@category", OdbcType.VarChar, 8));
+        grp_genericInsCmd.Parameters.Add(new OdbcParameter("@school_name", OdbcType.VarChar, 50));
+        grp_genericInsCmd.Parameters.Add(new OdbcParameter("@contact", OdbcType.VarChar, 50));         
+        grp_genericInsCmd.Parameters.Add(new OdbcParameter("@score", OdbcType.Double, 2));
 
         for(int p=0; p<5; p++){
         OdbcCommand grp_genericSelCmd= new OdbcCommand((String)GTCommandString[p],dbconn);
         //OdbcCommand grp_genericInsCmd= new OdbcCommand("INSERT INTO winners (names,[id], [type],category,school_name,contact,score) VALUES (@names,@id, @type,@category, @school_name,@contact,@score)",dbconn); 
-        //grp_genericInsCmd.Parameters.Add(new OdbcParameter("@names", OleDbType.VarChar, 240)); 
-        //grp_genericInsCmd.Parameters.Add(new OdbcParameter("@id", OleDbType.VarChar, 9)); 
-       // grp_genericInsCmd.Parameters.Add(new OdbcParameter("@type", OleDbType.VarChar, 15)); 
-        //grp_genericInsCmd.Parameters.Add(new OdbcParameter("@category", OleDbType.VarChar, 8));
-       // grp_genericInsCmd.Parameters.Add(new OdbcParameter("@school_name", OleDbType.VarChar, 50));
-       // grp_genericInsCmd.Parameters.Add(new OdbcParameter("@contact", OleDbType.VarChar, 50));         
-        //grp_genericInsCmd.Parameters.Add(new OdbcParameter("@score", OleDbType.Double, 2));
+        //grp_genericInsCmd.Parameters.Add(new OdbcParameter("@names", OdbcType.VarChar, 240)); 
+        //grp_genericInsCmd.Parameters.Add(new OdbcParameter("@id", OdbcType.VarChar, 9)); 
+       // grp_genericInsCmd.Parameters.Add(new OdbcParameter("@type", OdbcType.VarChar, 15)); 
+        //grp_genericInsCmd.Parameters.Add(new OdbcParameter("@category", OdbcType.VarChar, 8));
+       // grp_genericInsCmd.Parameters.Add(new OdbcParameter("@school_name", OdbcType.VarChar, 50));
+       // grp_genericInsCmd.Parameters.Add(new OdbcParameter("@contact", OdbcType.VarChar, 50));         
+        //grp_genericInsCmd.Parameters.Add(new OdbcParameter("@score", OdbcType.Double, 2));
         
         int grp_generic=0;
         ArrayList grp_generic_NAME=new ArrayList();
@@ -194,7 +194,7 @@
               }
         grp_genericDbread.Close();
         OdbcCommand grp_genericNamesCmd= new OdbcCommand((String)GTCommandNamesString[p],dbconn);
-        grp_genericNamesCmd.Parameters.Add(new OdbcParameter("@tid", OleDbType.VarChar, 4));
+        grp_genericNamesCmd.Parameters.Add(new OdbcParameter("@tid", OdbcType.VarChar, 4));
         for(int q=0; q<grp_generic; q++){
                   grp_genericNamesCmd.Parameters["@tid"].Value=grp_generic_ID[q];
                   OleDbDataReader grp_genericNameRead=grp_genericNamesCmd.ExecuteReader();

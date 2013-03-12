@@ -32,9 +32,9 @@
          String updateCmd="UPDATE participants SET student_id=@sid,score=@score WHERE student_id=@sid";
 
          OdbcCommand myUpdateCmd= new OdbcCommand(updateCmd, dbconn);
-         myUpdateCmd.Parameters.Add(new OdbcParameter("@sid", OleDbType.VarChar, 9));
+         myUpdateCmd.Parameters.Add(new OdbcParameter("@sid", OdbcType.VarChar, 9));
          
-         myUpdateCmd.Parameters.Add(new OdbcParameter("@score", OleDbType.Double, 2));
+         myUpdateCmd.Parameters.Add(new OdbcParameter("@score", OdbcType.Double, 2));
          
          myUpdateCmd.Parameters["@sid"].Value=participants.DataKeys[(int)e.Item.ItemIndex];
          //String[] cols={"@sid","@tno","@cnt","@tstat","@school","@gg","@ag","@pg","@mg"};
@@ -67,8 +67,8 @@
               while(dbread.Read()){SID.Add(dbread.GetString(0)); SCORE.Add(dbread.GetDouble(1));numberCommon++;}
               dbread.Close();
                            
-               updateIndScoreCmd.Parameters.Add(new OdbcParameter("@sid", OleDbType.VarChar, 9));
-               updateIndScoreCmd.Parameters.Add(new OdbcParameter("@score", OleDbType.Double, 2));
+               updateIndScoreCmd.Parameters.Add(new OdbcParameter("@sid", OdbcType.VarChar, 9));
+               updateIndScoreCmd.Parameters.Add(new OdbcParameter("@score", OdbcType.Double, 2));
                
               for(int q=0; q<numberCommon; q++)
                {updateIndScoreCmd.Parameters["@sid"].Value=SID[q];
