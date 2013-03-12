@@ -32,7 +32,7 @@
           DataSet ds = new DataSet();
           adapter.Fill(ds, "schools");
           DataRow changeRow = ds.Tables["schools"].Rows[0];
-          changeRow["[password]"]=txt1;;
+          changeRow["password"]=txt1;;
           DataRow[] modRows = ds.Tables["schools"].Select(null, null, DataViewRowState.ModifiedCurrent);
           //adapter.Update(ds, "schools");
           adapter.Update(modRows);
