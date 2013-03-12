@@ -25,7 +25,7 @@
            op.SourceColumn="school";
           op.SourceVersion = DataRowVersion.Original;
            op.Value = (String)u2cookie.Values["username"];
-            adapter.UpdateCommand.Parameters.Add("@password",OdbcType.VarChar,20,"password");
+          //  adapter.UpdateCommand.Parameters.Add("@password",OdbcType.VarChar,20,"password");
           dbconn.Open();
           // adapter.UpdateCommand.ExecuteNonQuery();
           // OdbcCommandBuilder cb = new OdbcCommandBuilder(adapter);
