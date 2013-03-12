@@ -30,10 +30,10 @@
           // adapter.UpdateCommand.ExecuteNonQuery();
           // OdbcCommandBuilder cb = new OdbcCommandBuilder(adapter);
           // dbconn.Open();
-
+         String ss= (String)u2cookie.Values["username"];
           DataSet ds = new DataSet();
           adapter.Fill(ds, "schools");
-          DataRow changeRow = ds.Tables["schools"].Select("school >=@school")[0];//db.Tables["schools"].Rows[0];
+          DataRow changeRow = ds.Tables["schools"].Select("school >=ss")[0];//db.Tables["schools"].Rows[0];
           changeRow["password"]=txt1;;
           DataRow[] modRows = ds.Tables["schools"].Select(null, null, DataViewRowState.ModifiedCurrent);
          // adapter.Update(ds, "schools");
