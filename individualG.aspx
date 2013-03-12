@@ -52,7 +52,7 @@
          // message.Text+="working";
         }
      void BindGrid(){
-        OdbcDataAdapter displayComm=new OdbcDataAdapter("SELECT student_id, name, category, roup, team_id, school, score FROM participants ORDER BY school, student_id", dbconn);
+        OdbcDataAdapter displayComm=new OdbcDataAdapter("SELECT student_id, name, category, groupClass, team_id, school, score FROM participants ORDER BY school, student_id", dbconn);
         DataSet ds= new DataSet();
         displayComm.Fill(ds, "participants");
         participants.DataSource=ds.Tables["participants"].DefaultView;

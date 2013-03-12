@@ -28,7 +28,7 @@
         {teams.EditItemIndex = -1; BindGrid(); }
      void teamGrades_Update(Object sender, DataGridCommandEventArgs e)
         {
-         /*String updateCmd="UPDATE teams SET team_id=@tid, team_no=@tno, [ount]=@cnt,team_status=@tstat,school=@school, geometry_g=@gg, algebra_g=@ag,precal_g=@pg, mixed_g=@mg WHERE team_id=@tid";*/
+         /*String updateCmd="UPDATE teams SET team_id=@tid, team_no=@tno, countNumount=@cnt,team_status=@tstat,school=@school, geometry_g=@gg, algebra_g=@ag,precal_g=@pg, mixed_g=@mg WHERE team_id=@tid";*/
          String updateCmd="UPDATE teams SET team_id=@tid,geometry_g=@gg, algebra_g=@ag,precal_g=@pg, mixed_g=@mg WHERE team_id=@tid";
 
          OdbcCommand myUpdateCmd= new OdbcCommand(updateCmd, dbconn);
@@ -59,7 +59,7 @@
          // message.Text+="working";
         }
      void BindGrid(){
-        OleDbDataAdapter displayComm=new OleDbDataAdapter("SELECT team_id, team_no, [ount], team_status, school, geometry_g, algebra_g, precal_g, mixed_g, team_score FROM teams ORDER BY school, team_id", dbconn);
+        OdbcDataAdapter displayComm=new OdbcDataAdapter("SELECT team_id, team_no, countNum, team_status, school, geometry_g, algebra_g, precal_g, mixed_g, team_score FROM teams ORDER BY school, team_id", dbconn);
         DataSet ds= new DataSet();
         displayComm.Fill(ds, "teams");
         teams.DataSource=ds.Tables["teams"].DefaultView;
