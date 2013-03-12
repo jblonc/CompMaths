@@ -88,7 +88,7 @@
         
          OdbcCommand insComm = new OdbcCommand("INSERT INTO participants (student_id,name, category, groupClass, school,team_id) Values (?,?, ?, ?, ?,?)", dbconn);
          OdbcCommand insTeamComm = new OdbcCommand("INSERT INTO teams (team_id,team_no,school) Values (?,?, ?)", dbconn);
-         OdbcCommand updComm=new OdbcCommand("UPDATE participants SET student_id=?, name=@name WHERE student_id=?",dbconn); 
+         OdbcCommand updComm=new OdbcCommand("UPDATE participants SET student_id=@student_id, name=@name WHERE student_id=?",dbconn); 
          OdbcCommand delCmd=new OdbcCommand("DELETE FROM participants WHERE student_id=?",dbconn);                                              
          OdbcCommand selComm=new OdbcCommand("SELECT student_id FROM participants WHERE student_id=?",dbconn);
          OdbcCommand selTeamComm=new OdbcCommand("SELECT team_id FROM teams WHERE team_id=?",dbconn); 
