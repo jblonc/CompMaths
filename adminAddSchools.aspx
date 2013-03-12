@@ -29,7 +29,8 @@
             
              OdbcCommand schoolIdSelAll=new OdbcCommand("SELECT school_id FROM xyzstart_db .dbo.schools", dbconn);
              
-             OdbcCommand myOleDbInsComm = new OdbcCommand("INSERT INTO xyzstart_db .dbo.schools ( school,passw, school_id, school_name,contact,email,phone, address) Values ( ?,? ?, ?,?,?,?,?)", dbconn);
+             OdbcCommand myOleDbInsComm = new OdbcCommand("INSERT INTO xyzstart_db .dbo.schools ( school,passw, school_id, school_name,contact,email,phone, address) Values ( @school,@passw, @school_id, @school_name,@contact,@email,@phone,@school_addr)", dbconn);
+//( ?,? ?, ?,?,?,?,?)", dbconn);
 // ( @school,@password, @school_id, @school_name,@contact,@email,@phone,@school_addr)", dbconn);
              myOleDbInsComm.Parameters.Add(new OdbcParameter("@school", OdbcType.VarChar, 20));
              myOleDbInsComm.Parameters["@school"].Value = school.Text;
