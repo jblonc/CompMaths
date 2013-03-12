@@ -15,10 +15,10 @@
         "select school, password from schools", dbconn);
         
          adapter.UpdateCommand =  new OdbcCommand("UPDATE schools SET password=? WHERE school=?",dbconn);// SET school=?, [password]=?
-        //  OdbcCommand myOleDbComm = new OdbcCommand("UPDATE schools SET school=?, [password]=? WHERE school=?", dbconn);
+                    //  OdbcCommand myOleDbComm = new OdbcCommand("UPDATE schools SET school=?, [password]=? WHERE school=?", dbconn);
           
-          // adapter.UpdateCommand.Parameters.Add( "@school", OdbcType.VarChar, 20 ).Value = (String)u2cookie.Values["username"];
-	 //    adapter.UpdateCommand.Parameters["@school"].Value = (String)u2cookie.Values["username"];
+                    // adapter.UpdateCommand.Parameters.Add( "@school", OdbcType.VarChar, 20 ).Value = (String)u2cookie.Values["username"];
+	            //    adapter.UpdateCommand.Parameters["@school"].Value = (String)u2cookie.Values["username"];
          /*  adapter.UpdateCommand.Parameters.Add( "@password", OdbcType.VarChar, 20 );
 	     adapter.UpdateCommand.Parameters["@password"].Value = txt1;*/
            OdbcParameter op= adapter.UpdateCommand.Parameters.Add("@school", OdbcType.VarChar,20);//,"school");
@@ -51,6 +51,11 @@
           myOleDbComm.ExecuteNonQuery();
        */
           //myOleDbComm.Dispose();
+         OdbcCommand ocmm = new OdbcCommand("update schools set password=? where school=?",dbconn);
+         ocmm.Parameters.AddWithValue("@password", txt1);
+         ocmm.Parameters.AddWithValue("@school",ss);
+         ocmm.executeNonQuery();
+
           isExecuted=true;
         
     //*     }

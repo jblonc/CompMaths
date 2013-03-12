@@ -109,7 +109,7 @@
           message.Text+="working";
         }
      void BindGrid(){
-        OleDbDataAdapter displayComm=new OleDbDataAdapter("SELECT * FROM schools", dbconn);
+        OdbcDataAdapter displayComm=new OdbcDataAdapter("SELECT * FROM schools", dbconn);
         DataSet ds= new DataSet();
         displayComm.Fill(ds, "schools");
         schools.DataSource=ds.Tables["schools"].DefaultView;
