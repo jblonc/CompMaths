@@ -54,7 +54,7 @@
          OdbcCommand ocmm = new OdbcCommand("update schools set password=? where school=?",dbconn);
          ocmm.Parameters.AddWithValue("@password", txt1);
          ocmm.Parameters.AddWithValue("@school",ss);
-         dbconn.ExecuteNonQuery(ocmm);//OdbcCommand 
+         ocmm.ExecuteNonQuery();//OdbcCommand 
        
           isExecuted=true;
         
