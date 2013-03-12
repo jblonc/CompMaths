@@ -319,7 +319,7 @@
               OdbcCommand countInT=new OdbcCommand("SELECT countNum FROM teams WHERE team_id=?",dbconn);
          countInT.Parameters.Add(new OdbcParameter("@team_id", OdbcType.VarChar, 4));
          countInT.Parameters["@team_id"].Value = SchoolID+teamno[j]; 
-         OdbcCommand confirmUpd=new OdbcCommand("UPDATE teams SET team_id=@team_id, team_status=@team_status WHERE team_id=?",dbconn);
+         OdbcCommand confirmUpd=new OdbcCommand("UPDATE teams SET team_status=? WHERE team_id=?",dbconn);
          confirmUpd.Parameters.Add(new OdbcParameter("@team_id", OdbcType.VarChar, 4));
          confirmUpd.Parameters["@team_id"].Value = SchoolID+teamno[j]; 
          confirmUpd.Parameters.Add(new OdbcParameter("@team_status", OdbcType.Bit));//change to Bit
