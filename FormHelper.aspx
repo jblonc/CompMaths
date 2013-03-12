@@ -88,7 +88,7 @@
         
          OdbcCommand insComm = new OdbcCommand("INSERT INTO participants (student_id,name, category, groupClass, school,team_id) Values (?,?, ?, ?, ?,?)", dbconn);
          OdbcCommand insTeamComm = new OdbcCommand("INSERT INTO teams (team_id,team_no,school) Values (?,?, ?)", dbconn);
-         OdbcCommand updComm=new OdbcCommand("UPDATE participants SET student_id=@student_id, name=@name WHERE student_id=?",dbconn); 
+         OdbcCommand updComm=new OdbcCommand("UPDATE participants SET student_id=?, name=@sname WHERE student_id=?",dbconn); 
          OdbcCommand delCmd=new OdbcCommand("DELETE FROM participants WHERE student_id=?",dbconn);                                              
          OdbcCommand selComm=new OdbcCommand("SELECT student_id FROM participants WHERE student_id=?",dbconn);
          OdbcCommand selTeamComm=new OdbcCommand("SELECT team_id FROM teams WHERE team_id=?",dbconn); 
@@ -103,7 +103,7 @@
              insTeamComm.Parameters.Add(new OdbcParameter("@team_no", OdbcType.VarChar, 1));
              insTeamComm.Parameters.Add(new OdbcParameter("@school", OdbcType.VarChar, 20));
              updComm.Parameters.Add(new OdbcParameter("@student_id", OdbcType.VarChar, 9));
-             updComm.Parameters.Add(new OdbcParameter("@name", OdbcType.VarChar, 20));
+             updComm.Parameters.Add(new OdbcParameter("@sname", OdbcType.VarChar, 20));
              delCmd.Parameters.Add(new OdbcParameter("@student_id", OdbcType.VarChar, 9));
              selComm.Parameters.Add(new OdbcParameter("@student_id", OdbcType.VarChar, 9));
              selTeamComm.Parameters.Add(new OdbcParameter("@team_id", OdbcType.VarChar, 4));
@@ -142,7 +142,7 @@
 
              updComm.Parameters["@student_id"].Value = Request.Form["team"+j.ToString()+"_"+i.ToString()+"_id"];
 
-             updComm.Parameters["@name"].Value = Request.Form["team"+j.ToString()+"_"+i.ToString()];
+             updComm.Parameters["@sname"].Value = Request.Form["team"+j.ToString()+"_"+i.ToString()];
 
              delCmd.Parameters["@student_id"].Value = Request.Form["team"+j.ToString()+"_"+i.ToString()+"_id"];
 
