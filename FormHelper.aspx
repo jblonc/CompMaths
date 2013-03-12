@@ -327,7 +327,7 @@
                //need change true to? True; no need to consider "False" situation.default is false unless manually changed in db.
          dbconn.Open();
          OdbcDataReader countRead =countInT.ExecuteReader();
-         if(countRead.Read()){int shortOfT=12-Convert.ToInt32(countRead.GetValue(0)); countRead.Close();// int is treated as int32; GetInt16 doesn't work
+         if(countRead.Read()){int shortOfT=12-countRead.GetInt32(0); countRead.Close();// int is treated as int32; GetInt16 doesn't work
                              if(shortOfT!=0){
                             
                             messageHidden.Text="SAVED! You need "+shortOfT.ToString()+" more students to make this a complete team (12 participants)!";
