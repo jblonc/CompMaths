@@ -101,7 +101,7 @@
         ind_genericInsCmd.Parameters.Add(new OdbcParameter("@category", OdbcType.VarChar, 8));
         ind_genericInsCmd.Parameters.Add(new OdbcParameter("@school_name", OdbcType.VarChar, 50));
         ind_genericInsCmd.Parameters.Add(new OdbcParameter("@contact", OdbcType.VarChar, 50));         
-        ind_genericInsCmd.Parameters.Add(new OdbcParameter("@score", OdbcType.Double, 2));
+        ind_genericInsCmd.Parameters.Add(new OdbcParameter("@score", OdbcType.Decimal, 4));
 
         int ind_generic=0;
         ArrayList ind_generic_NAME=new ArrayList();
@@ -116,7 +116,7 @@
         while(ind_genericDbread.Read() && ind_generic<k){
                        ind_generic++;
                        ind_generic_NAME.Add(ind_genericDbread.GetString(0));
-                       ind_generic_SCORE.Add(ind_genericDbread.GetDouble(4));
+                       ind_generic_SCORE.Add(ind_genericDbread.GetDecimal(4));
                        ind_generic_SCHOOLN.Add(ind_genericDbread.GetString(2));
                        ind_generic_CONTACT.Add(ind_genericDbread.GetString(3));
                        ind_generic_ID.Add(ind_genericDbread.GetString(1));
@@ -162,7 +162,7 @@
         grp_genericInsCmd.Parameters.Add(new OdbcParameter("@category", OdbcType.VarChar, 8));
         grp_genericInsCmd.Parameters.Add(new OdbcParameter("@school_name", OdbcType.VarChar, 50));
         grp_genericInsCmd.Parameters.Add(new OdbcParameter("@contact", OdbcType.VarChar, 50));         
-        grp_genericInsCmd.Parameters.Add(new OdbcParameter("@score", OdbcType.Double, 2));
+        grp_genericInsCmd.Parameters.Add(new OdbcParameter("@score", OdbcType.Decimal, 4));
 
         for(int p=0; p<5; p++){
         OdbcCommand grp_genericSelCmd= new OdbcCommand((String)GTCommandString[p],dbconn);
@@ -187,7 +187,7 @@
         while(grp_genericDbread.Read() && grp_generic<k){
                        grp_generic++;
                        //grp_generic_NAME.Add(grp_genericDbread.GetString(0));
-                       grp_generic_SCORE.Add(grp_genericDbread.GetDouble(3));
+                       grp_generic_SCORE.Add(grp_genericDbread.GetDecimal(3));
                        grp_generic_SCHOOLN.Add(grp_genericDbread.GetString(1));
                        grp_generic_CONTACT.Add(grp_genericDbread.GetString(2));
                        grp_generic_ID.Add(grp_genericDbread.GetString(0));
