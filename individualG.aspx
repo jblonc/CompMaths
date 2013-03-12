@@ -6,14 +6,14 @@
 <html>
    
      <script language="C#" runat="server">
-         OleDbConnection dbconn;
+         OdbcConnection dbconn;
          void Page_Load(Object Src, EventArgs E) {
          HttpCookie cookie = Request.Cookies["validation"];
           ViewState["Referer"] = Request.Headers["Referer"];
         if(cookie!=null){
          if((String)cookie.Values["valid_word"]!="allright"){Response.Redirect("adminLogin.aspx", true);} }
         else{Response.Redirect("adminLogin.aspx", true);}
-         dbconn = new OleDbConnection("Provider=SQLNCLI10; Server=tcp:ufwryy6r0y.database.windows.net,1433; Database=[xyzstart_db]; Uid=[xyzdb@ufwryy6r0y]; Pwd=[virAf89Hda];");
+         dbconn = new OdbcConnection("Driver={SQL Server Native Client 10.0};Server=tcp:ufwryy6r0y.database.windows.net,1433;Database=xyzstart_db;Uid=xyzdb@ufwryy6r0y;Pwd=virAf89Hda;Encrypt=yes;Connection Timeout=30;");
          if(!IsPostBack)
          {
          BindGrid();
@@ -31,7 +31,7 @@
         
          String updateCmd="UPDATE participants SET student_id=@sid,score=@score WHERE student_id=@sid";
 
-         OleDbCommand myUpdateCmd= new OleDbCommand(updateCmd, dbconn);
+         OdbcCommand myUpdateCmd= new OdbcCommand(updateCmd, dbconn);
          myUpdateCmd.Parameters.Add(new OleDbParameter("@sid", OleDbType.VarChar, 9));
          
          myUpdateCmd.Parameters.Add(new OleDbParameter("@score", OleDbType.Double, 2));
@@ -52,15 +52,15 @@
          // message.Text+="working";
         }
      void BindGrid(){
-        OleDbDataAdapter displayComm=new OleDbDataAdapter("SELECT student_id, name, category, roup, team_id, school, score FROM participants ORDER BY school, student_id", dbconn);
+        OdbcDataAdapter displayComm=new OdbcDataAdapter("SELECT student_id, name, category, roup, team_id, school, score FROM participants ORDER BY school, student_id", dbconn);
         DataSet ds= new DataSet();
         displayComm.Fill(ds, "participants");
         participants.DataSource=ds.Tables["participants"].DefaultView;
         participants.DataBind();
                 }
      void updateFromExcel(Object Src, EventArgs E){
-              OleDbCommand updateIndScoreCmd= new OleDbCommand("UPDATE participants SET student_id=@sid, score=@score WHERE student_id=@sid",dbconn);
-              OleDbCommand selIndScoreCmd= new OleDbCommand("SELECT participants.student_id, indExcel.score FROM participants INNER JOIN indExcel ON participants.student_id=indExcel.student_id",dbconn);
+              OdbcCommand updateIndScoreCmd= new OdbcCommand("UPDATE participants SET student_id=@sid, score=@score WHERE student_id=@sid",dbconn);
+              OdbcCommand selIndScoreCmd= new OdbcCommand("SELECT participants.student_id, indExcel.score FROM participants INNER JOIN indExcel ON participants.student_id=indExcel.student_id",dbconn);
               ArrayList SID= new ArrayList(); ArrayList SCORE=new ArrayList(); int numberCommon=0;
               dbconn.Open();
               OleDbDataReader dbread =selIndScoreCmd.ExecuteReader();
@@ -77,7 +77,7 @@
                updateIndScoreCmd.ExecuteNonQuery();}
               dbconn.Close();
               BindGrid();
-              /*OleDbCommand updateIndScoreCmd= new OleDbCommand("UPDATE participants SET score = indExcel.score FROM indExcel WHERE participants.student_id=indExcel.student_id",dbconn);
+              /*OdbcCommand updateIndScoreCmd= new OdbcCommand("UPDATE participants SET score = indExcel.score FROM indExcel WHERE participants.student_id=indExcel.student_id",dbconn);
               dbconn.Open();
               updateIndScoreCmd.ExecuteNonQuery();
               dbconn.Close();*/
