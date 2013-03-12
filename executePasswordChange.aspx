@@ -17,14 +17,15 @@
          adapter.UpdateCommand =  new OdbcCommand("UPDATE schools SET [password]=? WHERE school=?",dbconn);// SET school=?, [password]=?
         //  OdbcCommand myOleDbComm = new OdbcCommand("UPDATE schools SET school=?, [password]=? WHERE school=?", dbconn);
           
-          /* adapter.UpdateCommand.Parameters.Add( "@school", OdbcType.VarChar, 20 );
+           adapter.UpdateCommand.Parameters.Add( "@school", OdbcType.VarChar, 20 );
 	     adapter.UpdateCommand.Parameters["@school"].Value = (String)u2cookie.Values["username"];
            adapter.UpdateCommand.Parameters.Add( "@password", OdbcType.VarChar, 20 );
-	     adapter.UpdateCommand.Parameters["@password"].Value = txt1;*/
-            adapter.UpdateCommand.Parameters.Add("@school", OdbcType.VarChar,20,"school");
-            adapter.UpdateCommand.Parameters.Add("@password",OdbcType.VarChar,20,"[password]");
-          // adapter.UpdateCommand.ExecuteNonQuery();
-           OdbcCommandBuilder cb = new OdbcCommandBuilder(adapter);
+	     adapter.UpdateCommand.Parameters["@password"].Value = txt1;
+          //  adapter.UpdateCommand.Parameters.Add("@school", OdbcType.VarChar,20,"school");
+           // adapter.UpdateCommand.Parameters.Add("@password",OdbcType.VarChar,20,"[password]");
+          dbconn.Open();
+           adapter.UpdateCommand.ExecuteNonQuery();
+         /*  OdbcCommandBuilder cb = new OdbcCommandBuilder(adapter);
            dbconn.Open();
 
           DataSet ds = new DataSet();
@@ -32,7 +33,7 @@
           DataRow changeRow = ds.Tables["schools"].Rows["@school"];
           changeRow["[password]"]=txt1;;
           adapter.Update(ds, "schools");
-          ds.Dispose();
+          ds.Dispose();*/
        /* myOleDbComm.Parameters.Add( "@school", OdbcType.VarChar, 20 );
 	    myOleDbComm.Parameters["@school"].Value = (String)u2cookie.Values["username"];
           myOleDbComm.Parameters.Add( "@password", OdbcType.VarChar, 20 );
