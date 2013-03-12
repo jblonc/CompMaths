@@ -27,7 +27,7 @@
           dbconn.Open();
           // adapter.UpdateCommand.ExecuteNonQuery();
           // OdbcCommandBuilder cb = new OdbcCommandBuilder(adapter);
-           dbconn.Open();
+          // dbconn.Open();
 
           DataSet ds = new DataSet();
           adapter.Fill(ds, "schools");
