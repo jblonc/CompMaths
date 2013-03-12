@@ -86,7 +86,7 @@
     void participate_save(int j){
          
         
-         OdbcCommand insComm = new OdbcCommand("INSERT INTO participants (student_id,name, category, [roup], school,team_id) Values (@student_id,@name, @category, @group, @school,@team_id)", dbconn);
+         OdbcCommand insComm = new OdbcCommand("INSERT INTO participants (student_id,name, category, groupClass, school,team_id) Values (?,?, ?, ?, ?,?)", dbconn);
          OdbcCommand insTeamComm = new OdbcCommand("INSERT INTO teams (team_id,team_no,school) Values (?,?, ?)", dbconn);
          OdbcCommand updComm=new OdbcCommand("UPDATE participants SET student_id=@student_id, name=@s_name WHERE student_id=?",dbconn); 
          OdbcCommand delCmd=new OdbcCommand("DELETE FROM participants WHERE student_id=?",dbconn);                                              
@@ -95,7 +95,7 @@
              insComm.Parameters.Add(new OdbcParameter("@student_id", OdbcType.VarChar, 9));
              insComm.Parameters.Add(new OdbcParameter("@name", OdbcType.VarChar, 20));
              insComm.Parameters.Add(new OdbcParameter("@category", OdbcType.VarChar, 8));
-             insComm.Parameters.Add(new OdbcParameter("@group", OdbcType.VarChar, 8));
+             insComm.Parameters.Add(new OdbcParameter("@groupClass", OdbcType.VarChar, 8));
 
              insComm.Parameters.Add(new OdbcParameter("@school", OdbcType.VarChar, 20));
              insComm.Parameters.Add(new OdbcParameter("@team_id", OdbcType.VarChar, 4));
@@ -127,11 +127,11 @@
              else if (i<=8){insComm.Parameters["@category"].Value = "Geometry";}
              else {insComm.Parameters["@category"].Value = "PreCal";}
              
-             if(i%4==0){insComm.Parameters["@group"].Value = "Mixed";}
-             else {insComm.Parameters["@group"].Value = "Subject";}
+             if(i%4==0){insComm.Parameters["@groupClass"].Value = "Mixed";}
+             else {insComm.Parameters["@groupClass"].Value = "Subject";}
              
-             /*if(i==4 || i==8 || i==12){insComm.Parameters["@group"].Value = "Mixed";}
-             else {insComm.Parameters["@group"].Value = "Subject";}*/
+             /*if(i==4 || i==8 || i==12){insComm.Parameters["@groupClass"].Value = "Mixed";}
+             else {insComm.Parameters["@groupClass"].Value = "Subject";}*/
              
              insComm.Parameters["@student_id"].Value = Request.Form["team"+j.ToString()+"_"+i.ToString()+"_id"];//
 
@@ -173,7 +173,7 @@
          OdbcCommand deleteT=new OdbcCommand("DELETE FROM teams WHERE team_id=?",dbconn);
          deleteT.Parameters.Add(new OdbcParameter("@team_id", OdbcType.VarChar, 4));
          deleteT.Parameters["@team_id"].Value = SchoolID+teamno[j];
-         OdbcCommand udSCount=new OdbcCommand("UPDATE teams SET team_id=@tid,team_status=@tstatus, [ount]=@pcount  WHERE team_id=?",dbconn);//count is a reserved word?!
+         OdbcCommand udSCount=new OdbcCommand("UPDATE teams SET team_id=@tid,team_status=@tstatus, countNum=@pcount  WHERE team_id=?",dbconn);//count is a reserved word?!
          udSCount.Parameters.Add(new OdbcParameter("@tid", OdbcType.VarChar, 4));
          udSCount.Parameters["@tid"].Value = SchoolID+teamno[j]; 
          udSCount.Parameters.Add(new OdbcParameter("@tstatus", OdbcType.Bit));
@@ -204,7 +204,7 @@
          numConfirmedCmd.Parameters.Add(new OdbcParameter("@school",OdbcType.VarChar,20));
          numConfirmedCmd.Parameters["@school"].Value=uname;  
 
-         OdbcCommand numConsideredCmd= new OdbcCommand("SELECT [ount] FROM teams WHERE team_status= 'false' AND school=?",dbconn);
+         OdbcCommand numConsideredCmd= new OdbcCommand("SELECT countNum FROM teams WHERE team_status= 'false' AND school=?",dbconn);
          numConsideredCmd.Parameters.Add(new OdbcParameter("@school",OdbcType.VarChar,20));
          numConsideredCmd.Parameters["@school"].Value=uname;       
 
@@ -316,7 +316,7 @@
              }
 
     void participate_confirm(int j){
-              OdbcCommand countInT=new OdbcCommand("SELECT [ount] FROM teams WHERE team_id=?",dbconn);
+              OdbcCommand countInT=new OdbcCommand("SELECT countNum FROM teams WHERE team_id=?",dbconn);
          countInT.Parameters.Add(new OdbcParameter("@team_id", OdbcType.VarChar, 4));
          countInT.Parameters["@team_id"].Value = SchoolID+teamno[j]; 
          OdbcCommand confirmUpd=new OdbcCommand("UPDATE teams SET team_id=@team_id, team_status=@team_status WHERE team_id=?",dbconn);
