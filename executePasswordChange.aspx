@@ -33,7 +33,7 @@
 
           DataSet ds = new DataSet();
           adapter.Fill(ds, "schools");
-          DataRow changeRow = ds.Tables["schools"].Rows[0].Select("select * from schools where school =@school");
+          DataRow changeRow = ds.Tables["schools"].Select("school =@school")[0];
           changeRow["password"]=txt1;;
           DataRow[] modRows = ds.Tables["schools"].Select(null, null, DataViewRowState.ModifiedCurrent);
          // adapter.Update(ds, "schools");
