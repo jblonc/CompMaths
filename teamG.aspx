@@ -75,7 +75,8 @@
               ArrayList TID= new ArrayList(); ArrayList SUM_SCORES = new ArrayList(); int num_teams=0;
               dbconn.Open();
               OdbcDataReader dbread =allGroupScoresCmd.ExecuteReader();
-              while(dbread.Read()){TID.Add(dbread.GetString(0)); SUM_SCORES.Add(dbread.GetDouble(1)+dbread.GetDouble(2)+dbread.GetDouble(3)+dbread.GetDouble(4));num_teams++;}
+              while(dbread.Read()){TID.Add(dbread.GetString(0)); 
+SUM_SCORES.Add(dbread.GetDouble(1)+dbread.GetDouble(2)+dbread.GetDouble(3)+dbread.GetDouble(4));num_teams++;}
               dbread.Close();
               
               OdbcCommand allIndScoresCmd= new OdbcCommand("SELECT score  FROM participants WHERE team_id=@tid",dbconn);
