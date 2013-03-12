@@ -7,11 +7,11 @@
           ViewState["Referer"] = Request.Headers["Referer"];
           if(u2cookie!=null){  
         if((String)u2cookie.Values["valid_word"]=="collegebound" && txt1==txt2 && txt1!=(String)u2cookie.Values["username"]){    
-        try
-         {
+       //* try
+     //*    {
   
           dbconn.Open();
-          OdbcCommand myOleDbComm = new OdbcCommand("UPDATE schools SET school=@sch, [password]=@pss WHERE school=?", dbconn);
+          OdbcCommand myOleDbComm = new OdbcCommand("UPDATE schools SET school=@school, [password]=@pss WHERE school=?", dbconn);
           
           myOleDbComm.Parameters.Add( "@school", OdbcType.VarChar, 20 );
 	    myOleDbComm.Parameters["@school"].Value = (String)u2cookie.Values["username"];
@@ -21,15 +21,15 @@
           //myOleDbComm.Dispose();
           isExecuted=true;
         
-         }
-        catch(Exception e)
-           {
-            msg.Text+= "Couldn't change password: " + e.ToString();
-           }
-        finally
-          {
+    //*     }
+   //*     catch(Exception e)
+    //*       {
+   //*         msg.Text+= "Couldn't change password: " + e.ToString();
+   //*        }
+   //*     finally
+  //*        {
          dbconn.Close();
-          }
+  //*        }
           }
          } else{msg.Text="You working session has expired. Please sign in.";}
 
