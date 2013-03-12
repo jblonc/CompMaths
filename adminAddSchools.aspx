@@ -66,8 +66,8 @@
 
              message.Text="";
              
-             try
-               {
+            //* try
+            //*   {
   
                dbconn.Open();
                
@@ -99,14 +99,14 @@
                //myOleDbCleanupComm.ExecuteNonQuery();
                
                
-               }
-            catch(Exception e)
-                 { message.Text= "Couldn't add record: please ensure all fields are correctly filled out" ;
-                 }
-            finally
-              {
+           //*    }
+          //*  catch(Exception e)
+           //*      { message.Text= "Couldn't add record: please ensure all fields are correctly filled out" ;
+           //*      }
+          //*  finally
+          //*    {
              dbconn.Close();
-              }
+         //*     }
              school.Text="";
              contact.Text="";email.Text="";phone.Text="";school_name.Text="";school_addr.Text="";
              BindGrid();
