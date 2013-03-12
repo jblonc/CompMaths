@@ -112,7 +112,7 @@
         
 
     
-        OleDbDataReader ind_genericDbread =ind_genericSelCmd.ExecuteReader();
+        OdbcDataReader ind_genericDbread =ind_genericSelCmd.ExecuteReader();
         while(ind_genericDbread.Read() && ind_generic<k){
                        ind_generic++;
                        ind_generic_NAME.Add(ind_genericDbread.GetString(0));
@@ -183,7 +183,7 @@
         ArrayList grp_generic_ID=new ArrayList();
 
         
-        OleDbDataReader grp_genericDbread =grp_genericSelCmd.ExecuteReader();
+        OdbcDataReader grp_genericDbread =grp_genericSelCmd.ExecuteReader();
         while(grp_genericDbread.Read() && grp_generic<k){
                        grp_generic++;
                        //grp_generic_NAME.Add(grp_genericDbread.GetString(0));
@@ -197,7 +197,7 @@
         grp_genericNamesCmd.Parameters.Add(new OdbcParameter("@tid", OdbcType.VarChar, 4));
         for(int q=0; q<grp_generic; q++){
                   grp_genericNamesCmd.Parameters["@tid"].Value=grp_generic_ID[q];
-                  OleDbDataReader grp_genericNameRead=grp_genericNamesCmd.ExecuteReader();
+                  OdbcDataReader grp_genericNameRead=grp_genericNamesCmd.ExecuteReader();
               //with group scores >0 but can't find participants would have null string which SQL can't insert into database
                   String temp="list: ";
                   while(grp_genericNameRead.Read()){temp=temp+"&"+grp_genericNameRead.GetString(0);}

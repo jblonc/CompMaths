@@ -3,13 +3,13 @@
 <%@ Import Namespace="System.Data"%>
 <%@ Import Namespace="System.Globalization" %>
 
-<html>
+<html>  
    
      <script language="C#" runat="server">
-         OleDbConnection dbconn;
+         OdbcConnection dbconn;
          void Page_Load(Object Src, EventArgs E) {
          //if(Session["validation"]!="allright"){Response.Redirect("adminLogin.aspx", true);} 
-         dbconn = new OleDbConnection("Provider=SQLNCLI10; Server=tcp:ufwryy6r0y.database.windows.net,1433; Database=[xyzstart_db]; Uid=[xyzdb@ufwryy6r0y]; Pwd=[virAf89Hda];");
+         dbconn = dbconn = new OdbcConnection("Driver={SQL Server Native Client 10.0};Server=tcp:ufwryy6r0y.database.windows.net,1433;Database=xyzstart_db;Uid=xyzdb@ufwryy6r0y;Pwd=virAf89Hda;Encrypt=yes;Connection Timeout=30;");
          if(!IsPostBack)
          {
          BindGrid();
@@ -26,28 +26,28 @@
             
 
              
-             OleDbCommand myOleDbInsComm = new OleDbCommand("INSERT INTO schools ( school,[password], school_id, school_name,contact,contact_detail, address) Values ( @school,@password, @school_id, @school_name,@contact,@contact_det,@school_addr)", dbconn);
-             myOleDbInsComm.Parameters.Add(new OleDbParameter("@school", OleDbType.VarChar, 20));
+             OdbcCommand myOleDbInsComm = new OdbcCommand("INSERT INTO schools ( school,[password], school_id, school_name,contact,contact_detail, address) Values ( @school,@password, @school_id, @school_name,@contact,@contact_det,@school_addr)", dbconn);
+             myOleDbInsComm.Parameters.Add(new OdbcParameter("@school", OdbcType.VarChar, 20));
              myOleDbInsComm.Parameters["@school"].Value = school.Text;
 
-             myOleDbInsComm.Parameters.Add(new OleDbParameter("@password", OleDbType.VarChar, 20));
+             myOleDbInsComm.Parameters.Add(new OdbcParameter("@password", OdbcType.VarChar, 20));
              myOleDbInsComm.Parameters["@password"].Value = password.Text;
 
-             myOleDbInsComm.Parameters.Add(new OleDbParameter("@school_id", OleDbType.Integer, 10));
+             myOleDbInsComm.Parameters.Add(new OdbcParameter("@school_id", OdbcType.Int));
              myOleDbInsComm.Parameters["@school_id"].Value = school_id.Text;
 
-             myOleDbInsComm.Parameters.Add(new OleDbParameter("@school_name", OleDbType.VarChar, 50));
+             myOleDbInsComm.Parameters.Add(new OdbcParameter("@school_name", OdbcType.VarChar, 50));
              myOleDbInsComm.Parameters["@school_name"].Value = school_name.Text;
 
 
-             myOleDbInsComm.Parameters.Add(new OleDbParameter("@contact", OleDbType.VarChar, 50));
+             myOleDbInsComm.Parameters.Add(new OdbcParameter("@contact", OdbcType.VarChar, 50));
              myOleDbInsComm.Parameters["@contact"].Value = contact.Text;
 
 
-             myOleDbInsComm.Parameters.Add(new OleDbParameter("@contact_det", OleDbType.LongVarWChar));
+             myOleDbInsComm.Parameters.Add(new OdbcParameter("@contact_det", OdbcType.VarChar, 50));
              myOleDbInsComm.Parameters["@contact_det"].Value = contact_det.Text;
 
-             myOleDbInsComm.Parameters.Add(new OleDbParameter("@school_addr", OleDbType.VarChar, 100));
+             myOleDbInsComm.Parameters.Add(new OdbcParameter("@school_addr", OdbcType.VarChar, 100));
              myOleDbInsComm.Parameters["@school_addr"].Value = school_addr.Text;
 
              message.Text="";
@@ -81,16 +81,16 @@
      void schools_Update(Object sender, DataGridCommandEventArgs e)
         {
          String updateCmd="UPDATE schools SET school=@Nschool, [password]=@Npassword, school_id=@Nschool_id,school_name=@Nschool_name,last_login=@Nlast_login, contact=@Ncontact, contact_detail=@Ncontact_det,part_status=@Npart_status, address=@Nschool_addr WHERE school=@Nschool";
-         OleDbCommand myUpdateCmd= new OleDbCommand(updateCmd, dbconn);
-         myUpdateCmd.Parameters.Add(new OleDbParameter("@Nschool", OleDbType.VarChar, 20));
-         myUpdateCmd.Parameters.Add(new OleDbParameter("@Npassword", OleDbType.VarChar, 20));  
-         myUpdateCmd.Parameters.Add(new OleDbParameter("@Nschool_id", OleDbType.Integer, 10));
-         myUpdateCmd.Parameters.Add(new OleDbParameter("@Nschool_name", OleDbType.VarChar, 50));
-         myUpdateCmd.Parameters.Add(new OleDbParameter("@Nlast_login", OleDbType.VarChar, 50));
-         myUpdateCmd.Parameters.Add(new OleDbParameter("@Ncontact", OleDbType.VarChar, 50));
-         myUpdateCmd.Parameters.Add(new OleDbParameter("@Ncontact_det", OleDbType.LongVarWChar));
-         myUpdateCmd.Parameters.Add(new OleDbParameter("@Npart_status", OleDbType.Boolean));
-         myUpdateCmd.Parameters.Add(new OleDbParameter("@Nschool_addr", OleDbType.VarChar, 100));
+         OdbcCommand myUpdateCmd= new OdbcCommand(updateCmd, dbconn);
+         myUpdateCmd.Parameters.Add(new OdbcParameter("@Nschool", OdbcType.VarChar, 20));
+         myUpdateCmd.Parameters.Add(new OdbcParameter("@Npassword", OdbcType.VarChar, 20));  
+         myUpdateCmd.Parameters.Add(new OdbcParameter("@Nschool_id", OdbcType.Int));
+         myUpdateCmd.Parameters.Add(new OdbcParameter("@Nschool_name", OdbcType.VarChar, 50));
+         myUpdateCmd.Parameters.Add(new OdbcParameter("@Nlast_login", OdbcType.VarChar, 50));
+         myUpdateCmd.Parameters.Add(new OdbcParameter("@Ncontact", OdbcType.VarChar, 50));
+         myUpdateCmd.Parameters.Add(new OdbcParameter("@Ncontact_det", OdbcType.VarChar));
+         myUpdateCmd.Parameters.Add(new OdbcParameter("@Npart_status", OdbcType.Bit));
+         myUpdateCmd.Parameters.Add(new OdbcParameter("@Nschool_addr", OdbcType.VarChar, 100));
          myUpdateCmd.Parameters["@Nschool"].Value=schools.DataKeys[(int)e.Item.ItemIndex];
          String[] cols={"@Nschool","@Npassword","@Nschool_id","@Nschool_name","@Nlast_login","@Ncontact","@Ncontact_det","@Npart_status","@Nschool_addr"};
          int numCols=e.Item.Cells.Count;
