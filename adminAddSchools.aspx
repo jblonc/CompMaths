@@ -56,11 +56,11 @@
              myOleDbInsComm.Parameters.Add(new OdbcParameter("@school_addr", OdbcType.VarChar, 100));
              myOleDbInsComm.Parameters["@school_addr"].Value = school_addr.Text;
 
-             OdbcCommand schoolSelCmd=new OdbcCommand("SELECT school FROM xyzstart_db .dbo.schools WHERE school=@school", dbconn);
+             OdbcCommand schoolSelCmd=new OdbcCommand("SELECT school FROM xyzstart_db .dbo.schools WHERE school=?", dbconn);
              schoolSelCmd.Parameters.Add(new OdbcParameter("@school", OdbcType.VarChar, 20));
              schoolSelCmd.Parameters["@school"].Value = school.Text;
 
-             OdbcCommand schoolIdSelCmd=new OdbcCommand("SELECT school_id FROM xyzstart_db .dbo.schools WHERE school_id=@school_id", dbconn);
+             OdbcCommand schoolIdSelCmd=new OdbcCommand("SELECT school_id FROM xyzstart_db .dbo.schools WHERE school_id=?", dbconn);
              schoolIdSelCmd.Parameters.Add(new OdbcParameter("@school_id", OdbcType.Int));
              //schoolIdSelCmd.Parameters["@school_id"].Value = school_id.Text;
 
