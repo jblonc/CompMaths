@@ -24,7 +24,7 @@
            //OdbcParameter op= adapter.UpdateCommand.Parameters.Add("@school", OdbcType.VarChar,20);//,"school");
            //op.SourceColumn="school";
           // op.SourceVersion = DataRowVersion.Original;
-            adapter.UpdateCommand.Parameters.Add("@password",OdbcType.VarChar,20,"[password]");
+            adapter.UpdateCommand.Parameters.Add("@passw",OdbcType.VarChar,20,"passw");
           dbconn.Open();
           // adapter.UpdateCommand.ExecuteNonQuery();
           // OdbcCommandBuilder cb = new OdbcCommandBuilder(adapter);
