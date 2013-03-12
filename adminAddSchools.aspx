@@ -29,14 +29,14 @@
             
              OdbcCommand schoolIdSelAll=new OdbcCommand("SELECT school_id FROM xyzstart_db .dbo.schools", dbconn);
              
-             OdbcCommand myOleDbInsComm = new OdbcCommand("INSERT INTO xyzstart_db .dbo.schools (passw, schoo, school_id, school_name,contact,email,phone, address) Values (@passw, @school, @school_id, @school_name,@contact,@email,@phone,@school_addr)", dbconn);
+             OdbcCommand myOleDbInsComm = new OdbcCommand("INSERT INTO xyzstart_db .dbo.schools ([password], schoo, school_id, school_name,contact,email,phone, address) Values (@password, @school, @school_id, @school_name,@contact,@email,@phone,@school_addr)", dbconn);
 //( ?,? ?, ?,?,?,?,?)", dbconn);
 // ( @school,@password, @school_id, @school_name,@contact,@email,@phone,@school_addr)", dbconn);
              myOleDbInsComm.Parameters.Add(new OdbcParameter("@school", OdbcType.VarChar, 20));
              myOleDbInsComm.Parameters["@school"].Value = school.Text;
 
-             myOleDbInsComm.Parameters.Add(new OdbcParameter("@passw", OdbcType.VarChar, 20));
-             myOleDbInsComm.Parameters["@passw"].Value = school.Text;
+             myOleDbInsComm.Parameters.Add(new OdbcParameter("@password", OdbcType.VarChar, 20));
+             myOleDbInsComm.Parameters["@password"].Value = school.Text;
 
              myOleDbInsComm.Parameters.Add(new OdbcParameter("@school_id", OdbcType.Int));
              //myOleDbInsComm.Parameters["@school_id"].Value = school_id.Text;
