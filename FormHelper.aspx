@@ -178,13 +178,13 @@
          udSCount.Parameters["@team_id"].Value = SchoolID+teamno[j]; 
          udSCount.Parameters.Add(new OdbcParameter("@team_status", OdbcType.Bit));
          udSCount.Parameters["@team_status"].Value = false; 
-         udSCount.Parameters.Add(new OdbcParameter("@countName", OdbcType.Int, 2));
+         udSCount.Parameters.Add(new OdbcParameter("@countNum", OdbcType.Int, 2));
                
          dbconn.Open();
          OdbcDataReader selPinTReader=selPFromT.ExecuteReader();
          int PinT=0;
          while(selPinTReader.Read()){PinT++;} selPinTReader.Close();
-         udSCount.Parameters["@countName"].Value =PinT;
+         udSCount.Parameters["@countNum"].Value =PinT;
          if(PinT==0){deleteT.ExecuteNonQuery();}
          else{udSCount.ExecuteNonQuery();}
              
