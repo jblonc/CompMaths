@@ -5,7 +5,7 @@
 <html>
    
      <script language="C#" runat="server">
-         OleDbConnection dbconn;
+         OdbcConnection dbconn;
          /*void Page_Load(Object Src, EventArgs E) {
          //if(Session["validation"]!="allright"){Response.Redirect("adminLogin.aspx", true);} 
          dbconn = new OleDbConnection("Provider=SQLNCLI10; Server=tcp:ufwryy6r0y.database.windows.net,1433; Database=[xyzstart_db]; Uid=[xyzdb@ufwryy6r0y]; Pwd=[virAf89Hda];");*/
@@ -14,7 +14,8 @@
           ViewState["Referer"] = Request.Headers["Referer"];
         if(cookie!=null){
          if((String)cookie.Values["valid_word"]!="allright"){Response.Redirect("adminLogin.aspx", true);} }
-        else{Response.Redirect("adminL"Provider=SQLNCLI10; Server=tcp:ufwryy6r0y.database.windows.net,1433; Database=[xyzstart_db]; Uid=[xyzdb@ufwryy6r0y]; Pwd=[virAf89Hda];");
+        else{Response.Redirect("adminLogin.aspx",true);}
+           dbconn = new OdbcConnection("Driver={SQL Server Native Client 10.0};Server=tcp:ufwryy6r0y.database.windows.net,1433;Database=xyzstart_db;Uid=xyzdb@ufwryy6r0y;Pwd=virAf89Hda;Encrypt=yes;Connection Timeout=30;");
          if(!IsPostBack)
          {
          BindGrid();
@@ -27,49 +28,49 @@
       
      void BindGrid(){
 
-        OleDbDataAdapter topk_team=new OleDbDataAdapter("SELECT * FROM winners WHERE [type]='Team' AND category='Team' ORDER BY score DESC, id ASC", dbconn); 
+        OdbcDataAdapter topk_team=new OdbcDataAdapter("SELECT * FROM winners WHERE [type]='Team' AND category='Team' ORDER BY score DESC, id ASC", dbconn); 
         DataSet ds_team= new DataSet();
         topk_team.Fill(ds_team, "team");
         team.DataSource=ds_team.Tables["team"].DefaultView;
         team.DataBind();
 
-        OleDbDataAdapter topk_ind_algebra=new OleDbDataAdapter("SELECT * FROM winners WHERE [type]='Individual' AND category='Algebra' ORDER BY score DESC, id ASC", dbconn); 
+        OdbcDataAdapter topk_ind_algebra=new OdbcDataAdapter("SELECT * FROM winners WHERE [type]='Individual' AND category='Algebra' ORDER BY score DESC, id ASC", dbconn); 
         DataSet ds_ind_algebra= new DataSet();
         topk_ind_algebra.Fill(ds_ind_algebra, "ind_algebra");
         ind_algebra.DataSource=ds_ind_algebra.Tables["ind_algebra"].DefaultView;
         ind_algebra.DataBind();
 
-        OleDbDataAdapter topk_ind_geometry=new OleDbDataAdapter("SELECT * FROM winners WHERE [type]='Individual' AND category='Geometry' ORDER BY score DESC, id ASC", dbconn); 
+        OdbcDataAdapter topk_ind_geometry=new OdbcDataAdapter("SELECT * FROM winners WHERE [type]='Individual' AND category='Geometry' ORDER BY score DESC, id ASC", dbconn); 
         DataSet ds_ind_geometry= new DataSet();
         topk_ind_geometry.Fill(ds_ind_geometry, "ind_geometry");
         ind_geometry.DataSource=ds_ind_geometry.Tables["ind_geometry"].DefaultView;
         ind_geometry.DataBind();
 
-        OleDbDataAdapter topk_ind_precal=new OleDbDataAdapter("SELECT * FROM winners WHERE [type]='Individual' AND category='Precal' ORDER BY score DESC, id ASC", dbconn); 
+        OdbcDataAdapter topk_ind_precal=new OdbcDataAdapter("SELECT * FROM winners WHERE [type]='Individual' AND category='Precal' ORDER BY score DESC, id ASC", dbconn); 
         DataSet ds_ind_precal= new DataSet();
         topk_ind_precal.Fill(ds_ind_precal, "ind_precal");
         ind_precal.DataSource=ds_ind_precal.Tables["ind_precal"].DefaultView;
         ind_precal.DataBind();
 
-        OleDbDataAdapter topk_grp_algebra=new OleDbDataAdapter("SELECT * FROM winners WHERE [type]='Group' AND  category='Algebra' ORDER BY score DESC, id ASC", dbconn); 
+        OdbcDataAdapter topk_grp_algebra=new OdbcDataAdapter("SELECT * FROM winners WHERE [type]='Group' AND  category='Algebra' ORDER BY score DESC, id ASC", dbconn); 
         DataSet ds_grp_algebra= new DataSet();
         topk_grp_algebra.Fill(ds_grp_algebra, "grp_algebra");
         grp_algebra.DataSource=ds_grp_algebra.Tables["grp_algebra"].DefaultView;
         grp_algebra.DataBind();
 
-        OleDbDataAdapter topk_grp_geometry=new OleDbDataAdapter("SELECT * FROM winners WHERE [type]='Group' AND category='Geometry' ORDER BY score DESC, id ASC", dbconn); 
+        OdbcDataAdapter topk_grp_geometry=new OdbcDataAdapter("SELECT * FROM winners WHERE [type]='Group' AND category='Geometry' ORDER BY score DESC, id ASC", dbconn); 
         DataSet ds_grp_geometry= new DataSet();
         topk_grp_geometry.Fill(ds_grp_geometry, "grp_geometry");
         grp_geometry.DataSource=ds_grp_geometry.Tables["grp_geometry"].DefaultView;
         grp_geometry.DataBind();
 
-        OleDbDataAdapter topk_grp_precal=new OleDbDataAdapter("SELECT * FROM winners WHERE [type]='Group' AND category='Precal' ORDER BY score DESC, id ASC", dbconn); 
+        OdbcDataAdapter topk_grp_precal=new OdbcDataAdapter("SELECT * FROM winners WHERE [type]='Group' AND category='Precal' ORDER BY score DESC, id ASC", dbconn); 
         DataSet ds_grp_precal= new DataSet();
         topk_grp_precal.Fill(ds_grp_precal, "grp_precal");
         grp_precal.DataSource=ds_grp_precal.Tables["grp_precal"].DefaultView;
         grp_precal.DataBind();
 
-        OleDbDataAdapter topk_grp_mixed=new OleDbDataAdapter("SELECT * FROM winners WHERE [type]='Group' AND category='Mixed' ORDER BY score DESC, id ASC", dbconn); 
+        OdbcDataAdapter topk_grp_mixed=new OdbcDataAdapter("SELECT * FROM winners WHERE [type]='Group' AND category='Mixed' ORDER BY score DESC, id ASC", dbconn); 
         DataSet ds_grp_mixed= new DataSet();
         topk_grp_mixed.Fill(ds_grp_mixed, "grp_mixed");
         grp_mixed.DataSource=ds_grp_mixed.Tables["grp_mixed"].DefaultView;
@@ -81,7 +82,7 @@
         //int k=5
         
 
-        OleDbCommand delAllCmd= new OleDbCommand("DELETE * FROM winners",dbconn);
+        OdbcCommand delAllCmd= new OdbcCommand("DELETE * FROM winners",dbconn);
 
         // Generic individual
         ArrayList SubjectList= new ArrayList(); ArrayList CommandString= new ArrayList(); 
@@ -92,15 +93,15 @@
         dbconn.Open();
         delAllCmd.ExecuteNonQuery();
         for(int p=0;p<3;p++){
-        OleDbCommand ind_genericSelCmd= new OleDbCommand((String)CommandString[p],dbconn);
-        OleDbCommand ind_genericInsCmd= new OleDbCommand("INSERT INTO winners ([names],[id],[type],category,school_name,contact,score) VALUES(@names,@id, @type,@category, @school_name,@contact,@score)",dbconn); 
-        ind_genericInsCmd.Parameters.Add(new OleDbParameter("@names", OleDbType.VarChar, 240)); 
-        ind_genericInsCmd.Parameters.Add(new OleDbParameter("@id", OleDbType.VarChar, 9)); 
-        ind_genericInsCmd.Parameters.Add(new OleDbParameter("@type", OleDbType.VarChar, 15)); 
-        ind_genericInsCmd.Parameters.Add(new OleDbParameter("@category", OleDbType.VarChar, 8));
-        ind_genericInsCmd.Parameters.Add(new OleDbParameter("@school_name", OleDbType.VarChar, 50));
-        ind_genericInsCmd.Parameters.Add(new OleDbParameter("@contact", OleDbType.VarChar, 50));         
-        ind_genericInsCmd.Parameters.Add(new OleDbParameter("@score", OleDbType.Double, 2));
+        OdbcCommand ind_genericSelCmd= new OdbcCommand((String)CommandString[p],dbconn);
+        OdbcCommand ind_genericInsCmd= new OdbcCommand("INSERT INTO winners ([names],[id],[type],category,school_name,contact,score) VALUES(@names,@id, @type,@category, @school_name,@contact,@score)",dbconn); 
+        ind_genericInsCmd.Parameters.Add(new OdbcParameter("@names", OleDbType.VarChar, 240)); 
+        ind_genericInsCmd.Parameters.Add(new OdbcParameter("@id", OleDbType.VarChar, 9)); 
+        ind_genericInsCmd.Parameters.Add(new OdbcParameter("@type", OleDbType.VarChar, 15)); 
+        ind_genericInsCmd.Parameters.Add(new OdbcParameter("@category", OleDbType.VarChar, 8));
+        ind_genericInsCmd.Parameters.Add(new OdbcParameter("@school_name", OleDbType.VarChar, 50));
+        ind_genericInsCmd.Parameters.Add(new OdbcParameter("@contact", OleDbType.VarChar, 50));         
+        ind_genericInsCmd.Parameters.Add(new OdbcParameter("@score", OleDbType.Double, 2));
 
         int ind_generic=0;
         ArrayList ind_generic_NAME=new ArrayList();
@@ -154,25 +155,25 @@
         CategoryList.Add("Algebra");CategoryList.Add("Geometry");CategoryList.Add("Precal");
         CategoryList.Add("Mixed");CategoryList.Add("Team");
         //dbconn.Open();
-        OleDbCommand grp_genericInsCmd= new OleDbCommand("INSERT INTO winners ([names],[id], [type],[category],school_name,contact,score) VALUES (@names,@id, @type,@category, @school_name,@contact,@score)",dbconn); 
-        grp_genericInsCmd.Parameters.Add(new OleDbParameter("@names", OleDbType.VarChar, 240)); 
-        grp_genericInsCmd.Parameters.Add(new OleDbParameter("@id", OleDbType.VarChar, 9)); 
-        grp_genericInsCmd.Parameters.Add(new OleDbParameter("@type", OleDbType.VarChar, 15)); 
-        grp_genericInsCmd.Parameters.Add(new OleDbParameter("@category", OleDbType.VarChar, 8));
-        grp_genericInsCmd.Parameters.Add(new OleDbParameter("@school_name", OleDbType.VarChar, 50));
-        grp_genericInsCmd.Parameters.Add(new OleDbParameter("@contact", OleDbType.VarChar, 50));         
-        grp_genericInsCmd.Parameters.Add(new OleDbParameter("@score", OleDbType.Double, 2));
+        OdbcCommand grp_genericInsCmd= new OdbcCommand("INSERT INTO winners ([names],[id], [type],[category],school_name,contact,score) VALUES (@names,@id, @type,@category, @school_name,@contact,@score)",dbconn); 
+        grp_genericInsCmd.Parameters.Add(new OdbcParameter("@names", OleDbType.VarChar, 240)); 
+        grp_genericInsCmd.Parameters.Add(new OdbcParameter("@id", OleDbType.VarChar, 9)); 
+        grp_genericInsCmd.Parameters.Add(new OdbcParameter("@type", OleDbType.VarChar, 15)); 
+        grp_genericInsCmd.Parameters.Add(new OdbcParameter("@category", OleDbType.VarChar, 8));
+        grp_genericInsCmd.Parameters.Add(new OdbcParameter("@school_name", OleDbType.VarChar, 50));
+        grp_genericInsCmd.Parameters.Add(new OdbcParameter("@contact", OleDbType.VarChar, 50));         
+        grp_genericInsCmd.Parameters.Add(new OdbcParameter("@score", OleDbType.Double, 2));
 
         for(int p=0; p<5; p++){
-        OleDbCommand grp_genericSelCmd= new OleDbCommand((String)GTCommandString[p],dbconn);
-        //OleDbCommand grp_genericInsCmd= new OleDbCommand("INSERT INTO winners (names,[id], [type],category,school_name,contact,score) VALUES (@names,@id, @type,@category, @school_name,@contact,@score)",dbconn); 
-        //grp_genericInsCmd.Parameters.Add(new OleDbParameter("@names", OleDbType.VarChar, 240)); 
-        //grp_genericInsCmd.Parameters.Add(new OleDbParameter("@id", OleDbType.VarChar, 9)); 
-       // grp_genericInsCmd.Parameters.Add(new OleDbParameter("@type", OleDbType.VarChar, 15)); 
-        //grp_genericInsCmd.Parameters.Add(new OleDbParameter("@category", OleDbType.VarChar, 8));
-       // grp_genericInsCmd.Parameters.Add(new OleDbParameter("@school_name", OleDbType.VarChar, 50));
-       // grp_genericInsCmd.Parameters.Add(new OleDbParameter("@contact", OleDbType.VarChar, 50));         
-        //grp_genericInsCmd.Parameters.Add(new OleDbParameter("@score", OleDbType.Double, 2));
+        OdbcCommand grp_genericSelCmd= new OdbcCommand((String)GTCommandString[p],dbconn);
+        //OdbcCommand grp_genericInsCmd= new OdbcCommand("INSERT INTO winners (names,[id], [type],category,school_name,contact,score) VALUES (@names,@id, @type,@category, @school_name,@contact,@score)",dbconn); 
+        //grp_genericInsCmd.Parameters.Add(new OdbcParameter("@names", OleDbType.VarChar, 240)); 
+        //grp_genericInsCmd.Parameters.Add(new OdbcParameter("@id", OleDbType.VarChar, 9)); 
+       // grp_genericInsCmd.Parameters.Add(new OdbcParameter("@type", OleDbType.VarChar, 15)); 
+        //grp_genericInsCmd.Parameters.Add(new OdbcParameter("@category", OleDbType.VarChar, 8));
+       // grp_genericInsCmd.Parameters.Add(new OdbcParameter("@school_name", OleDbType.VarChar, 50));
+       // grp_genericInsCmd.Parameters.Add(new OdbcParameter("@contact", OleDbType.VarChar, 50));         
+        //grp_genericInsCmd.Parameters.Add(new OdbcParameter("@score", OleDbType.Double, 2));
         
         int grp_generic=0;
         ArrayList grp_generic_NAME=new ArrayList();
@@ -192,8 +193,8 @@
                        grp_generic_ID.Add(grp_genericDbread.GetString(0));
               }
         grp_genericDbread.Close();
-        OleDbCommand grp_genericNamesCmd= new OleDbCommand((String)GTCommandNamesString[p],dbconn);
-        grp_genericNamesCmd.Parameters.Add(new OleDbParameter("@tid", OleDbType.VarChar, 4));
+        OdbcCommand grp_genericNamesCmd= new OdbcCommand((String)GTCommandNamesString[p],dbconn);
+        grp_genericNamesCmd.Parameters.Add(new OdbcParameter("@tid", OleDbType.VarChar, 4));
         for(int q=0; q<grp_generic; q++){
                   grp_genericNamesCmd.Parameters["@tid"].Value=grp_generic_ID[q];
                   OleDbDataReader grp_genericNameRead=grp_genericNamesCmd.ExecuteReader();

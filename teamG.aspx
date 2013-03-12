@@ -32,15 +32,15 @@
          String updateCmd="UPDATE teams SET team_id=@tid,geometry_g=@gg, algebra_g=@ag,precal_g=@pg, mixed_g=@mg WHERE team_id=@tid";
 
          OdbcCommand myUpdateCmd= new OdbcCommand(updateCmd, dbconn);
-         myUpdateCmd.Parameters.Add(new OleDbParameter("@tid", OleDbType.VarChar, 4));
-         /*myUpdateCmd.Parameters.Add(new OleDbParameter("@tno", OleDbType.VarChar, 1));  
-         myUpdateCmd.Parameters.Add(new OleDbParameter("@cnt", OleDbType.Integer, 10));
-         myUpdateCmd.Parameters.Add(new OleDbParameter("@tstat", OleDbType.Boolean));
-         myUpdateCmd.Parameters.Add(new OleDbParameter("@school", OleDbType.VarChar, 20));*/
-         myUpdateCmd.Parameters.Add(new OleDbParameter("@gg", OleDbType.Double, 2));
-         myUpdateCmd.Parameters.Add(new OleDbParameter("@ag", OleDbType.Double, 2));
-         myUpdateCmd.Parameters.Add(new OleDbParameter("@pg", OleDbType.Double, 2));
-         myUpdateCmd.Parameters.Add(new OleDbParameter("@mg", OleDbType.Double, 2));
+         myUpdateCmd.Parameters.Add(new OdbcParameter("@tid", OleDbType.VarChar, 4));
+         /*myUpdateCmd.Parameters.Add(new OdbcParameter("@tno", OleDbType.VarChar, 1));  
+         myUpdateCmd.Parameters.Add(new OdbcParameter("@cnt", OleDbType.Integer, 10));
+         myUpdateCmd.Parameters.Add(new OdbcParameter("@tstat", OleDbType.Boolean));
+         myUpdateCmd.Parameters.Add(new OdbcParameter("@school", OleDbType.VarChar, 20));*/
+         myUpdateCmd.Parameters.Add(new OdbcParameter("@gg", OleDbType.Double, 2));
+         myUpdateCmd.Parameters.Add(new OdbcParameter("@ag", OleDbType.Double, 2));
+         myUpdateCmd.Parameters.Add(new OdbcParameter("@pg", OleDbType.Double, 2));
+         myUpdateCmd.Parameters.Add(new OdbcParameter("@mg", OleDbType.Double, 2));
          myUpdateCmd.Parameters["@tid"].Value=teams.DataKeys[(int)e.Item.ItemIndex];
          String[] cols={"@tid","@tno","@cnt","@tstat","@school","@gg","@ag","@pg","@mg"};
          int numCols=e.Item.Cells.Count;
@@ -69,8 +69,8 @@
              // OdbcCommand allScoresCmd= new OdbcCommand("UPDATE participants SET student_id=@sid, score=@score WHERE student_id=@sid",dbconn);
               OdbcCommand allGroupScoresCmd= new OdbcCommand("SELECT team_id, algebra_g, geometry_g, precal_g, mixed_g  FROM teams",dbconn);
               OdbcCommand teamScoresUpdCmd= new OdbcCommand("UPDATE teams SET team_id=@tid, team_score=@score WHERE team_id=@tid",dbconn);
-              teamScoresUpdCmd.Parameters.Add(new OleDbParameter("@tid", OleDbType.VarChar,4));
-              teamScoresUpdCmd.Parameters.Add(new OleDbParameter("@score", OleDbType.Double,2));
+              teamScoresUpdCmd.Parameters.Add(new OdbcParameter("@tid", OleDbType.VarChar,4));
+              teamScoresUpdCmd.Parameters.Add(new OdbcParameter("@score", OleDbType.Double,2));
 
               ArrayList TID= new ArrayList(); ArrayList SUM_SCORES = new ArrayList(); int num_teams=0;
               dbconn.Open();
@@ -79,7 +79,7 @@
               dbread.Close();
               
               OdbcCommand allIndScoresCmd= new OdbcCommand("SELECT score  FROM participants WHERE team_id=@tid",dbconn);
-              allIndScoresCmd.Parameters.Add(new OleDbParameter("@tid", OleDbType.VarChar,4));
+              allIndScoresCmd.Parameters.Add(new OdbcParameter("@tid", OleDbType.VarChar,4));
               for (int q=0; q<num_teams; q++){
               allIndScoresCmd.Parameters["@tid"].Value=TID[q];
               OdbcDataReader indbread =allIndScoresCmd.ExecuteReader();
@@ -126,7 +126,7 @@
               <asp:EditCommandColumn EditText="Edit" CancelText="Cancel" UpdateText="Update" ItemStyle-Wrap="false" />
               <asp:BoundColumn HeaderText="team_id" SortExpression="team_id" ReadOnly="True" DataField="team_id" ItemStyle-Wrap="false"/>
               <asp:BoundColumn HeaderText="team_no" SortExpression="team_no" ReadOnly="True" DataField="team_no" ItemStyle-Wrap="false"/>
-              <asp:BoundColumn HeaderText="count" SortExpression="count" ReadOnly="True" DataField="count" ItemStyle-Wrap="false"/>
+              <asp:BoundColumn HeaderText="count" SortExpression="count" ReadOnly="True" DataField="countNum" ItemStyle-Wrap="false"/>
               <asp:BoundColumn HeaderText="team_status" SortExpression="team_status" ReadOnly="True" DataField="team_status" ItemStyle-Wrap="false"/>
               <asp:BoundColumn HeaderText="school" SortExpression="school" ReadOnly="True" DataField="school" ItemStyle-Wrap="false"/>
               <asp:BoundColumn HeaderText="geometry_g" SortExpression="geometry_g" DataField="geometry_g" ItemStyle-Wrap="false"/>
