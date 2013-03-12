@@ -12,7 +12,7 @@
   
           
           OdbcDataAdapter adapter = new OdbcDataAdapter(
-        "select school, [password] from schools", dbconn);
+        "select school, passw from schools", dbconn);
         
          adapter.UpdateCommand =  new OdbcCommand("UPDATE schools SET passw=? WHERE school=?",dbconn);// SET school=?, [password]=?
         //  OdbcCommand myOleDbComm = new OdbcCommand("UPDATE schools SET school=?, [password]=? WHERE school=?", dbconn);
