@@ -63,7 +63,7 @@
               OdbcCommand selIndScoreCmd= new OdbcCommand("SELECT participants.student_id, indExcel.score FROM participants INNER JOIN indExcel ON participants.student_id=indExcel.student_id",dbconn);
               ArrayList SID= new ArrayList(); ArrayList SCORE=new ArrayList(); int numberCommon=0;
               dbconn.Open();
-              OleDbDataReader dbread =selIndScoreCmd.ExecuteReader();
+              OdbcDataReader dbread =selIndScoreCmd.ExecuteReader();
               while(dbread.Read()){SID.Add(dbread.GetString(0)); SCORE.Add(dbread.GetDouble(1));numberCommon++;}
               dbread.Close();
                            

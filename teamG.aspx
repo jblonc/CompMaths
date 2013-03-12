@@ -6,14 +6,14 @@
 <html>
    
      <script language="C#" runat="server">
-         OleDbConnection dbconn;
+         OdbcConnection dbconn;
          void Page_Load(Object Src, EventArgs E) {
          HttpCookie cookie = Request.Cookies["validation"];
           ViewState["Referer"] = Request.Headers["Referer"];
         if(cookie!=null){
          if((String)cookie.Values["valid_word"]!="allright"){Response.Redirect("adminLogin.aspx", true);} }
         else{Response.Redirect("adminLogin.aspx", true);}
-         dbconn = new OleDbConnection("Provider=SQLNCLI10; Server=tcp:ufwryy6r0y.database.windows.net,1433; Database=[xyzstart_db]; Uid=[xyzdb@ufwryy6r0y]; Pwd=[virAf89Hda];");
+         dbconn = new OdbcConnection("Driver={SQL Server Native Client 10.0};Server=tcp:ufwryy6r0y.database.windows.net,1433;Database=xyzstart_db;Uid=xyzdb@ufwryy6r0y;Pwd=virAf89Hda;Encrypt=yes;Connection Timeout=30;");
          if(!IsPostBack)
          {
          BindGrid();
@@ -31,7 +31,7 @@
          /*String updateCmd="UPDATE teams SET team_id=@tid, team_no=@tno, [ount]=@cnt,team_status=@tstat,school=@school, geometry_g=@gg, algebra_g=@ag,precal_g=@pg, mixed_g=@mg WHERE team_id=@tid";*/
          String updateCmd="UPDATE teams SET team_id=@tid,geometry_g=@gg, algebra_g=@ag,precal_g=@pg, mixed_g=@mg WHERE team_id=@tid";
 
-         OleDbCommand myUpdateCmd= new OleDbCommand(updateCmd, dbconn);
+         OdbcCommand myUpdateCmd= new OdbcCommand(updateCmd, dbconn);
          myUpdateCmd.Parameters.Add(new OleDbParameter("@tid", OleDbType.VarChar, 4));
          /*myUpdateCmd.Parameters.Add(new OleDbParameter("@tno", OleDbType.VarChar, 1));  
          myUpdateCmd.Parameters.Add(new OleDbParameter("@cnt", OleDbType.Integer, 10));
@@ -66,23 +66,23 @@
         teams.DataBind();
                 }
      void updateTeamScore(Object Src, EventArgs E){
-             // OleDbCommand allScoresCmd= new OleDbCommand("UPDATE participants SET student_id=@sid, score=@score WHERE student_id=@sid",dbconn);
-              OleDbCommand allGroupScoresCmd= new OleDbCommand("SELECT team_id, algebra_g, geometry_g, precal_g, mixed_g  FROM teams",dbconn);
-              OleDbCommand teamScoresUpdCmd= new OleDbCommand("UPDATE teams SET team_id=@tid, team_score=@score WHERE team_id=@tid",dbconn);
+             // OdbcCommand allScoresCmd= new OdbcCommand("UPDATE participants SET student_id=@sid, score=@score WHERE student_id=@sid",dbconn);
+              OdbcCommand allGroupScoresCmd= new OdbcCommand("SELECT team_id, algebra_g, geometry_g, precal_g, mixed_g  FROM teams",dbconn);
+              OdbcCommand teamScoresUpdCmd= new OdbcCommand("UPDATE teams SET team_id=@tid, team_score=@score WHERE team_id=@tid",dbconn);
               teamScoresUpdCmd.Parameters.Add(new OleDbParameter("@tid", OleDbType.VarChar,4));
               teamScoresUpdCmd.Parameters.Add(new OleDbParameter("@score", OleDbType.Double,2));
 
               ArrayList TID= new ArrayList(); ArrayList SUM_SCORES = new ArrayList(); int num_teams=0;
               dbconn.Open();
-              OleDbDataReader dbread =allGroupScoresCmd.ExecuteReader();
+              OdbcDataReader dbread =allGroupScoresCmd.ExecuteReader();
               while(dbread.Read()){TID.Add(dbread.GetString(0)); SUM_SCORES.Add(dbread.GetDouble(1)+dbread.GetDouble(2)+dbread.GetDouble(3)+dbread.GetDouble(4));num_teams++;}
               dbread.Close();
               
-              OleDbCommand allIndScoresCmd= new OleDbCommand("SELECT score  FROM participants WHERE team_id=@tid",dbconn);
+              OdbcCommand allIndScoresCmd= new OdbcCommand("SELECT score  FROM participants WHERE team_id=@tid",dbconn);
               allIndScoresCmd.Parameters.Add(new OleDbParameter("@tid", OleDbType.VarChar,4));
               for (int q=0; q<num_teams; q++){
               allIndScoresCmd.Parameters["@tid"].Value=TID[q];
-              OleDbDataReader indbread =allIndScoresCmd.ExecuteReader();
+              OdbcDataReader indbread =allIndScoresCmd.ExecuteReader();
               while(indbread.Read()){SUM_SCORES[q] = (Double)SUM_SCORES[q]+indbread.GetDouble(0);}
               indbread.Close();
               }
