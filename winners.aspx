@@ -115,11 +115,11 @@
         OdbcDataReader ind_genericDbread =ind_genericSelCmd.ExecuteReader();
         while(ind_genericDbread.Read() && ind_generic<k){
                        ind_generic++;
-                       ind_generic_NAME.Add(ind_genericDbread.GetString(0));
-                       ind_generic_SCORE.Add(ind_genericDbread.GetDecimal(4));
-                       ind_generic_SCHOOLN.Add(ind_genericDbread.GetString(2));
-                       ind_generic_CONTACT.Add(ind_genericDbread.GetString(3));
-                       ind_generic_ID.Add(ind_genericDbread.GetString(1));
+                       ind_generic_NAME.Add(ind_genericDbread.GetString(1));
+                       ind_generic_SCORE.Add(ind_genericDbread.GetDecimal(5));
+                       ind_generic_SCHOOLN.Add(ind_genericDbread.GetString(3));
+                       ind_generic_CONTACT.Add(ind_genericDbread.GetString(4));
+                       ind_generic_ID.Add(ind_genericDbread.GetString(2));
               }
         ind_genericDbread.Close();
         for(int q=0; q<ind_generic; q++){
