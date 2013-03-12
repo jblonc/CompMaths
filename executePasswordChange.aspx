@@ -11,13 +11,22 @@
      //*    {
   
           dbconn.Open();
-          OdbcCommand myOleDbComm = new OdbcCommand("UPDATE schools SET school=?, [password]=? WHERE school=?", dbconn);
+          OdbcDataAdapter adapter = new OdbcDataAdapter(
+        "select school, [password] from schools", connection);
+         adapter.UpdateCommand =  new OdbcCommand("UPDATE schools SET school=?, [password]=? WHERE school=?", dbconn);;
+        //  OdbcCommand myOleDbComm = new OdbcCommand("UPDATE schools SET school=?, [password]=? WHERE school=?", dbconn);
           
-          myOleDbComm.Parameters.Add( "@school", OdbcType.VarChar, 20 );
+           adapter.UpdateCommand.Parameters.Add( "@school", OdbcType.VarChar, 20 );
+	     adapter.UpdateCommand.Parameters["@school"].Value = (String)u2cookie.Values["username"];
+           adapter.UpdateCommand.Parameters.Add( "@password", OdbcType.VarChar, 20 );
+	     adapter.UpdateCommand.Parameters["@password"].Value = txt1;
+           adapter.UpdateCommand.ExecuteNonQuery();
+       /* myOleDbComm.Parameters.Add( "@school", OdbcType.VarChar, 20 );
 	    myOleDbComm.Parameters["@school"].Value = (String)u2cookie.Values["username"];
           myOleDbComm.Parameters.Add( "@password", OdbcType.VarChar, 20 );
 	    myOleDbComm.Parameters["@password"].Value = txt1;
           myOleDbComm.ExecuteNonQuery();
+       */
           //myOleDbComm.Dispose();
           isExecuted=true;
         
