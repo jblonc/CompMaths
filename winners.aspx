@@ -82,7 +82,7 @@
         //int k=5
         
 
-        OdbcCommand delAllCmd= new OdbcCommand("DELETE * FROM winners",dbconn);
+        OdbcCommand delAllCmd= new OdbcCommand("DELETE  FROM winners",dbconn);//got rid of *
 
         // Generic individual
         ArrayList SubjectList= new ArrayList(); ArrayList CommandString= new ArrayList(); 
