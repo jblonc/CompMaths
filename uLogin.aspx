@@ -33,7 +33,7 @@ if (i<10)
      <script language="C#" runat="server">
         
         void Page_Load(Object Src, EventArgs E) {
-            welcome.Text = "Competition Date: Wed April 18, 2007<br />Arrival and Registration: 9:30-10am<br /><br />";//+ DateTime.Now;
+            welcome.Text = "Math Competition<br />Arrival and Registration: 9:30-10am<br /><br />";//+ DateTime.Now;
         }
      </script>
      <!-- #include File = "uLoginValidator.aspx" -->

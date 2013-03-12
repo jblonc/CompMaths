@@ -55,8 +55,8 @@ if (i<10)
        <table><tr><td align="left">
        <table><tr><td align="left" valign="middle">
        <table><tr><td align="left"><asp:label id="schoolNAME" runat=server /></td></tr>
-              <tr><td align="left">Welcome to the 3rd Annual MathLeague!</td></tr>
-              <tr><td align="left" style="text-decoration: underline">Wed April 18, 2007</td></tr>
+              <tr><td align="left">Welcome to the Annual MathLeague!</td></tr>
+              <tr><td align="left" style="text-decoration: underline">Wednesday</td></tr>
               <tr><td align="left">Current Time: <span id="timeTxt"></span></td></tr></table></td>
         <td align="right"><table class="summary">
  <tr><td align="center" valign="top" class="summ" >STATUS</td></tr><tr><td> <asp:label id="summary" Text="" runat=server /></td></tr></table></td></tr></table> </td>
