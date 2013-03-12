@@ -29,7 +29,7 @@
 
           DataSet ds = new DataSet();
           adapter.Fill(ds, "schools");
-          DataRow changeRow = ds.Tables["schools").Rows["@school"];
+          DataRow changeRow = ds.Tables["schools"].Rows["@school"];
           changeRow["[password]"]=txt1;;
           adapter.Update(ds, "schools");
           ds.Dispose();
