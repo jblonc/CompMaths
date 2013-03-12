@@ -29,7 +29,7 @@
             
              OdbcCommand schoolIdSelAll=new OdbcCommand("SELECT school_id FROM xyzstart_db .dbo.schools", dbconn);
              
-             OdbcCommand myOleDbInsComm = new OdbcCommand("INSERT INTO xyzstart_db .dbo.schools ([password], school, school_id, school_name,contact,email,phone, address) Values( ?,? ,?, ?,?,?,?,?)", dbconn);
+             OdbcCommand myOleDbInsComm = new OdbcCommand("INSERT INTO xyzstart_db .dbo.schools (school,[password], school_id, school_name,contact,email,phone, address) Values( ?,? ,?, ?,?,?,?,?)", dbconn);
 
 // (@password, @school, @school_id, @school_name,@contact,@email,@phone,@school_addr)", dbconn);
 //( ?,? ,?, ?,?,?,?,?)", dbconn);
@@ -72,8 +72,8 @@
 
              message.Text="";
              
-            //* try
-            //*   {
+             try
+              {
   
                dbconn.Open();
                
@@ -105,14 +105,14 @@
                //myOleDbCleanupComm.ExecuteNonQuery();
                
                
-           //*    }
-          //*  catch(Exception e)
-           //*      { message.Text= "Couldn't add record: please ensure all fields are correctly filled out" ;
-           //*      }
-          //*  finally
-          //*    {
+               }
+            catch(Exception e)
+                 { message.Text= "Couldn't add record: please ensure all fields are correctly filled out" ;
+                 }
+            finally
+              {
              dbconn.Close();
-         //*     }
+              }
              school.Text="";
              contact.Text="";email.Text="";phone.Text="";school_name.Text="";school_addr.Text="";
              BindGrid();
