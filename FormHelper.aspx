@@ -173,18 +173,18 @@
          OdbcCommand deleteT=new OdbcCommand("DELETE FROM teams WHERE team_id=?",dbconn);
          deleteT.Parameters.Add(new OdbcParameter("@team_id", OdbcType.VarChar, 4));
          deleteT.Parameters["@team_id"].Value = SchoolID+teamno[j];
-         OdbcCommand udSCount=new OdbcCommand("UPDATE teams SET team_id=?,team_status=@tstatus, countNum=@pcount  WHERE team_id=?",dbconn);//count is a reserved word?!
+         OdbcCommand udSCount=new OdbcCommand("UPDATE teams SET team_status=?, countNum=?  WHERE team_id=?",dbconn);//count is a reserved word?!
          udSCount.Parameters.Add(new OdbcParameter("@team_id", OdbcType.VarChar, 4));
          udSCount.Parameters["@team_id"].Value = SchoolID+teamno[j]; 
-         udSCount.Parameters.Add(new OdbcParameter("@tstatus", OdbcType.Bit));
-         udSCount.Parameters["@tstatus"].Value = false; 
-         udSCount.Parameters.Add(new OdbcParameter("@pcount", OdbcType.Int, 2));
+         udSCount.Parameters.Add(new OdbcParameter("@team_status", OdbcType.Bit));
+         udSCount.Parameters["@team_status"].Value = false; 
+         udSCount.Parameters.Add(new OdbcParameter("@countName", OdbcType.Int, 2));
                
          dbconn.Open();
          OdbcDataReader selPinTReader=selPFromT.ExecuteReader();
          int PinT=0;
          while(selPinTReader.Read()){PinT++;} selPinTReader.Close();
-         udSCount.Parameters["@pcount"].Value =PinT;
+         udSCount.Parameters["@countName"].Value =PinT;
          if(PinT==0){deleteT.ExecuteNonQuery();}
          else{udSCount.ExecuteNonQuery();}
              
