@@ -45,7 +45,7 @@
          String[] cols={"@tid","@tno","@cnt","@tstat","@school","@gg","@ag","@pg","@mg"};
          int numCols=e.Item.Cells.Count;
          message.Text="";
-         for (int i=ount6; i<numCols-1;i++) //numCols=11.
+         for (int i=6; i<numCols-1;i++) //numCols=11.
             {
              String colvalue=((System.Web.UI.WebControls.TextBox) e.Item.Cells[i].Controls[0]).Text;
              myUpdateCmd.Parameters[cols[i-1]].Value = Convert.ToDouble(colvalue);

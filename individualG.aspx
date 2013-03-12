@@ -118,7 +118,7 @@
               <asp:BoundColumn HeaderText="student_id" SortExpression="student_id" ReadOnly="True" DataField="student_id" ItemStyle-Wrap="false"/>
               <asp:BoundColumn HeaderText="name" SortExpression="name" ReadOnly="True" DataField="name" ItemStyle-Wrap="false"/>
               <asp:BoundColumn HeaderText="category" SortExpression="category" ReadOnly="True" DataField="category" ItemStyle-Wrap="false"/>
-              <asp:BoundColumn HeaderText="group" SortExpression="group" ReadOnly="True" DataField="OdbcDataAdapter" ItemStyle-Wrap="false"/>
+              <asp:BoundColumn HeaderText="group" SortExpression="group" ReadOnly="True" DataField="groupClass" ItemStyle-Wrap="false"/>
               <asp:BoundColumn HeaderText="team_id" SortExpression="team_id" ReadOnly="True" DataField="team_id" ItemStyle-Wrap="false"/>
               <asp:BoundColumn HeaderText="school" SortExpression="school" ReadOnly="True" DataField="school" ItemStyle-Wrap="false"/>
               <asp:BoundColumn HeaderText="score" SortExpression="score" DataField="score" ItemStyle-Wrap="false"/>
