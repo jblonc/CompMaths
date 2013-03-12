@@ -86,7 +86,7 @@
     void participate_save(int j){
          
         
-         OdbcCommand insComm = new OdbcCommand("INSERT INTO participants ( student_id,name, category, [roup], school,team_id) Values (@student_id,@name, @category, @group, @school,@team_id)", dbconn);
+         OdbcCommand insComm = new OdbcCommand("INSERT INTO participants (student_id,name, category, [roup], school,team_id) Values (@student_id,@name, @category, @group, @school,@team_id)", dbconn);
          OdbcCommand insTeamComm = new OdbcCommand("INSERT INTO teams (team_id,team_no,school) Values (?,?, ?)", dbconn);
          OdbcCommand updComm=new OdbcCommand("UPDATE participants SET student_id=@student_id, name=@s_name WHERE student_id=?",dbconn); 
          OdbcCommand delCmd=new OdbcCommand("DELETE FROM participants WHERE student_id=?",dbconn);                                              

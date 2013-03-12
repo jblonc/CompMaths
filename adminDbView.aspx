@@ -5,17 +5,17 @@
 <html>
    
      <script language="C#" runat="server">
-         OleDbConnection dbconn;
+         OdbcConnection dbconn;
          /*void Page_Load(Object Src, EventArgs E) {
          //if(Session["validation"]!="allright"){Response.Redirect("adminLogin.aspx", true);} 
-         dbconn = new OleDbConnection("Provider=SQLNCLI10; Server=tcp:ufwryy6r0y.database.windows.net,1433; Database=[xyzstart_db]; Uid=[xyzdb@ufwryy6r0y]; Pwd=[virAf89Hda];");*/
+         dbconn = new OdbcConnection("Driver={SQL Server Native Client 10.0};Server=tcp:ufwryy6r0y.database.windows.net,1433;Database=xyzstart_db;Uid=xyzdb@ufwryy6r0y;Pwd=virAf89Hda;Encrypt=yes;Connection Timeout=30;");*/
          void Page_Load(Object Src, EventArgs E) {
          HttpCookie cookie = Request.Cookies["validation"];
           ViewState["Referer"] = Request.Headers["Referer"];
         if(cookie!=null){
          if((String)cookie.Values["valid_word"]!="allright"){Response.Redirect("adminLogin.aspx", true);} }
         else{Response.Redirect("adminLogin.aspx", true);}
-         dbconn = new OleDbConnection("Provider=SQLNCLI10; Server=tcp:ufwryy6r0y.database.windows.net,1433; Database=[xyzstart_db]; Uid=[xyzdb@ufwryy6r0y]; Pwd=[virAf89Hda];");
+         dbconn = new OdbcConnection("Driver={SQL Server Native Client 10.0};Server=tcp:ufwryy6r0y.database.windows.net,1433;Database=xyzstart_db;Uid=xyzdb@ufwryy6r0y;Pwd=virAf89Hda;Encrypt=yes;Connection Timeout=30;");
          if(!IsPostBack)
          {
          BindGrid();
@@ -27,13 +27,13 @@
 
       
      void BindGrid(){
-        OleDbDataAdapter displayComm_p=new OleDbDataAdapter("SELECT * FROM participants ORDER BY school, student_id", dbconn);// 
+        OdbcDataAdapter displayComm_p=new OdbcDataAdapter("SELECT * FROM participants ORDER BY school, student_id", dbconn);// 
         DataSet ds_p= new DataSet();
         displayComm_p.Fill(ds_p, "participants");
         participants.DataSource=ds_p.Tables["participants"].DefaultView;
         participants.DataBind();
 
-        OleDbDataAdapter displayComm_t=new OleDbDataAdapter("SELECT * FROM teams ORDER BY school, team_id", dbconn);
+        OdbcDataAdapter displayComm_t=new OdbcDataAdapter("SELECT * FROM teams ORDER BY school, team_id", dbconn);
         DataSet ds_t= new DataSet();
         displayComm_t.Fill(ds_t, "teams");
         teams.DataSource=ds_t.Tables["teams"].DefaultView;
