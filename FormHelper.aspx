@@ -173,9 +173,9 @@
          OdbcCommand deleteT=new OdbcCommand("DELETE FROM teams WHERE team_id=?",dbconn);
          deleteT.Parameters.Add(new OdbcParameter("@team_id", OdbcType.VarChar, 4));
          deleteT.Parameters["@team_id"].Value = SchoolID+teamno[j];
-         OdbcCommand udSCount=new OdbcCommand("UPDATE teams SET team_id=@tid,team_status=@tstatus, countNum=@pcount  WHERE team_id=?",dbconn);//count is a reserved word?!
-         udSCount.Parameters.Add(new OdbcParameter("@tid", OdbcType.VarChar, 4));
-         udSCount.Parameters["@tid"].Value = SchoolID+teamno[j]; 
+         OdbcCommand udSCount=new OdbcCommand("UPDATE teams SET team_id=?,team_status=@tstatus, countNum=@pcount  WHERE team_id=?",dbconn);//count is a reserved word?!
+         udSCount.Parameters.Add(new OdbcParameter("@team_id", OdbcType.VarChar, 4));
+         udSCount.Parameters["@team_id"].Value = SchoolID+teamno[j]; 
          udSCount.Parameters.Add(new OdbcParameter("@tstatus", OdbcType.Bit));
          udSCount.Parameters["@tstatus"].Value = false; 
          udSCount.Parameters.Add(new OdbcParameter("@pcount", OdbcType.Int, 2));
