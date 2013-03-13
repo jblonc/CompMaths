@@ -26,7 +26,7 @@
             
 
              
-             OdbcCommand myOleDbInsComm = new OdbcCommand("INSERT INTO schools ( school,[password], school_id, school_name,contact,contact_detail, address) Values ( @school,@password, @school_id, @school_name,@contact,@contact_det,@school_addr)", dbconn);
+             OdbcCommand myOleDbInsComm = new OdbcCommand("INSERT INTO schools ( school,[password], school_id, school_name,contact,contact_detail, address) Values (?,?, ?, ?,?,?,?)", dbconn);
              myOleDbInsComm.Parameters.Add(new OdbcParameter("@school", OdbcType.VarChar, 20));
              myOleDbInsComm.Parameters["@school"].Value = school.Text;
 
@@ -80,9 +80,9 @@
         {schools.EditItemIndex = -1; BindGrid(); }
      void schools_Update(Object sender, DataGridCommandEventArgs e)
         {
-         String updateCmd="UPDATE schools SET school=@Nschool, [password]=@Npassword, school_id=@Nschool_id,school_name=@Nschool_name,last_login=@Nlast_login, contact=@Ncontact, contact_detail=@Ncontact_det,part_status=@Npart_status, address=@Nschool_addr WHERE school=@Nschool";
+         String updateCmd="UPDATE schools SET [password]=?, school_id=?,school_name=?,last_login=?, contact=?, contact_detail=?,part_status=?, address=? WHERE school=?";
          OdbcCommand myUpdateCmd= new OdbcCommand(updateCmd, dbconn);
-         myUpdateCmd.Parameters.Add(new OdbcParameter("@Nschool", OdbcType.VarChar, 20));
+         
          myUpdateCmd.Parameters.Add(new OdbcParameter("@Npassword", OdbcType.VarChar, 20));  
          myUpdateCmd.Parameters.Add(new OdbcParameter("@Nschool_id", OdbcType.Int));
          myUpdateCmd.Parameters.Add(new OdbcParameter("@Nschool_name", OdbcType.VarChar, 50));
@@ -91,6 +91,7 @@
          myUpdateCmd.Parameters.Add(new OdbcParameter("@Ncontact_det", OdbcType.VarChar));
          myUpdateCmd.Parameters.Add(new OdbcParameter("@Npart_status", OdbcType.Bit));
          myUpdateCmd.Parameters.Add(new OdbcParameter("@Nschool_addr", OdbcType.VarChar, 100));
+        myUpdateCmd.Parameters.Add(new OdbcParameter("@Nschool", OdbcType.VarChar, 20));
          myUpdateCmd.Parameters["@Nschool"].Value=schools.DataKeys[(int)e.Item.ItemIndex];
          String[] cols={"@Nschool","@Npassword","@Nschool_id","@Nschool_name","@Nlast_login","@Ncontact","@Ncontact_det","@Npart_status","@Nschool_addr"};
          int numCols=e.Item.Cells.Count;
