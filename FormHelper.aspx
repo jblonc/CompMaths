@@ -361,7 +361,7 @@ confirmUpd.Parameters.Add(new OdbcParameter("@team_id", OdbcType.VarChar, 4));
                   delPComm.Parameters["@team_id"].Value=SchoolID+teamno[j];
                   selTComm.Parameters["@team_id"].Value=SchoolID+teamno[j];
                   dbconn.Open();
-                  OdbcDataReader tReader=selTComm.ExecuteReader();
+                  OdbcDataReader tReader=selTComm.ExecuteReader();//this is not necessary, can delete an empty set or table
                   if(tReader.Read()){tReader.Close();delPComm.ExecuteNonQuery();delTComm.ExecuteNonQuery();messageHidden.Text="This team deleted!";}
                     else{delPComm.ExecuteNonQuery();
                           tReader.Close();
