@@ -102,8 +102,8 @@
              insTeamComm.Parameters.Add(new OdbcParameter("@team_id", OdbcType.VarChar, 4));
              insTeamComm.Parameters.Add(new OdbcParameter("@team_no", OdbcType.VarChar, 1));
              insTeamComm.Parameters.Add(new OdbcParameter("@school", OdbcType.VarChar, 20));
-             updComm.Parameters.Add(new OdbcParameter("@student_id", OdbcType.VarChar, 9));
-             updComm.Parameters.Add(new OdbcParameter("@name", OdbcType.VarChar, 20));
+             
+             updComm.Parameters.Add(new OdbcParameter("@name", OdbcType.VarChar, 20));updComm.Parameters.Add(new OdbcParameter("@student_id", OdbcType.VarChar, 9));
              delCmd.Parameters.Add(new OdbcParameter("@student_id", OdbcType.VarChar, 9));
              selComm.Parameters.Add(new OdbcParameter("@student_id", OdbcType.VarChar, 9));
              selTeamComm.Parameters.Add(new OdbcParameter("@team_id", OdbcType.VarChar, 4));
@@ -321,10 +321,11 @@
          countInT.Parameters.Add(new OdbcParameter("@team_id", OdbcType.VarChar, 4));
          countInT.Parameters["@team_id"].Value = SchoolID+teamno[j]; 
          OdbcCommand confirmUpd=new OdbcCommand("UPDATE teams SET team_status=? WHERE team_id=?",dbconn);
-         confirmUpd.Parameters.Add(new OdbcParameter("@team_id", OdbcType.VarChar, 4));
-         confirmUpd.Parameters["@team_id"].Value = SchoolID+teamno[j]; 
+         
          confirmUpd.Parameters.Add(new OdbcParameter("@team_status", OdbcType.Bit));//change to Bit
          confirmUpd.Parameters["@team_status"].Value = true; 
+confirmUpd.Parameters.Add(new OdbcParameter("@team_id", OdbcType.VarChar, 4));
+         confirmUpd.Parameters["@team_id"].Value = SchoolID+teamno[j]; 
                //need change true to? True; no need to consider "False" situation.default is false unless manually changed in db.
          dbconn.Open();
          OdbcDataReader countRead =countInT.ExecuteReader();
