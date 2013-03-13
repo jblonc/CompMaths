@@ -146,9 +146,9 @@
         GTCommandString.Add("SELECT teams.team_id, schools.school_name, schools.contact, teams.mixed_g FROM teams, schools WHERE teams.school=schools.school AND teams.mixed_g>0 ORDER BY teams.mixed_g DESC, teams.team_id ASC");
         GTCommandString.Add("SELECT teams.team_id, schools.school_name, schools.contact, teams.team_score FROM teams, schools WHERE teams.school=schools.school AND teams.team_score>0 ORDER BY teams.team_score DESC, teams.team_id ASC");
         GTCommandNamesString.Add("SELECT [name]  FROM participants WHERE team_id=? AND (category='Algebra' AND groupClass='Subject')");
-        GTCommandNamesString.Add("SELECT [name]  FROM participants WHERE team_id=? AND (category='Geometry' AND [roup]='Subject')");
+        GTCommandNamesString.Add("SELECT [name]  FROM participants WHERE team_id=? AND (category='Geometry' AND groupClass='Subject')");
         GTCommandNamesString.Add("SELECT [name]  FROM participants WHERE team_id=? AND (category='Precal' AND groupClass='Subject')");
-        GTCommandNamesString.Add("SELECT [name]  FROM participants WHERE team_id=? AND [roup]='Mixed'");
+        GTCommandNamesString.Add("SELECT [name]  FROM participants WHERE team_id=? AND groupClass='Mixed'");
         GTCommandNamesString.Add("SELECT [name]  FROM participants WHERE team_id=?");
         ArrayList TypeList=new ArrayList();ArrayList CategoryList=new ArrayList();
         TypeList.Add("Group");TypeList.Add("Group");TypeList.Add("Group");TypeList.Add("Group");TypeList.Add("Team");
