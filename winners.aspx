@@ -94,7 +94,7 @@
         delAllCmd.ExecuteNonQuery();
         for(int p=0;p<3;p++){
         OdbcCommand ind_genericSelCmd= new OdbcCommand((String)CommandString[p],dbconn);
-        OdbcCommand ind_genericInsCmd= new OdbcCommand("INSERT INTO winners ([names],[id],[type],category,school_name,contact,score) VALUES(@names,@id, @type,@category, @school_name,@contact,@score)",dbconn); 
+        OdbcCommand ind_genericInsCmd= new OdbcCommand("INSERT INTO winners ([names],[id],[type],category,school_name,contact,score) VALUES(?,?, ?,?, ?,?,?)",dbconn); 
         ind_genericInsCmd.Parameters.Add(new OdbcParameter("@names", OdbcType.VarChar, 240)); 
         ind_genericInsCmd.Parameters.Add(new OdbcParameter("@id", OdbcType.VarChar, 9)); 
         ind_genericInsCmd.Parameters.Add(new OdbcParameter("@type", OdbcType.VarChar, 15)); 
@@ -145,17 +145,17 @@
         GTCommandString.Add("SELECT teams.team_id, schools.school_name, schools.contact, teams.precal_g FROM teams, schools WHERE teams.school=schools.school AND teams.precal_g>0 ORDER BY teams.precal_g DESC, teams.team_id ASC");
         GTCommandString.Add("SELECT teams.team_id, schools.school_name, schools.contact, teams.mixed_g FROM teams, schools WHERE teams.school=schools.school AND teams.mixed_g>0 ORDER BY teams.mixed_g DESC, teams.team_id ASC");
         GTCommandString.Add("SELECT teams.team_id, schools.school_name, schools.contact, teams.team_score FROM teams, schools WHERE teams.school=schools.school AND teams.team_score>0 ORDER BY teams.team_score DESC, teams.team_id ASC");
-        GTCommandNamesString.Add("SELECT [name]  FROM participants WHERE team_id=@tid AND (category='Algebra' AND [roup]='Subject')");
-        GTCommandNamesString.Add("SELECT [name]  FROM participants WHERE team_id=@tid AND (category='Geometry' AND [roup]='Subject')");
-        GTCommandNamesString.Add("SELECT [name]  FROM participants WHERE team_id=@tid AND (category='Precal' AND [roup]='Subject')");
-        GTCommandNamesString.Add("SELECT [name]  FROM participants WHERE team_id=@tid AND [roup]='Mixed'");
-        GTCommandNamesString.Add("SELECT [name]  FROM participants WHERE team_id=@tid");
+        GTCommandNamesString.Add("SELECT [name]  FROM participants WHERE team_id=? AND (category='Algebra' AND groupClass='Subject')");
+        GTCommandNamesString.Add("SELECT [name]  FROM participants WHERE team_id=? AND (category='Geometry' AND [roup]='Subject')");
+        GTCommandNamesString.Add("SELECT [name]  FROM participants WHERE team_id=? AND (category='Precal' AND groupClass='Subject')");
+        GTCommandNamesString.Add("SELECT [name]  FROM participants WHERE team_id=? AND [roup]='Mixed'");
+        GTCommandNamesString.Add("SELECT [name]  FROM participants WHERE team_id=?");
         ArrayList TypeList=new ArrayList();ArrayList CategoryList=new ArrayList();
         TypeList.Add("Group");TypeList.Add("Group");TypeList.Add("Group");TypeList.Add("Group");TypeList.Add("Team");
         CategoryList.Add("Algebra");CategoryList.Add("Geometry");CategoryList.Add("Precal");
         CategoryList.Add("Mixed");CategoryList.Add("Team");
         //dbconn.Open();
-        OdbcCommand grp_genericInsCmd= new OdbcCommand("INSERT INTO winners ([names],[id], [type],[category],school_name,contact,score) VALUES (@names,@id, @type,@category, @school_name,@contact,@score)",dbconn); 
+        OdbcCommand grp_genericInsCmd= new OdbcCommand("INSERT INTO winners ([names],[id], [type],[category],school_name,contact,score) VALUES (?,?, ?,?, ?,?,?)",dbconn); 
         grp_genericInsCmd.Parameters.Add(new OdbcParameter("@names", OdbcType.VarChar, 240)); 
         grp_genericInsCmd.Parameters.Add(new OdbcParameter("@id", OdbcType.VarChar, 9)); 
         grp_genericInsCmd.Parameters.Add(new OdbcParameter("@type", OdbcType.VarChar, 15)); 
