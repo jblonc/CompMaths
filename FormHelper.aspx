@@ -363,7 +363,7 @@ confirmUpd.Parameters.Add(new OdbcParameter("@team_id", OdbcType.VarChar, 4));
                   dbconn.Open();
                   OdbcDataReader tReader=selTComm.ExecuteReader();
                   if(tReader.Read()){tReader.Close();delPComm.ExecuteNonQuery();delTComm.ExecuteNonQuery();messageHidden.Text="This team deleted!";}
-                    else{
+                    else{delPComm.ExecuteNonQuery();
                           tReader.Close();
                           messageHidden.Text= "This team doesnt exist";
                           // "<script language='javascript'"+">"+"alert('The team doesnt exist!');"+"</scri"+"pt>";
