@@ -350,7 +350,7 @@
 
     void delete_team(int j){
                  
-                  OdbcCommand delTComm = new OdbcCommand("DELETE FROM teams WHERE team_id=@team_id", dbconn);
+                  OdbcCommand delTComm = new OdbcCommand("DELETE FROM teams WHERE team_id=?", dbconn);
                   delTComm.Parameters.Add(new OdbcParameter("@team_id", OdbcType.VarChar, 4));
                   delTComm.Parameters["@team_id"].Value=SchoolID+teamno[j];
                   OdbcCommand selTComm = new OdbcCommand("SELECT team_id FROM teams WHERE team_id=?", dbconn);
