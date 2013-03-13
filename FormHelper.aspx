@@ -356,10 +356,13 @@ confirmUpd.Parameters.Add(new OdbcParameter("@team_id", OdbcType.VarChar, 4));
                   delTComm.Parameters["@team_id"].Value=SchoolID+teamno[j];
                   OdbcCommand selTComm = new OdbcCommand("SELECT team_id FROM teams WHERE team_id=?", dbconn);
                   selTComm.Parameters.Add(new OdbcParameter("@team_id", OdbcType.VarChar, 4));
+                  OdbcCommand delPComm = new OdbcCommand("DELETE FROM participants WHERE team_id=?", dbconn);
+                  delPComm.Parameters.Add(new OdbcParameter("@team_id", OdbcType.VarChar, 4));
+                  delPComm.Parameters["@team_id"].Value=SchoolID+teamno[j];
                   selTComm.Parameters["@team_id"].Value=SchoolID+teamno[j];
                   dbconn.Open();
                   OdbcDataReader tReader=selTComm.ExecuteReader();
-                  if(tReader.Read()){tReader.Close();delTComm.ExecuteNonQuery();messageHidden.Text="This team deleted!";}
+                  if(tReader.Read()){tReader.Close();delPComm.ExecuteNonQuery();delTComm.ExecuteNonQuery();messageHidden.Text="This team deleted!";}
                     else{
                           tReader.Close();
                           messageHidden.Text= "This team doesnt exist";
