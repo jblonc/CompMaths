@@ -29,12 +29,12 @@
      void indGrades_Update(Object sender, DataGridCommandEventArgs e)
         {
         
-         String updateCmd="UPDATE participants SET student_id=@sid,score=@score WHERE student_id=@sid";
+         String updateCmd="UPDATE participants SET score=? WHERE student_id=?";
 
          OdbcCommand myUpdateCmd= new OdbcCommand(updateCmd, dbconn);
-         myUpdateCmd.Parameters.Add(new OdbcParameter("@sid", OdbcType.VarChar, 9));
+        
          
-         myUpdateCmd.Parameters.Add(new OdbcParameter("@score", OdbcType.Double, 2));
+         myUpdateCmd.Parameters.Add(new OdbcParameter("@score", OdbcType.Double, 2));  myUpdateCmd.Parameters.Add(new OdbcParameter("@sid", OdbcType.VarChar, 9));
          
          myUpdateCmd.Parameters["@sid"].Value=participants.DataKeys[(int)e.Item.ItemIndex];
          //String[] cols={"@sid","@tno","@cnt","@tstat","@school","@gg","@ag","@pg","@mg"};
@@ -59,7 +59,7 @@
         participants.DataBind();
                 }
      void updateFromExcel(Object Src, EventArgs E){
-              OdbcCommand updateIndScoreCmd= new OdbcCommand("UPDATE participants SET student_id=@sid, score=@score WHERE student_id=@sid",dbconn);
+              OdbcCommand updateIndScoreCmd= new OdbcCommand("UPDATE participants SET score=? WHERE student_id=?",dbconn);
               OdbcCommand selIndScoreCmd= new OdbcCommand("SELECT participants.student_id, indExcel.score FROM participants INNER JOIN indExcel ON participants.student_id=indExcel.student_id",dbconn);
               ArrayList SID= new ArrayList(); ArrayList SCORE=new ArrayList(); int numberCommon=0;
               dbconn.Open();
@@ -67,8 +67,8 @@
               while(dbread.Read()){SID.Add(dbread.GetString(0)); SCORE.Add(dbread.GetDouble(1));numberCommon++;}
               dbread.Close();
                            
-               updateIndScoreCmd.Parameters.Add(new OdbcParameter("@sid", OdbcType.VarChar, 9));
-               updateIndScoreCmd.Parameters.Add(new OdbcParameter("@score", OdbcType.Double, 2));
+              
+               updateIndScoreCmd.Parameters.Add(new OdbcParameter("@score", OdbcType.Double, 2)); updateIndScoreCmd.Parameters.Add(new OdbcParameter("@sid", OdbcType.VarChar, 9));
                
               for(int q=0; q<numberCommon; q++)
                {updateIndScoreCmd.Parameters["@sid"].Value=SID[q];
