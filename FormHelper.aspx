@@ -174,11 +174,12 @@
          deleteT.Parameters.Add(new OdbcParameter("@team_id", OdbcType.VarChar, 4));
          deleteT.Parameters["@team_id"].Value = SchoolID+teamno[j];
          OdbcCommand udSCount=new OdbcCommand("UPDATE teams SET team_status=?, countNum=?  WHERE team_id=?",dbconn);//count is a reserved word?!
-         udSCount.Parameters.Add(new OdbcParameter("@team_id", OdbcType.VarChar, 4));
-         udSCount.Parameters["@team_id"].Value = SchoolID+teamno[j]; 
+
          udSCount.Parameters.Add(new OdbcParameter("@team_status", OdbcType.Bit));
          udSCount.Parameters["@team_status"].Value = false; 
          udSCount.Parameters.Add(new OdbcParameter("@countNum", OdbcType.Int));
+         udSCount.Parameters.Add(new OdbcParameter("@team_id", OdbcType.VarChar, 4));
+         udSCount.Parameters["@team_id"].Value = SchoolID+teamno[j]; 
                
          dbconn.Open();
          OdbcDataReader selPinTReader=selPFromT.ExecuteReader();
