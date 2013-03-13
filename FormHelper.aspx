@@ -394,15 +394,16 @@
          Response.Redirect("uPassChange.aspx", true);
       }
     void save_cont(Object Src, EventArgs E){
-         OdbcCommand contUpd=new OdbcCommand("UPDATE schools SET school=@school, contact=@cont, email=@email, phone=@phone WHERE school=?",dbconn);
-         contUpd.Parameters.Add(new OdbcParameter("@school", OdbcType.VarChar, 20));
-         contUpd.Parameters["@school"].Value = uname;
+         OdbcCommand contUpd=new OdbcCommand("UPDATE schools SET contact=?, email=?, phone=? WHERE school=?",dbconn);
+         
          contUpd.Parameters.Add(new OdbcParameter("@cont", OdbcType.VarChar, 20));
          contUpd.Parameters["@cont"].Value = cont.Text; 
          contUpd.Parameters.Add(new OdbcParameter("@email", OdbcType.VarChar, 50));
          contUpd.Parameters["@email"].Value =cont_email.Text;
          contUpd.Parameters.Add(new OdbcParameter("@phone", OdbcType.VarChar, 20));
          contUpd.Parameters["@phone"].Value = cont_phone.Text;
+        contUpd.Parameters.Add(new OdbcParameter("@school", OdbcType.VarChar, 20));
+         contUpd.Parameters["@school"].Value = uname;
          dbconn.Open();
          contUpd.ExecuteNonQuery();
          cont_m.Text="Thank you for the update!<br />Please let the new contact know the username and current password for this website.";
