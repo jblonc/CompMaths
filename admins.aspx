@@ -46,7 +46,7 @@ catch(Exception e)
 <th>email</th>
 <th>phone</th>
 <!--<th>Address</th>-->
-<th>permissions</th>
+<!--<th>permissions</th>-->
 </tr>
 </HeaderTemplate>
 
@@ -58,7 +58,7 @@ catch(Exception e)
 <td> <%# DataBinder.Eval(Container.DataItem, "email") %> </td>
 <td> <%# DataBinder.Eval(Container.DataItem, "phone") %>  </td>
 <!--<td> <%# //DataBinder.Eval(Container.DataItem, "address") %> </td>-->
-<td> <%# DataBinder.Eval(Container.DataItem, "permissions") %> </td>
+<!--<td> <%# // DataBinder.Eval(Container.DataItem, "permissions") %> </td>-->
 
 </tr>
 </ItemTemplate>
