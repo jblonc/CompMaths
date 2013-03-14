@@ -45,8 +45,6 @@ catch(Exception e)
 <th>role</th>
 <th>email</th>
 <th>phone</th>
-<!--<th>Address</th>-->
-<!--<th>permissions</th>-->
 </tr>
 </HeaderTemplate>
 
