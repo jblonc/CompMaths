@@ -9,7 +9,7 @@
           
           
 
-         dbconn = new OdbcConnection("Driver={SQL Server Native Client 10.0};Server=tcp:ufwryy6r0y.database.windows.net,1433;Database=xyzstart_db;Uid=xyzdb@ufwryy6r0y;Pwd=virAf89Hda;Encrypt=yes;Connection Timeout=30;");               teamno=new String[4]; teamno[0]="";teamno[1]="2";teamno[2]="6";teamno[3]="8";
+         dbconn = new OdbcConnection("Driver={SQL Server Native Client 10.0};Server=tcp:ioq6hahtjs.database.windows.net,1433;Database=mathcomAhfq5rGk1;Uid=qinvfd@ioq6hahtjs;Pwd= kvQ98Jvcsq;Encrypt=yes;Connection Timeout=30;");              teamno=new String[4]; teamno[0]="";teamno[1]="2";teamno[2]="6";teamno[3]="8";
          if(uFormcookie!=null){
            if((String)uFormcookie.Values["valid_word"]!="collegebound"){Response.Redirect("uLogin.aspx", true);}}
          else{Response.Redirect("uLogin.aspx", true);}

@@ -7,7 +7,7 @@ protected void Page_Load(Object Src, EventArgs E) {
           if(cookie!=null){
 if((String)cookie.Values["valid_word"]!="allright"){Response.Redirect("adminLogin.aspx", true);}}
           else{Response.Redirect("adminLogin.aspx", true);}
-OdbcConnection dbconn = new OdbcConnection("Driver={SQL Server Native Client 10.0};Server=tcp:ufwryy6r0y.database.windows.net,1433;Database=xyzstart_db;Uid=xyzdb@ufwryy6r0y;Pwd=virAf89Hda;Encrypt=yes;Connection Timeout=30;");
+OdbcConnection dbconn = new OdbcConnection("Driver={SQL Server Native Client 10.0};Server=tcp:ioq6hahtjs.database.windows.net,1433;Database=mathcomAhfq5rGk1;Uid=qinvfd@ioq6hahtjs;Pwd= kvQ98Jvcsq;Encrypt=yes;Connection Timeout=30;");
 OdbcCommand myOleDbComm = new OdbcCommand("SELECT * FROM admins", dbconn);
 //OleDbCommand myOleDbInsComm = new OleDbCommand("INSERT INTO admins ( CompanyName, contactname, address, city) Values ('ABC Company', 'New York', 'Owner','New york, NY')", dbconn);
 try

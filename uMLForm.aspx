@@ -104,7 +104,7 @@ top=0,location=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizable=no,fu
             <tr><td align="left">For help with using this form, please click <a href="helpWithForm.doc">here</a>. For other technical questions, contact jinbo.lu@uwc.edu.</td></tr>
             <tr><td align="left"><a href="javascript:void(window.open('idexplained.html','idexplained','width=350, height=200,left=0,
 top=0,location=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizable=no,fullscreen=no'))">Here</a> is an explanation on how id's are assigned.</td></tr>
-            <tr><td align="left">If you prefer to receive a paper form via email, please contact kavita.bhatia@uwc.edu or (715)389-6548.</td></tr>
+            <tr><td align="left">If you prefer to receive a paper form via email, please contact jlu@uwc.edu or (715)389-6548.</td></tr>
 </table>   
 
         <table><tr><td>
