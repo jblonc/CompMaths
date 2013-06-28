@@ -22,7 +22,7 @@
 	    myOleDbComm.Parameters["@username"].Value = un;
           string lookuppass= (string) myOleDbComm.ExecuteScalar();
           myOleDbComm.Dispose();*/
-          OdbcCommand myOdbcComm = new OdbcCommand("SELECT password FROM xyzstart_db.dbo.admins WHERE username=?", dbconn);
+          OdbcCommand myOdbcComm = new OdbcCommand("SELECT password FROM admins WHERE username=?", dbconn);//xyzstart_db.dbo.
           myOdbcComm.Parameters.AddWithValue("@username", un);
           OdbcDataReader reader = myOdbcComm.ExecuteReader();
           string lookuppass="";
