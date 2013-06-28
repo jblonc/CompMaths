@@ -9,7 +9,7 @@
           
           
 
-         dbconn = new OdbcConnection("Driver={SQL Server Native Client 10.0};Server=tcp:ioq6hahtjs.database.windows.net,1433;Database=mathcomAhfq5rGk1;Uid=qinvfd@ioq6hahtjs;Pwd= kvQ98Jvcsq;Encrypt=yes;Connection Timeout=30;");              teamno=new String[4]; teamno[0]="";teamno[1]="2";teamno[2]="6";teamno[3]="8";
+         dbconn = new OdbcConnection("Driver={SQL Server Native Client 10.0};Server=tcp:ioq6hahtjs.database.windows.net,1433;Database=mathcomAhfq5rGk1;Uid=qinvfd@ioq6hahtjs;Pwd=kvQ98Jvcsq;Encrypt=yes;Connection Timeout=30;");              teamno=new String[4]; teamno[0]="";teamno[1]="2";teamno[2]="6";teamno[3]="8";
          if(uFormcookie!=null){
            if((String)uFormcookie.Values["valid_word"]!="collegebound"){Response.Redirect("uLogin.aspx", true);}}
          else{Response.Redirect("uLogin.aspx", true);}
@@ -27,7 +27,6 @@
          dbread.Close();
          dbconn.Close();
          
-         //String uname=(String)uFormcookie.Values["username"];
          if((String)uFormcookie.Values["mstr"]=="mstrmobb13g"){}
          else{
          if(uname==pass){Response.Redirect("uPassChange.aspx", true);}}
@@ -64,21 +63,15 @@
           team2_5_id.Text=(String)al[17];team2_6_id.Text=(String)al[18];team2_7_id.Text=(String)al[19];team2_8_id.Text=(String)al[20];
           team2_9_id.Text=(String)al[21];team2_10_id.Text=(String)al[22];team2_11_id.Text=(String)al[23];team2_12_id.Text=(String)al[24];
 
-          /* team3_1_id.Text=(String)al[25];team3_2_id.Text=(String)al[26];team3_3_id.Text=(String)al[27];team3_4_id.Text=(String)al[28];
-          team3_5_id.Text=(String)al[29];team3_6_id.Text=(String)al[30];team3_7_id.Text=(String)al[31];team3_8_id.Text=(String)al[32];
-          team3_9_id.Text=(String)al[33];team3_10_id.Text=(String)al[34];team3_11_id.Text=(String)al[35];team3_12_id.Text=(String)al[36];*/
 
          populateForm(); 
            } 
-          //after postback, message1 reports the progress in filling the form; 
-          //without this, after deleting a team, message1 always displays the alert javascript     
-          //message1.Text="";
-        }
+                  }
      
      
     void participate_save_1(Object Src, EventArgs E){participate_save(1);message1.Text=messageHidden.Text;}
     void participate_save_2(Object Src, EventArgs E){participate_save(2);message2.Text=messageHidden.Text;}
-    //void participate_save_3(Object Src, EventArgs E){participate_save(3);message3.Text=messageHidden.Text;}
+    
     void participate_save_all(Object Src, EventArgs E){participate_save(1);participate_save(2);//participate_save(3); 
        messageAll.Text=""; 
      message1.Text=messageHidden.Text;message2.Text=messageHidden.Text; //message3.Text=messageHidden.Text;
@@ -194,7 +187,7 @@
          messageHidden.Text="Changes to this team SAVED!";
          populateForm();
         }
-    void populateForm(){//message1.Text="<script language='javascript'"+">"+"alert('what');"+"</scri"+"pt>";
+    void populateForm(){
                     OdbcCommand populateFormCmd= new OdbcCommand("SELECT student_id, name FROM participants WHERE school=?",dbconn);
          
          populateFormCmd.Parameters.Add(new OdbcParameter("@school",OdbcType.VarChar,20));
@@ -222,9 +215,7 @@
           team2_5.Text="";team2_6.Text="";team2_7.Text="";team2_8.Text="";
           team2_9.Text="";team2_10.Text="";team2_11.Text="";team2_12.Text=""; 
 
-          /*team3_1.Text="";team3_2.Text="";team3_3.Text="";team3_4.Text="";
-          team3_5.Text="";team3_6.Text="";team3_7.Text="";team3_8.Text="";
-          team3_9.Text="";team3_10.Text="";team3_11.Text="";team3_12.Text=""; */        
+                  
 
          dbconn.Open();
          OdbcDataReader popuread =populateFormCmd.ExecuteReader();         
@@ -306,7 +297,6 @@
                  message1.Text=messageHidden.Text;messageHidden.Text="";
              }
     void participate_confirm_2(Object Src, EventArgs E){participate_save(2);participate_confirm(2);message2.Text=messageHidden.Text;messageHidden.Text="";}
-    /*void participate_confirm_3(Object Src, EventArgs E){participate_save(3);participate_confirm(3);message3.Text=messageHidden.Text;messageHidden.Text="";}*/
 
     void participate_confirm_all(Object Src, EventArgs E){
                  participate_save(1);
@@ -347,7 +337,7 @@ confirmUpd.Parameters.Add(new OdbcParameter("@team_id", OdbcType.VarChar, 4));
 
     void delete_team_1(Object Src, EventArgs E){delete_team(1);  message1.Text=messageHidden.Text;messageHidden.Text="";}
     void delete_team_2(Object Src, EventArgs E){delete_team(2);  message2.Text=messageHidden.Text;messageHidden.Text="";}
-   // void delete_team_3(Object Src, EventArgs E){delete_team(3);  message3.Text=messageHidden.Text;messageHidden.Text="";}
+ 
 
     void delete_team(int j){
                  
@@ -370,19 +360,17 @@ confirmUpd.Parameters.Add(new OdbcParameter("@team_id", OdbcType.VarChar, 4));
                            }
                   dbconn.Close();
                   populateForm(); //should work instead of the following but populateForm() requires dbconn
-         /* team1_1.Text="";team1_2.Text="";team1_3.Text="";team1_4.Text="";
-          team1_5.Text="";team1_6.Text="";team1_7.Text="";team1_8.Text="";
-          team1_9.Text="";team1_10.Text="";team1_11.Text="";team1_12.Text="";  */              
+                      
                   
                      }
     void cancel_all_changes(Object Src, EventArgs E){
                 populateForm();messageAll.Text="";
                 message1.Text="Changes cancelled!";message2.Text="Changes cancelled!";
-                //message3.Text="Changes cancelled!";
+               
                  }
     void cancel_changes_1(Object Src, EventArgs E){populateForm();message1.Text="Changes cancelled!";}
     void cancel_changes_2(Object Src, EventArgs E){populateForm();message2.Text="Changes cancelled!";}
-    //void cancel_changes_3(Object Src, EventArgs E){populateForm();message3.Text="Changes cancelled!";}
+    
     void doNothing(Object Src, EventArgs E){}
     void logout(Object Src, EventArgs E){
        Session.Abandon();//uFormcookie=null;

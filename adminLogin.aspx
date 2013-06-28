@@ -19,8 +19,7 @@
                cookie.Expires = DateTime.Now.AddMinutes(120);//cookie.Expires = DateTime.MaxValue;
                Response.AppendCookie(cookie);
                Response.Redirect("adminControl.aspx",true);
-            //message.Text+=username.Text + password.Text;
-            //Server.Transfer("session_in.aspx");
+            
              }
           else{message.Text +=message.Text+ "Invalid credentials!";}
           }

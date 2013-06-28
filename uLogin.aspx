@@ -33,7 +33,7 @@ if (i<10)
      <script language="C#" runat="server">
         
         void Page_Load(Object Src, EventArgs E) {
-            welcome.Text = "Math Competition<br />Arrival and Registration: 9:30-10am<br /><br />";//+ DateTime.Now;
+            welcome.Text = "Math Competition<br />Arrival and Registration: 9:30-10am<br /><br />";
         }
      </script>
      <!-- #include File = "uLoginValidator.aspx" -->
@@ -54,8 +54,7 @@ if (i<10)
                if(username.Text!=password.Text){Response.Redirect("uMLForm.aspx",true);}
                else { Response.Redirect("uPassChange.aspx",true);
                      }
-            //message.Text+=username.Text + password.Text;
-            //Server.Transfer("session_in.aspx");
+            
              }
           else{message.Text +=message.Text+ "Invalid credentials!";}
           }

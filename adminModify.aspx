@@ -8,8 +8,8 @@
      <script language="C#" runat="server">
          OdbcConnection dbconn;
          void Page_Load(Object Src, EventArgs E) {
-         //if(Session["validation"]!="allright"){Response.Redirect("adminLogin.aspx", true);} 
-          dbconn = new OdbcConnection("Driver={SQL Server Native Client 10.0};Server=tcp:ioq6hahtjs.database.windows.net,1433;Database=mathcomAhfq5rGk1;Uid=qinvfd@ioq6hahtjs;Pwd= kvQ98Jvcsq;Encrypt=yes;Connection Timeout=30;");
+         
+          dbconn = new OdbcConnection("Driver={SQL Server Native Client 10.0};Server=tcp:ioq6hahtjs.database.windows.net,1433;Database=mathcomAhfq5rGk1;Uid=qinvfd@ioq6hahtjs;Pwd=kvQ98Jvcsq;Encrypt=yes;Connection Timeout=30;");
          if(!IsPostBack)
          {
          BindGrid();
@@ -18,62 +18,6 @@
         }
      
      
-           //insert school not already in database with all info on the form
-           // change password for school already in database, ignore other info entered on the form
-      /* void schoolInsert (Object Src, EventArgs E){
-            Page.Validate();
-            if(!Page.IsValid){return;}
-            
-
-             
-             OdbcCommand myOleDbInsComm = new OdbcCommand("INSERT INTO schools ( school,[password], school_id, school_name,contact,contact_detail, address) Values (?,?, ?, ?,?,?,?)", dbconn);
-             myOleDbInsComm.Parameters.Add(new OdbcParameter("@school", OdbcType.VarChar, 20));
-             myOleDbInsComm.Parameters["@school"].Value = school.Text;
-
-             myOleDbInsComm.Parameters.Add(new OdbcParameter("@password", OdbcType.VarChar, 20));
-             myOleDbInsComm.Parameters["@password"].Value = password.Text;
-
-             myOleDbInsComm.Parameters.Add(new OdbcParameter("@school_id", OdbcType.Int));
-             myOleDbInsComm.Parameters["@school_id"].Value = school_id.Text;
-
-             myOleDbInsComm.Parameters.Add(new OdbcParameter("@school_name", OdbcType.VarChar, 50));
-             myOleDbInsComm.Parameters["@school_name"].Value = school_name.Text;
-
-
-             myOleDbInsComm.Parameters.Add(new OdbcParameter("@contact", OdbcType.VarChar, 50));
-             myOleDbInsComm.Parameters["@contact"].Value = contact.Text;
-
-
-             myOleDbInsComm.Parameters.Add(new OdbcParameter("@contact_det", OdbcType.VarChar, 50));
-             myOleDbInsComm.Parameters["@contact_det"].Value = contact_det.Text;
-
-             myOleDbInsComm.Parameters.Add(new OdbcParameter("@school_addr", OdbcType.VarChar, 100));
-             myOleDbInsComm.Parameters["@school_addr"].Value = school_addr.Text;
-
-             message.Text="";
-             
-             try
-               {
-  
-               dbconn.Open();
-               myOleDbInsComm.ExecuteNonQuery();
-               
-               //myOleDbCleanupComm.ExecuteNonQuery();
-               
-               
-               }
-            catch(Exception e)
-                 {
-                   message.Text= "Couldn't insert record: " + e.ToString();
-                 }
-            finally
-              {
-             dbconn.Close();
-              }
-             school.Text="";password.Text="";school_id.Text="";
-             contact.Text="";contact_det.Text="";school_name.Text="";school_addr.Text="";
-             BindGrid();
-          }*/
      void schools_Edit(Object sender, DataGridCommandEventArgs e)
         {schools.EditItemIndex = (int)e.Item.ItemIndex; BindGrid(); }
      void schools_Cancel(Object sender, DataGridCommandEventArgs e)

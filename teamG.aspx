@@ -13,7 +13,7 @@
         if(cookie!=null){
          if((String)cookie.Values["valid_word"]!="allright"){Response.Redirect("adminLogin.aspx", true);} }
         else{Response.Redirect("adminLogin.aspx", true);}
-         dbconn = new OdbcConnection("Driver={SQL Server Native Client 10.0};Server=tcp:ioq6hahtjs.database.windows.net,1433;Database=mathcomAhfq5rGk1;Uid=qinvfd@ioq6hahtjs;Pwd= kvQ98Jvcsq;Encrypt=yes;Connection Timeout=30;");
+         dbconn = new OdbcConnection("Driver={SQL Server Native Client 10.0};Server=tcp:ioq6hahtjs.database.windows.net,1433;Database=mathcomAhfq5rGk1;Uid=qinvfd@ioq6hahtjs;Pwd=kvQ98Jvcsq;Encrypt=yes;Connection Timeout=30;");
          if(!IsPostBack)
          {
          BindGrid();
@@ -28,7 +28,7 @@
         {teams.EditItemIndex = -1; BindGrid(); }
      void teamGrades_Update(Object sender, DataGridCommandEventArgs e)
         {
-         /*String updateCmd="UPDATE teams SET team_id=@tid, team_no=@tno, countNumount=@cnt,team_status=@tstat,school=@school, geometry_g=@gg, algebra_g=@ag,precal_g=@pg, mixed_g=@mg WHERE team_id=@tid";*/
+         
          String updateCmd="UPDATE teams SET geometry_g=?, algebra_g=?,precal_g=?, mixed_g=? WHERE team_id=?";
 
          OdbcCommand myUpdateCmd= new OdbcCommand(updateCmd, dbconn);
@@ -46,18 +46,18 @@
          String[] cols={"@tid","@tno","@cnt","@tstat","@school","@gg","@ag","@pg","@mg"};
          int numCols=e.Item.Cells.Count;
          message.Text="";
-         for (int i=6; i<numCols-1;i++) //numCols=11.
+         for (int i=6; i<numCols-1;i++) 
             {
              String colvalue=((System.Web.UI.WebControls.TextBox) e.Item.Cells[i].Controls[0]).Text;
              myUpdateCmd.Parameters[cols[i-1]].Value = Convert.ToDouble(colvalue);
-             //message.Text+=Convert.ToDouble(colvalue)+"<br />";
+             
             }
           myUpdateCmd.Connection.Open();
           try{myUpdateCmd.ExecuteNonQuery();teams.EditItemIndex=-1;}
           catch(Exception ex){message.Text+="Exception with update!";}
           myUpdateCmd.Connection.Close();
           BindGrid();
-         // message.Text+="working";
+         
         }
      void BindGrid(){
         OdbcDataAdapter displayComm=new OdbcDataAdapter("SELECT team_id, team_no, countNum, team_status, school, geometry_g, algebra_g, precal_g, mixed_g, team_score FROM teams ORDER BY school, team_id", dbconn);
@@ -67,7 +67,7 @@
         teams.DataBind();
                 }
      void updateTeamScore(Object Src, EventArgs E){
-             // OdbcCommand allScoresCmd= new OdbcCommand("UPDATE participants SET student_id=@sid, score=@score WHERE student_id=@sid",dbconn);
+             
               OdbcCommand allGroupScoresCmd= new OdbcCommand("SELECT team_id, algebra_g, geometry_g, precal_g, mixed_g  FROM teams",dbconn);
               OdbcCommand teamScoresUpdCmd= new OdbcCommand("UPDATE teams SET team_score=? WHERE team_id=?",dbconn);
 teamScoresUpdCmd.Parameters.Add(new OdbcParameter("@score", OdbcType.Double,2));

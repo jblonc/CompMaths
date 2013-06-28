@@ -6,16 +6,14 @@
    
      <script language="C#" runat="server">
          OdbcConnection dbconn;
-         /*void Page_Load(Object Src, EventArgs E) {
-         //if(Session["validation"]!="allright"){Response.Redirect("adminLogin.aspx", true);} 
-         dbconn = new OleDbConnection("Provider=SQLNCLI10; Server=tcp:ufwryy6r0y.database.windows.net,1433; Database=[xyzstart_db]; Uid=[xyzdb@ufwryy6r0y]; Pwd=[virAf89Hda];");*/
+         
          void Page_Load(Object Src, EventArgs E) {
          HttpCookie cookie = Request.Cookies["validation"];
           ViewState["Referer"] = Request.Headers["Referer"];
         if(cookie!=null){
          if((String)cookie.Values["valid_word"]!="allright"){Response.Redirect("adminLogin.aspx", true);} }
         else{Response.Redirect("adminLogin.aspx",true);}
-           dbconn = new OdbcConnection("Driver={SQL Server Native Client 10.0};Server=tcp:ioq6hahtjs.database.windows.net,1433;Database=mathcomAhfq5rGk1;Uid=qinvfd@ioq6hahtjs;Pwd= kvQ98Jvcsq;Encrypt=yes;Connection Timeout=30;");
+           dbconn = new OdbcConnection("Driver={SQL Server Native Client 10.0};Server=tcp:ioq6hahtjs.database.windows.net,1433;Database=mathcomAhfq5rGk1;Uid=qinvfd@ioq6hahtjs;Pwd=kvQ98Jvcsq;Encrypt=yes;Connection Timeout=30;");
          if(!IsPostBack)
          {
          BindGrid();
@@ -79,7 +77,7 @@
                 
         int k=5; // k value in "top k"; modify if necessary after consulting complete results on results.aspx
      void createTopk(Object Src, EventArgs E){
-        //int k=5
+     
         
 
         OdbcCommand delAllCmd= new OdbcCommand("DELETE  FROM winners",dbconn);//got rid of *
@@ -135,7 +133,7 @@
         
         
         }
-       // dbconn.Close();
+       
          
         //Gneric Group and Team
         
@@ -154,7 +152,7 @@
         TypeList.Add("Group");TypeList.Add("Group");TypeList.Add("Group");TypeList.Add("Group");TypeList.Add("Team");
         CategoryList.Add("Algebra");CategoryList.Add("Geometry");CategoryList.Add("Precal");
         CategoryList.Add("Mixed");CategoryList.Add("Team");
-        //dbconn.Open();
+        
         OdbcCommand grp_genericInsCmd= new OdbcCommand("INSERT INTO winners ([names],[id], [type],[category],school_name,contact,score) VALUES (?,?, ?,?, ?,?,?)",dbconn); 
         grp_genericInsCmd.Parameters.Add(new OdbcParameter("@names", OdbcType.VarChar, 240)); 
         grp_genericInsCmd.Parameters.Add(new OdbcParameter("@id", OdbcType.VarChar, 9)); 
@@ -166,14 +164,7 @@
 
         for(int p=0; p<5; p++){
         OdbcCommand grp_genericSelCmd= new OdbcCommand((String)GTCommandString[p],dbconn);
-        //OdbcCommand grp_genericInsCmd= new OdbcCommand("INSERT INTO winners (names,[id], [type],category,school_name,contact,score) VALUES (@names,@id, @type,@category, @school_name,@contact,@score)",dbconn); 
-        //grp_genericInsCmd.Parameters.Add(new OdbcParameter("@names", OdbcType.VarChar, 240)); 
-        //grp_genericInsCmd.Parameters.Add(new OdbcParameter("@id", OdbcType.VarChar, 9)); 
-       // grp_genericInsCmd.Parameters.Add(new OdbcParameter("@type", OdbcType.VarChar, 15)); 
-        //grp_genericInsCmd.Parameters.Add(new OdbcParameter("@category", OdbcType.VarChar, 8));
-       // grp_genericInsCmd.Parameters.Add(new OdbcParameter("@school_name", OdbcType.VarChar, 50));
-       // grp_genericInsCmd.Parameters.Add(new OdbcParameter("@contact", OdbcType.VarChar, 50));         
-        //grp_genericInsCmd.Parameters.Add(new OdbcParameter("@score", OdbcType.Double, 2));
+        
         
         int grp_generic=0;
         ArrayList grp_generic_NAME=new ArrayList();

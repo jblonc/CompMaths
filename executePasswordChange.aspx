@@ -2,7 +2,7 @@
         private bool pchange (string txt1, string txt2){
             msg.Text="";
             bool isExecuted = false;
-            OdbcConnection dbconn = new OdbcConnection("Driver={SQL Server Native Client 10.0};Server=tcp:ioq6hahtjs.database.windows.net,1433;Database=mathcomAhfq5rGk1;Uid=qinvfd@ioq6hahtjs;Pwd= kvQ98Jvcsq;Encrypt=yes;Connection Timeout=30;");
+            OdbcConnection dbconn = new OdbcConnection("Driver={SQL Server Native Client 10.0};Server=tcp:ioq6hahtjs.database.windows.net,1433;Database=mathcomAhfq5rGk1;Uid=qinvfd@ioq6hahtjs;Pwd=kvQ98Jvcsq;Encrypt=yes;Connection Timeout=30;");
         HttpCookie u2cookie = Request.Cookies["uvalidation"];
           ViewState["Referer"] = Request.Headers["Referer"];
           if(u2cookie!=null){  
@@ -11,49 +11,14 @@
         {
   
           
-        ///  OdbcDataAdapter adapter = new OdbcDataAdapter( "select school, password from schools", dbconn);
-        
-        /// adapter.UpdateCommand =  new OdbcCommand("UPDATE schools SET password=? WHERE school=?",dbconn);// SET school=?, [password]=?
-                    //  OdbcCommand myOleDbComm = new OdbcCommand("UPDATE schools SET school=?, [password]=? WHERE school=?", dbconn);
-          
-                    // adapter.UpdateCommand.Parameters.Add( "@school", OdbcType.VarChar, 20 ).Value = (String)u2cookie.Values["username"];
-	            //    adapter.UpdateCommand.Parameters["@school"].Value = (String)u2cookie.Values["username"];
-         /*  adapter.UpdateCommand.Parameters.Add( "@password", OdbcType.VarChar, 20 );
-	     adapter.UpdateCommand.Parameters["@password"].Value = txt1;*/
-        ///   OdbcParameter op= adapter.UpdateCommand.Parameters.Add("@school", OdbcType.VarChar,20);//,"school");
-        ///    op.SourceColumn="school";
-        ///  op.SourceVersion = DataRowVersion.Original;
-        ///   op.Value = (String)u2cookie.Values["username"];
-       ///     adapter.UpdateCommand.Parameters.Add("@password",OdbcType.VarChar,20,"password");
+       
+     
           dbconn.Open();
-          // adapter.UpdateCommand.ExecuteNonQuery();
-          // OdbcCommandBuilder cb = new OdbcCommandBuilder(adapter);
-          // dbconn.Open();
-       ///  String ss= (String)u2cookie.Values["username"];
-       ///   DataSet ds = new DataSet();
-       ///   adapter.Fill(ds, "schools");
-      ///    msg.Text="outside";
-       ///   foreach(DataRow dr in ds.Tables["schools"].Rows){
-      ///        msg.Text +="inside";
-     ///      if(dr["school"] == ss){dr["password"]=txt1;}
-     ///     }
-         // DataRow changeRow = ds.Tables["schools"].Select("school >='@school'")[0];//db.Tables["schools"].Rows[0];
-        //  changeRow["password"]=txt1;;
-      ///    DataRow[] modRows = ds.Tables["schools"].Select(null, null, DataViewRowState.ModifiedCurrent);
-         // adapter.Update(ds, "schools");
-     ///     adapter.Update(modRows);
-     ///     ds.Dispose();
-       /* myOleDbComm.Parameters.Add( "@school", OdbcType.VarChar, 20 );
-	    myOleDbComm.Parameters["@school"].Value = (String)u2cookie.Values["username"];
-          myOleDbComm.Parameters.Add( "@password", OdbcType.VarChar, 20 );
-	    myOleDbComm.Parameters["@password"].Value = txt1;
-          myOleDbComm.ExecuteNonQuery();
-       */
-          //myOleDbComm.Dispose();
+
          OdbcCommand ocmm = new OdbcCommand("update schools set password=? where school=?",dbconn);
          ocmm.Parameters.AddWithValue("@password", txt1);
          ocmm.Parameters.AddWithValue("@school",(String)u2cookie.Values["username"]);
-         ocmm.ExecuteNonQuery();//OdbcCommand 
+         ocmm.ExecuteNonQuery();
          ocmm.Dispose();
           isExecuted=true;
         

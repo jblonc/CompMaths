@@ -13,7 +13,7 @@
         if(cookie!=null){
          if((String)cookie.Values["valid_word"]!="allright"){Response.Redirect("adminLogin.aspx", true);} }
         else{Response.Redirect("adminLogin.aspx", true);}
-         dbconn = new OdbcConnection("Driver={SQL Server Native Client 10.0};Server=tcp:ioq6hahtjs.database.windows.net,1433;Database=mathcomAhfq5rGk1;Uid=qinvfd@ioq6hahtjs;Pwd= kvQ98Jvcsq;Encrypt=yes;Connection Timeout=30;");
+         dbconn = new OdbcConnection("Driver={SQL Server Native Client 10.0};Server=tcp:ioq6hahtjs.database.windows.net,1433;Database=mathcomAhfq5rGk1;Uid=qinvfd@ioq6hahtjs;Pwd=kvQ98Jvcsq;Encrypt=yes;Connection Timeout=30;");
          if(!IsPostBack)
          {
          BindGrid();
@@ -37,8 +37,7 @@
          myUpdateCmd.Parameters.Add(new OdbcParameter("@score", OdbcType.Double, 2));  myUpdateCmd.Parameters.Add(new OdbcParameter("@sid", OdbcType.VarChar, 9));
          
          myUpdateCmd.Parameters["@sid"].Value=participants.DataKeys[(int)e.Item.ItemIndex];
-         //String[] cols={"@sid","@tno","@cnt","@tstat","@school","@gg","@ag","@pg","@mg"};
-         //int numCols=e.Item.Cells.Count;
+         
          message.Text="";
          
              String colvalue=((System.Web.UI.WebControls.TextBox) e.Item.Cells[7].Controls[0]).Text;
@@ -49,7 +48,7 @@
           catch(Exception ex){message.Text+="Exception with update!";}
           myUpdateCmd.Connection.Close();
           BindGrid();
-         // message.Text+="working";
+       
         }
      void BindGrid(){
         OdbcDataAdapter displayComm=new OdbcDataAdapter("SELECT student_id, name, category, groupClass, team_id, school, score FROM participants ORDER BY school, student_id", dbconn);
@@ -73,14 +72,11 @@
               for(int q=0; q<numberCommon; q++)
                {updateIndScoreCmd.Parameters["@sid"].Value=SID[q];
                updateIndScoreCmd.Parameters["@score"].Value=SCORE[q];
-              // message.Text+=SID[q]+" "+SCORE[q]+"<br />";
+              
                updateIndScoreCmd.ExecuteNonQuery();}
               dbconn.Close();
               BindGrid();
-              /*OdbcCommand updateIndScoreCmd= new OdbcCommand("UPDATE participants SET score = indExcel.score FROM indExcel WHERE participants.student_id=indExcel.student_id",dbconn);
-              dbconn.Open();
-              updateIndScoreCmd.ExecuteNonQuery();
-              dbconn.Close();*/
+              
      }
     </script>
   

@@ -27,23 +27,17 @@
             Page.Validate();
             if(!Page.IsValid){return;}
             
-             OdbcCommand schoolIdSelAll=new OdbcCommand("SELECT school_id FROM xyzstart_db .dbo.schools", dbconn);
+             OdbcCommand schoolIdSelAll=new OdbcCommand("SELECT school_id FROM schools", dbconn);//xyzstart_db .dbo.
              
-             OdbcCommand myOleDbInsComm = new OdbcCommand("INSERT INTO xyzstart_db .dbo.schools (school,[password], school_id, school_name,contact,email,phone, address) Values( ?,? ,?, ?,?,?,?,?)", dbconn);
+             OdbcCommand myOleDbInsComm = new OdbcCommand("INSERT INTO schools (school,[password], school_id, school_name,contact,email,phone, address) Values( ?,? ,?, ?,?,?,?,?)", dbconn);//xyzstart_db .dbo.
 
-// (@password, @school, @school_id, @school_name,@contact,@email,@phone,@school_addr)", dbconn);
-//( ?,? ,?, ?,?,?,?,?)", dbconn);
-// ( @school,@password, @school_id, @school_name,@contact,@email,@phone,@school_addr)", dbconn);
-          //*   myOleDbInsComm.Parameters.Add(new OdbcParameter("@school", OdbcType.VarChar, 20));
-          //*   myOleDbInsComm.Parameters["@school"].Value = school.Text;
+
                 myOleDbInsComm.Parameters.AddWithValue("@school", school.Text);
 
-          //*   myOleDbInsComm.Parameters.Add(new OdbcParameter("@password", OdbcType.VarChar, 20));
-          //*   myOleDbInsComm.Parameters["@password"].Value = school.Text;
                  myOleDbInsComm.Parameters.AddWithValue("@password", school.Text);
 
              myOleDbInsComm.Parameters.Add(new OdbcParameter("@school_id", OdbcType.Int));
-             //myOleDbInsComm.Parameters["@school_id"].Value = school_id.Text;
+            
 
              myOleDbInsComm.Parameters.Add(new OdbcParameter("@school_name", OdbcType.VarChar, 50));
              myOleDbInsComm.Parameters["@school_name"].Value = school_name.Text;
@@ -62,13 +56,13 @@
              myOleDbInsComm.Parameters.Add(new OdbcParameter("@address", OdbcType.VarChar, 100));
              myOleDbInsComm.Parameters["@address"].Value = school_addr.Text;
 
-             OdbcCommand schoolSelCmd=new OdbcCommand("SELECT school FROM xyzstart_db .dbo.schools WHERE school=?", dbconn);
+             OdbcCommand schoolSelCmd=new OdbcCommand("SELECT school FROM schools WHERE school=?", dbconn);//xyzstart_db .dbo.
              schoolSelCmd.Parameters.Add(new OdbcParameter("@school", OdbcType.VarChar, 20));
              schoolSelCmd.Parameters["@school"].Value = school.Text;
 
-             OdbcCommand schoolIdSelCmd=new OdbcCommand("SELECT school_id FROM xyzstart_db .dbo.schools WHERE school_id=?", dbconn);
+             OdbcCommand schoolIdSelCmd=new OdbcCommand("SELECT school_id FROM schools WHERE school_id=?", dbconn);//xyzstart_db .dbo.
              schoolIdSelCmd.Parameters.Add(new OdbcParameter("@school_id", OdbcType.Int));
-             //schoolIdSelCmd.Parameters["@school_id"].Value = school_id.Text;
+            
 
              message.Text="";
              
@@ -102,7 +96,6 @@
                 }
                
                
-               //myOleDbCleanupComm.ExecuteNonQuery();
                
                
                }
@@ -118,7 +111,7 @@
              BindGrid();
           }
      void BindGrid(){
-        OdbcDataAdapter displayComm=new OdbcDataAdapter("SELECT school, school_id,school_name, contact, email, phone , address FROM xyzstart_db .dbo.schools ORDER BY school", dbconn);// 
+        OdbcDataAdapter displayComm=new OdbcDataAdapter("SELECT school, school_id,school_name, contact, email, phone , address FROM schools ORDER BY school", dbconn);// xyzstart_db .dbo.
         DataSet ds= new DataSet();
         displayComm.Fill(ds, "schools");
         schools.DataSource=ds.Tables["schools"].DefaultView;

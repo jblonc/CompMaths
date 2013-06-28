@@ -25,24 +25,15 @@ href="mystyle.css" />
           ViewState["Referer"] = Request.Headers["Referer"];
           
              msg.Text="";
-             Page.Validate();//without this line seems to be fine
+             Page.Validate();
              if(Page.IsValid){bool isExecuted=pchange(pass1.Text, pass2.Text);
                  if(u1cookie!=null){  
                  if (isExecuted && (String)u1cookie.Values["valid_word"]=="collegebound"){
                  msg.Text = "Password changed!<br /> Please log on with the new password next time.<br />";
                  msg.Text = msg.Text+"Please wait ... you will be redirected in 10 seconds";
-                 //long sec= (new DateTime()).Ticks+1;
-                 //msg.Text+= (new DateTime()).Hour;
-                 //System.Threading.Thread.Sleep(2000); this one works for waiting only
-                 //while((new DateTime()).Second<=sec){}
+                 
                  Response.Redirect("uMLForm.aspx",true);
-               //Session["validation"]="collegebound";
-               //Session["username"]=username.Text;
-               //if(username.Text!=password.Text){Response.Redirect("uMLForm.aspx",true);}
-               //else { Response.Redirect("uPassChange.aspx",true);
-               //      }
-            //message.Text+=username.Text + password.Text;
-            //Server.Transfer("session_in.aspx");
+               
              }
           else{msg.Text = "password not changed;<br /> please make sure you typed the same password (different from your username) in the above two boxes";}}
             else{msg.Text ="Your working session has expired. Please sign in.";}
