@@ -2,7 +2,7 @@
 <%@ Import Namespace="System.Data.OleDb" %>
 
 <html>
-   <head><link REL="SHORTCUT ICON" HREF="http://www.marshfield.uwc.edu/faculty/jlu/ml/favicon.ico">
+   <head><link REL="SHORTCUT ICON" HREF="http://localhost/ml/favicon.ico">
 <title>Math League</title>
 <script type="text/javascript">
 function startTime()
