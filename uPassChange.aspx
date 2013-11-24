@@ -3,7 +3,7 @@
 
 
 <html>
-   <head><link REL="SHORTCUT ICON" HREF="http://www.marshfield.uwc.edu/faculty/jlu/ml/favicon.ico">
+   <head><link REL="SHORTCUT ICON" HREF="http://localhost/ml/favicon.ico">
 <link rel="stylesheet" type="text/css"
 href="mystyle.css" />
 <title>Math League</title></head>
